@@ -24,9 +24,10 @@ namespace CloakOfDarkness
                 {
                     SwitchPlayerCharacter(RMUD.MudObject.GetObject("Player"));
                     RMUD.MudObject.Move(Player, RMUD.MudObject.GetObject("Foyer"));
+                    RMUD.MudObject.SendMessage(actor, "Hurrying through the rainswept November night, you're glad to see the bright lights of the Opera House. It's surprising that there aren't more people about but, hey, what do you expect in a cheap demo game...?");
                     RMUD.Core.EnqueuActorCommand(Player, "look");
-        
-                    return SharpRuleEngine.PerformResult.Stop;
+                    RMUD.Core.ProcessCommands();        
+                    return SharpRuleEngine.PerformResult.Continue;
                 });
         }
     }
