@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinglePlayerMinimumGame", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloakOfDarkness", "SinglePlayer\CloakOfDarkness\CloakOfDarkness.csproj", "{A8EA5CC5-9C0A-47E3-A68C-9E8367CEF1FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skrogard", "SinglePlayer\Skrogard\Skrogard\Skrogard.csproj", "{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,14 @@ Global
 		{A8EA5CC5-9C0A-47E3-A68C-9E8367CEF1FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A8EA5CC5-9C0A-47E3-A68C-9E8367CEF1FC}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8EA5CC5-9C0A-47E3-A68C-9E8367CEF1FC}.Release|x86.Build.0 = Release|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Debug|x86.Build.0 = Debug|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Release|x86.ActiveCfg = Release|Any CPU
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,6 +182,7 @@ Global
 		{1A004032-0F05-4545-88F2-3F58EFA1CE1D} = {53B4E8EC-40AA-4166-92FF-543837FCD305}
 		{68D0E431-5DCA-4A25-A1B2-2F5B857821B1} = {5695FB1B-65C3-4659-BCFE-62037DC92A81}
 		{A8EA5CC5-9C0A-47E3-A68C-9E8367CEF1FC} = {5695FB1B-65C3-4659-BCFE-62037DC92A81}
+		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE} = {5695FB1B-65C3-4659-BCFE-62037DC92A81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F2FB861-7B3B-4667-B5D5-2638C0FD52A5}

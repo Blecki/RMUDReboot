@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Skrogard</RootNamespace>
+    <AssemblyName>Skrogard</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Jump.cs" />
+    <Compile Include="World\Homestead\Jaygmundre.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="World\Homestead\PlasmaQuest.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="World\Homestead\SittingRoom.cs" />
+    <Compile Include="World\Homestead\Kitchen.cs" />
+    <Compile Include="World\Surface\Landing.cs" />
+    <Compile Include="World\Surface\Stairway.cs" />
+    <Compile Include="World\Surface\Homestead.cs" />
+    <Compile Include="World\Surface\Overlook.cs" />
+    <Compile Include="World\Surface\WindingPath.cs" />
+    <Compile Include="World\Surface\Hollow.cs" />
+    <Compile Include="World\Caves\ExcavatorCab.cs" />
+    <Compile Include="World\Caves\ExcavatorCave.cs" />
+    <Compile Include="World\Caves\JunkChasm.cs" />
+    <Compile Include="World\Caves\DeepJunk.cs" />
+    <Compile Include="World\Caves\Pod.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="GameInfo.cs" />
+    <Compile Include="World\Player.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="World\settings.cs" />
+    <Compile Include="World\Wall\Perch.cs" />
+    <Compile Include="World\Wall\Overhang.cs" />
+    <Compile Include="World\Wall\UpperCatwalk.cs" />
+    <Compile Include="World\Wall\LowerCatwalk.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Core.csproj">
+      <Project>{5c29e6ad-54e3-4105-a9f3-2aab48a17c41}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\Admin\AdminModule.csproj">
+      <Project>{adaf3782-88d1-4170-866a-9ef3479eae97}</Project>
+      <Name>AdminModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\Alias\AliasModule.csproj">
+      <Project>{37794c83-f94b-4b30-8e6a-deda0a389015}</Project>
+      <Name>AliasModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\Clothing\ClothingModule.csproj">
+      <Project>{8f1af0e1-c98d-466a-a712-621493453373}</Project>
+      <Name>ClothingModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\Conversation\ConversationModule.csproj">
+      <Project>{35448d1e-7997-4626-8d1f-4278659f60a0}</Project>
+      <Name>ConversationModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\Introduction\IntroductionModule.csproj">
+      <Project>{fd03fcf2-e4f6-4132-a50f-c66b1b9a409e}</Project>
+      <Name>IntroductionModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\Quest\QuestModule.csproj">
+      <Project>{05484d1a-47f3-4b4a-b457-af56b197e4cb}</Project>
+      <Name>QuestModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Modules\StandardActions\StandardActionsModule.csproj">
+      <Project>{1a004032-0f05-4545-88f2-3f58efa1ce1d}</Project>
+      <Name>StandardActionsModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
