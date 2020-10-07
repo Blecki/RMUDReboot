@@ -14,7 +14,10 @@ namespace World.Homestead
 
             OpenLink(Direction.EAST, "Homestead.Hallway");
             OpenLink(Direction.WEST, "Homestead.SittingRoom");
-            OpenLink(Direction.OUT, "Surface.Homestead");
+            OpenLink(Direction.OUT, "Homestead.Homestead");
+
+            Move(GetObject("Homestead.Table"), this, RelativeLocations.Contents);
+            Move(GetObject("Homestead.SkullKey"), GetObject("Homestead.Table"), RelativeLocations.On);
         }
     }
 
@@ -30,7 +33,7 @@ namespace World.Homestead
 
             Move(new RMUD.MudObject("empty plasma bag", "A small translucent pouch made of tough plastic. All that's left inside is the residue of a red liquid."), this, RMUD.RelativeLocations.On);
 
-            Check<RMUD.MudObject, RMUD.MudObject>("can take?").Do((actor, thing) =>
+            Check<RMUD.MudObject, RMUD.MudObject>("can take?").ThisOnly().Do((actor, thing) =>
             {
                 SendMessage(actor, "It's far too heavy.");
                 return SharpRuleEngine.CheckResult.Disallow;

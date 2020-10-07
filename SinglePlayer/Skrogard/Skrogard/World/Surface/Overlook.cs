@@ -14,7 +14,7 @@ namespace World.Surface
 
             OpenLink(Direction.WEST, "Surface.WindingPath");
             OpenLink(Direction.NORTH, "Surface.Stairway");
-            OpenLink(Direction.SOUTH, "Surface.Homestead");
+            OpenLink(Direction.SOUTH, "Homestead.Homestead");
         }
     }
 }

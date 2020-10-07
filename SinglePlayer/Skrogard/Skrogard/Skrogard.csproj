@@ -44,17 +44,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Jump.cs" />
+    <Compile Include="World\Caves\Tunnel.cs" />
+    <Compile Include="World\Caves\Chasm.cs" />
+    <Compile Include="World\Caves\Crevice.cs" />
+    <Compile Include="World\Caves\Lake.cs" />
+    <Compile Include="World\Caves\Passage.cs" />
+    <Compile Include="World\Homestead\Balcony.cs" />
+    <Compile Include="World\Homestead\Cellar.cs" />
+    <Compile Include="World\Homestead\StormDoor.cs" />
+    <Compile Include="World\Homestead\WorkshopDoor.cs" />
+    <Compile Include="World\Homestead\GirlsRoom.cs" />
+    <Compile Include="World\Homestead\FlowerDoor.cs" />
+    <Compile Include="World\Homestead\BoysRoom.cs" />
+    <Compile Include="World\Homestead\Workshop.cs" />
+    <Compile Include="World\Homestead\Gully.cs" />
+    <Compile Include="World\Homestead\Ledge.cs" />
+    <Compile Include="World\Homestead\Skull.cs" />
+    <Compile Include="World\Homestead\SkullKey.cs" />
+    <Compile Include="World\Homestead\PosterDoor.cs" />
     <Compile Include="World\Homestead\Jaygmundre.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="World\Homestead\Hallway.cs" />
     <Compile Include="World\Homestead\PlasmaQuest.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="World\Homestead\SittingRoom.cs" />
     <Compile Include="World\Homestead\Kitchen.cs" />
+    <Compile Include="World\Hreppholar\Square.cs" />
+    <Compile Include="World\Hreppholar\Gate.cs" />
+    <Compile Include="World\Surface\DustStorm.cs" />
+    <Compile Include="World\Surface\Dustbowl.cs" />
+    <Compile Include="World\Surface\Bridge.cs" />
+    <Compile Include="World\Surface\LowerBadlands.cs" />
     <Compile Include="World\Surface\Landing.cs" />
+    <Compile Include="World\Surface\Badlands.cs" />
     <Compile Include="World\Surface\Stairway.cs" />
-    <Compile Include="World\Surface\Homestead.cs" />
+    <Compile Include="World\Homestead\Homestead.cs" />
     <Compile Include="World\Surface\Overlook.cs" />
     <Compile Include="World\Surface\WindingPath.cs" />
     <Compile Include="World\Surface\Hollow.cs" />

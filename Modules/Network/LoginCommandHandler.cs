@@ -52,6 +52,7 @@ namespace NetworkModule
             CommandFactory.CreateCommandFactory(typeof(Login)).Create(Parser);
             CommandFactory.CreateCommandFactory(typeof(Register)).Create(Parser);
             CommandFactory.CreateCommandFactory(typeof(Quit)).Create(Parser);
+            CommandFactory.CreateCommandFactory(typeof(Who)).Create(Parser);
 
 		}
 

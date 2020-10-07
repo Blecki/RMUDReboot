@@ -17,6 +17,7 @@ namespace World.Caves
             OpenLink(Direction.WEST, "Caves.JunkChasm");
             OpenLink(Direction.IN, "Caves.ExcavatorCab");
             OpenLink(Direction.UP, "Surface.Hollow");
+            OpenLink(Direction.EAST, "Caves.Lake");
         }
     }
 }

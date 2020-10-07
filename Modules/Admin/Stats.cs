@@ -32,7 +32,7 @@ namespace AdminModule
         public static void AtStartup(RuleEngine GlobalRules)
         {
             GlobalRules.DeclarePerformRuleBook<MudObject, String>("stats", "[Actor, Type] : Display engine stats.");
-            
+
             GlobalRules.DeclarePerformRuleBook<MudObject>("enumerate-stats", "[Actor] : Display stats options.");
         }
     }

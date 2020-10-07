@@ -24,7 +24,17 @@ namespace RMUD
 
         protected Dictionary<String, MudObject> NamedObjects = new Dictionary<string, MudObject>();
         protected Dictionary<String, MudObject> ActiveInstances = new Dictionary<String, MudObject>();
-        
+
+        public static void AtStartup(RuleEngine GlobalRules)
+        {
+            GlobalRules.Perform<MudObject>("enumerate-stats").Do((Actor) =>
+            {
+                MudObject.SendMessage(Actor, "Named Object: " + Core.Database.NamedObjects.Count);
+                MudObject.SendMessage(Actor, "Rooms: " + Core.Database.NamedObjects.Where(obj => obj.Value.HasProperty("room type")).Count());
+                return SharpRuleEngine.PerformResult.Continue;
+            });
+        }
+
         protected static void SplitObjectName(String FullName, out String BasePath, out String InstanceName)
         {
             var split = FullName.IndexOf('@');
