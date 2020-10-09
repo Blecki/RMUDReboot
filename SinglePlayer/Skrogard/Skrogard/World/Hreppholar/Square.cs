@@ -13,6 +13,9 @@ namespace World.Hreppholar
             SetProperty("long", "You are in a dusty square, surprisingly large compared to the size of the settlement. This is the only place in the village with pavement, though it's as much crack now as asphalt. There's no vehicles on the roads, just weeds and bits of debris. A dried up fountain stands in the very center.");
 
             OpenLink(Direction.NORTH, "Hreppholar.Gate");
+            OpenLink(Direction.EAST, "Hreppholar.EastStreet");
+            OpenLink(Direction.WEST, "Hreppholar.WestStreet");
+            OpenLink(Direction.SOUTH, "Hreppholar.GeneralStorePorch");
 
             Move(GetObject("Hreppholar.Fountain"), this);
         }

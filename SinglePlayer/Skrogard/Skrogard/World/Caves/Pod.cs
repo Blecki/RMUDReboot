@@ -9,7 +9,7 @@ namespace World.Caves
         {
             Room(RoomType.Interior);
 
-            SetProperty("short", "Pod");
+            SetProperty("short", "$Red;Pod$White;");
             SetProperty("long", "You are in a small dark pod. Light falls through cracks above. The metal walls glisten with condensation, and some papers crinkle under foot. A single light glares overhead.");
             SetProperty("ambient light", LightingLevel.Bright);
 

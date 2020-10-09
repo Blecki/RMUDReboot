@@ -10,7 +10,7 @@ namespace RMUD
     /// <summary>
     /// Contains helper functions for parsing messages.
     /// </summary>
-    internal static class MessageFormatParser
+    public static class MessageFormatParser
     {
         /// <summary>
         /// Parses a number, which may be multiple digits.

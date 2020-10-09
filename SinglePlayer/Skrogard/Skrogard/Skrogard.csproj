@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Jump.cs" />
+    <Compile Include="World\Caves\Glade.cs" />
     <Compile Include="World\Caves\Tunnel.cs" />
     <Compile Include="World\Caves\Chasm.cs" />
     <Compile Include="World\Caves\Crevice.cs" />
@@ -71,8 +72,15 @@
     </Compile>
     <Compile Include="World\Homestead\SittingRoom.cs" />
     <Compile Include="World\Homestead\Kitchen.cs" />
+    <Compile Include="World\Hreppholar\GeneralStore.cs" />
+    <Compile Include="World\Hreppholar\GeneralStorePorch.cs" />
+    <Compile Include="World\Hreppholar\Bjorn.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="World\Hreppholar\EastStreet.cs" />
     <Compile Include="World\Hreppholar\Square.cs" />
     <Compile Include="World\Hreppholar\Gate.cs" />
+    <Compile Include="World\Hreppholar\GeneralStoreDoor.cs" />
     <Compile Include="World\Surface\DustStorm.cs" />
     <Compile Include="World\Surface\Dustbowl.cs" />
     <Compile Include="World\Surface\Bridge.cs" />
@@ -99,6 +107,18 @@
     <Compile Include="World\Wall\Overhang.cs" />
     <Compile Include="World\Wall\UpperCatwalk.cs" />
     <Compile Include="World\Wall\LowerCatwalk.cs" />
+    <Compile Include="World\Wilderness\MotherTree.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="World\Wilderness\Oak.cs" />
+    <Compile Include="World\Wilderness\FlowerTrail.cs" />
+    <Compile Include="World\Wilderness\InsideTheLog.cs" />
+    <Compile Include="World\Wilderness\Ravine.cs" />
+    <Compile Include="World\Wilderness\Slope.cs" />
+    <Compile Include="World\Wilderness\Clearing.cs" />
+    <Compile Include="World\Wilderness\TopOfTheLog.cs" />
+    <Compile Include="World\Wilderness\Trail.cs" />
+    <Compile Include="World\Wilderness\Waterhead.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

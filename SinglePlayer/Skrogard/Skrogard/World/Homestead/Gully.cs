@@ -15,6 +15,7 @@ namespace World.Homestead
             OpenLink(Direction.IN, "Homestead.Workshop");
             OpenLink(Direction.SOUTH, "Homestead.Ledge");
             OpenLink(Direction.UP, "Homestead.Balcony");
+            OpenLink(Direction.NORTHEAST, "Wilderness.Waterhead");
         }
     }
 }

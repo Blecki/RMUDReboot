@@ -54,6 +54,7 @@
     <Compile Include="Core\CommandQueue.cs" />
     <Compile Include="Core\ErrorLog.cs" />
     <Compile Include="Core\FindLocale.cs" />
+    <Compile Include="Core\Color.cs" />
     <Compile Include="Core\Heartbeat.cs" />
     <Compile Include="Core\FormatMessage.cs" />
     <Compile Include="Core\ModuleAssembly.cs" />

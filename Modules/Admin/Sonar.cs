@@ -7,126 +7,203 @@ namespace AdminModule
 {
     internal class Sonar : CommandFactory
     {
-        private static int MapWidth = 50;
-        private static int MapHeight = 25;
+        private const int MapWidth = 11;
+        private const int MapHeight = 5;
+        private const int RoomWidth = 9;
+        private const int RoomHeight = 7;
+        private const int RoomMidWidth = 4;
+        private const int RoomMidHeight = 3;
+        private const int RenderWidth = MapWidth * RoomWidth + 2;
+        private const int RenderHeight = MapHeight * RoomHeight + 2;
+
+        private static MudObject[,] GriddedMap = new MudObject[MapWidth, MapHeight];
+        private static List<MudObject> VisitedRooms = new List<MudObject>();
 
         public override void Create(CommandParser Parser)
         {
             Parser.AddCommand(KeyWord("SONAR"))
                 .ProceduralRule((match, actor) =>
                 {
+                    ClearGrid();
+                    PopulateGrid(actor.Location, MapWidth / 2, MapHeight / 2);
 
-                    var builder = new System.Text.StringBuilder();
-
-                    var mapGrid = new int[MapWidth, MapHeight];
-                    for (int y = 0; y < MapHeight; ++y)
-                        for (int x = 0; x < MapWidth; ++x)
+                    // Prep output grid
+                    var mapGrid = new int[RenderWidth, RenderHeight];
+                    for (int y = 0; y < RenderHeight; ++y)
+                        for (int x = 0; x < RenderWidth; ++x)
                             mapGrid[x, y] = ' ';
 
-                    for (int y = 1; y < MapHeight - 1; ++y)
+                    // Draw frame
+                    for (int y = 1; y < RenderHeight - 1; ++y)
                     {
                         mapGrid[0, y] = '|';
-                        mapGrid[MapWidth - 1, y] = '|';
+                        mapGrid[RenderWidth - 1, y] = '|';
                     }
 
-                    for (int x = 1; x < MapWidth - 1; ++x)
+                    for (int x = 1; x < RenderWidth - 1; ++x)
                     {
                         mapGrid[x, 0] = '-';
-                        mapGrid[x, MapHeight - 1] = '-';
+                        mapGrid[x, RenderHeight - 1] = '-';
                     }
 
                     mapGrid[0, 0] = '+';
-                    mapGrid[0, MapHeight - 1] = '+';
-                    mapGrid[MapWidth - 1, 0] = '+';
-                    mapGrid[MapWidth - 1, MapHeight - 1] = '+';
+                    mapGrid[0, RenderHeight - 1] = '+';
+                    mapGrid[RenderWidth - 1, 0] = '+';
+                    mapGrid[RenderWidth - 1, RenderHeight - 1] = '+';
 
-                    var roomLegend = new Dictionary<int, String>();
+                    // Render Map
+                    var roomLegend = new List<String>();
+                    for (var x = 0; x < MapWidth; ++x)
+                        for (var y = 0; y < MapHeight; ++y)
+                            if (GriddedMap[x, y] != null)
+                            {
+                                roomLegend.Add(Pad(FindSymbol(GriddedMap[x, y]), RoomWidth - 4) + " - " + GriddedMap[x, y].Short);
+                                RenderRoom(GriddedMap[x, y], mapGrid, x * RoomWidth + 1, y * RoomHeight + 1);
+                            }
 
-                    MapLocation(mapGrid, roomLegend, (MapWidth / 2), (MapHeight / 2), actor.Location, '@');
+                    PlaceSymbol(mapGrid, 1 + (MapWidth / 2) * RoomWidth + RoomMidWidth, 1 + (MapHeight / 2) * RoomHeight + RoomMidHeight, '@');
 
-                    for (int y = 0; y < MapHeight; ++y)
+                    // Dump map to screen.
+                    var builder = new System.Text.StringBuilder();
+
+                    for (int y = 0; y < RenderHeight; ++y)
                     {
-                        for (int x = 0; x < MapWidth; ++x)
+                        for (int x = 0; x < RenderWidth; ++x)
                             builder.Append((char)mapGrid[x, y]);
                         builder.Append("\r\n");
                     }
 
                     foreach (var entry in roomLegend)
-                        builder.Append((char)entry.Key + " - " + entry.Value + "\r\n");
+                        builder.Append(entry + "\r\n");
 
                     MudObject.SendMessage(actor, builder.ToString());
+
+                    ClearGrid();
+
                     return SharpRuleEngine.PerformResult.Continue;
                 }, "Implement sonar device rule.");
         }
 
+        private static void ClearGrid()
+        {
+            for (var x = 0; x < MapWidth; ++x)
+                for (var y = 0; y < MapHeight; ++y)
+                    GriddedMap[x, y] = null;
+            VisitedRooms.Clear();
+        }
+
+        private static void PopulateGrid(MudObject Location, int X, int Y)
+        {
+            if (X < 0 || X >= MapWidth || Y < 0 || Y >= MapHeight) return;
+            if (GriddedMap[X, Y] != null) return;
+            if (Location == null) return;
+            if (VisitedRooms.Contains(Location)) return;
+            VisitedRooms.Add(Location);
+            GriddedMap[X, Y] = Location;
+
+            foreach (var link in Location.EnumerateObjects().Where(t => t.HasProperty("link direction")))
+            {
+                var destinationName = link.GetProperty<string>("link destination");
+                var destination = MudObject.GetObject(destinationName);
+                var direction = link.GetProperty<RMUD.Direction>("link direction");
+                var vec = Link.GetAsVector(direction);
+                PopulateGrid(destination, X + vec.X, Y + vec.Y);
+            }
+        }
+
+        private static String Pad(String Symbol, int Width)
+        {
+            while (Symbol.Length < Width)
+                Symbol = Symbol + " ";
+            return Symbol;
+        }
+
         private static void PlaceSymbol(int[,] MapGrid, int X, int Y, int Symbol)
         {
-            if (X < 1 || X >= MapWidth - 1 || Y < 1 || Y >= MapHeight - 1) return;
             MapGrid[X, Y] = Symbol;
         }
 
-        private static int FindSymbol(RMUD.MudObject Location)
+        private static void PlaceString(int[,] MapGrid, int X, int Y, String Str)
         {
-            if (Location == null) return '?';
-
-            var spacer = Location.GetProperty<String>("short").LastIndexOf('-');
-            if (spacer > 0 && spacer < Location.GetProperty<String>("short").Length - 2)
-                return Location.GetProperty<String>("short").ToUpper()[spacer + 2];
-            else
-                return Location.GetProperty<String>("short").ToUpper()[0];
+            for (var i = 0; i < Str.Length && X + i < RenderWidth - 1; ++i)
+                PlaceSymbol(MapGrid, X + i, Y, Str[i]);
         }
 
-        private static void MapLocation(int[,] MapGrid, Dictionary<int, String> RoomLegend, int X, int Y, RMUD.MudObject Location, int Symbol)
+        private static String ComposeSymbol(String[] Pieces, int GoalLength)
         {
-            if (X < 1 || X >= MapWidth - 1 || Y < 1 || Y >= MapHeight - 1) return;
+            if (Pieces.Length == 0) return new string('?', GoalLength);
+            var r = "";
+            var piecesLeft = Pieces.Length;
+            foreach (var piece in Pieces)
+            {
+                var targetPieceLength = (int)(Math.Ceiling((float)(GoalLength - r.Length) / (float)piecesLeft));
+                r += piece.Substring(0, Math.Min(targetPieceLength, piece.Length));
+                piecesLeft -= 1;
+            }
+            return r.ToUpper();
+        }
 
-            if (MapGrid[X, Y] != ' ') return;
+        private static String FindSymbol(RMUD.MudObject Location)
+        {
+            if (Location == null) return "???";
+            var namePart = Core.StripColorTags(Location.Short).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            return ComposeSymbol(namePart, RoomWidth - 4);
+        }
 
-            if (Symbol == ' ') Symbol = FindSymbol(Location);
+        private static void RenderRoom(MudObject Location, int[,] MapGrid, int X, int Y)
+        { 
+            var symbol = FindSymbol(Location);
 
-            if (Location != null) RoomLegend.Upsert(Symbol, Location.GetProperty<String>("short"));
             
-            PlaceSymbol(MapGrid, X, Y, Symbol);
-            PlaceSymbol(MapGrid, X - 2, Y - 1, '+');
-            PlaceSymbol(MapGrid, X - 1, Y - 1, '-');
-            PlaceSymbol(MapGrid, X - 0, Y - 1, '-');
-            PlaceSymbol(MapGrid, X + 1, Y - 1, '-');
-            PlaceSymbol(MapGrid, X + 2, Y - 1, '+');
-
-            PlaceSymbol(MapGrid, X + 2, Y, '|');
-            PlaceSymbol(MapGrid, X - 2, Y, '|');
-
-            PlaceSymbol(MapGrid, X - 2, Y + 1, '+');
-            PlaceSymbol(MapGrid, X - 1, Y + 1, '-');
-            PlaceSymbol(MapGrid, X - 0, Y + 1, '-');
-            PlaceSymbol(MapGrid, X + 1, Y + 1, '-');
-            PlaceSymbol(MapGrid, X + 2, Y + 1, '+');
+            PlaceString(MapGrid, X + 2, Y + 2, symbol);
+            PlaceSymbol(MapGrid, X + 1, Y + 1, '+');
+            PlaceSymbol(MapGrid, X + RoomWidth - 2, Y + 1, '+');
+            PlaceSymbol(MapGrid, X + RoomWidth - 2, Y + RoomHeight - 2, '+');
+            PlaceSymbol(MapGrid, X + 1, Y + RoomHeight - 2, '+');
+            for (var i = 0; i < RoomWidth - 4; ++i)
+            {
+                PlaceSymbol(MapGrid, X + 2 + i, Y + 1, '-');
+                PlaceSymbol(MapGrid, X + 2 + i, Y + RoomHeight - 2, '-');
+            }
+            for (var i = 0; i < RoomHeight - 4; ++i)
+            {
+                PlaceSymbol(MapGrid, X + 1, Y + 2 + i, '|');
+                PlaceSymbol(MapGrid, X + RoomWidth - 2, Y + 2 + i, '|');
+            }
 
             if (Location != null)
             {
+                var bonusLinks = "";
+
                 foreach (var link in Location.EnumerateObjects().Where(t => t.HasProperty("link direction")))
                 {
                     var destinationName = link.GetProperty<string>("link destination");
                     var destination = MudObject.GetObject(destinationName);
                     var direction = link.GetProperty<RMUD.Direction>("link direction");
 
-                    if (direction == Direction.UP)
+                    if (Link.IsBonusDirection(direction))
                     {
-                        PlaceSymbol(MapGrid, X + 1, Y - 2, ':');
-                        PlaceSymbol(MapGrid, X + 1, Y - 3, FindSymbol(destination));
-                    }
-                    else if (direction == Direction.DOWN)
-                    {
-                        PlaceSymbol(MapGrid, X - 1, Y + 2, ':');
-                        PlaceSymbol(MapGrid, X - 1, Y + 3, FindSymbol(destination));
+                        bonusLinks += direction.ToString()[0];
                     }
                     else
                     {
                         var directionVector = RMUD.Link.GetAsVector(direction);
-                        PlaceEdge(MapGrid, X + directionVector.X * 3, Y + directionVector.Y * 2, direction);
+                        PlaceEdge(MapGrid, X, Y, direction);
+                    }
 
-                        //if (destination.RoomType == Location.RoomType)
-                        MapLocation(MapGrid, RoomLegend, X + (directionVector.X * 7), Y + (directionVector.Y * 5), destination, ' ');
+                    var bonusSpace = RoomWidth - 4;
+                    var bonusRows = (int)Math.Ceiling((float)bonusLinks.Length / (float)bonusSpace);
+                    var bonusY = Y + RoomHeight - 2 - bonusRows;
+                    var bonusX = 0;
+                    for (var i = 0; i < bonusLinks.Length; ++i)
+                    {
+                        PlaceSymbol(MapGrid, X + 2 + bonusX, bonusY, bonusLinks[i]);
+                        bonusX += 1;
+                        if (bonusX >= bonusSpace)
+                        {
+                            bonusX = 0;
+                            bonusY += 1;
+                        }
                     }
                 }
             }
@@ -134,28 +211,34 @@ namespace AdminModule
 
         private static void PlaceEdge(int[,] MapGrid, int X, int Y, RMUD.Direction Direction)
         {
-            if (X < 1 || X >= MapWidth - 1 || Y < 1 || Y >= MapHeight - 1) return;
-
             switch (Direction)
             {
                 case RMUD.Direction.NORTH:
+                    PlaceSymbol(MapGrid, X + RoomMidWidth, Y, '|');
+                    break;
                 case RMUD.Direction.SOUTH:
-                    MapGrid[X, Y] = '|';
+                    PlaceSymbol(MapGrid, X + RoomMidWidth, Y + RoomHeight - 1, '|');
                     break;
                 case RMUD.Direction.EAST:
+                    PlaceSymbol(MapGrid, X + RoomWidth - 1, Y + RoomMidHeight, '-');
+                    break;
                 case RMUD.Direction.WEST:
-                    MapGrid[X, Y] = '-';
+                    PlaceSymbol(MapGrid, X, Y + RoomMidHeight, '-');
                     break;
                 case RMUD.Direction.NORTHEAST:
+                    PlaceSymbol(MapGrid, X + RoomWidth - 1, Y, '/');
+                    break;
                 case RMUD.Direction.SOUTHWEST:
-                    MapGrid[X, Y] = '/';
+                    PlaceSymbol(MapGrid, X, Y + RoomHeight - 1, '/');
                     break;
                 case RMUD.Direction.NORTHWEST:
+                    PlaceSymbol(MapGrid, X, Y, '\\');
+                    break;
                 case RMUD.Direction.SOUTHEAST:
-                    MapGrid[X, Y] = '\\';
+                    PlaceSymbol(MapGrid, X + RoomWidth - 1, Y + RoomHeight - 1, '\\');
                     break;
                 default:
-                    MapGrid[X, Y] = '*';
+                    //PlaceSymbol(MapGrid, X + 2, Y, '|');
                     break;
             }
         }

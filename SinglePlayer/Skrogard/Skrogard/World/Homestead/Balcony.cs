@@ -13,7 +13,7 @@ namespace World.Homestead
             SetProperty("long", "A rickety wooden platform juts from the side of the rock. It creaks loudly underfoot.");
 
             OpenLink(Direction.DOWN, "Homestead.Gully");
-            OpenLink(Direction.WEST, "Homestead.Cellar", GetObject("Homestead.Stormdoor@outside"));
+            OpenLink(Direction.WEST, "Homestead.Cellar", GetObject("Homestead.StormDoor@outside"));
 
         }
     }

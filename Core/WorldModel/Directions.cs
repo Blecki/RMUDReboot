@@ -97,7 +97,32 @@ namespace RMUD
             }
         }
 
-		public static Direction Opposite(Direction Of)
+        public static bool IsBonusDirection(Direction D)
+        {
+            switch (D)
+            {
+                case Direction.NOWHERE: return false;
+                case Direction.NORTH: return false;
+                case Direction.NORTHEAST: return false;
+                case Direction.EAST: return false;
+                case Direction.SOUTHEAST: return false;
+                case Direction.SOUTH: return false;
+                case Direction.SOUTHWEST: return false;
+                case Direction.WEST: return false;
+                case Direction.NORTHWEST: return false;
+                case Direction.UP: return true;
+                case Direction.DOWN: return true;
+                case Direction.IN: return true;
+                case Direction.OUT: return true;
+                case Direction.PORT: return true;
+                case Direction.STARBOARD: return true;
+                case Direction.FORE: return true;
+                case Direction.AFT: return true;
+                default: return false;
+            }
+        }
+
+        public static Direction Opposite(Direction Of)
 		{
 			switch (Of)
 			{
