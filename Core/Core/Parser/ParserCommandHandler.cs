@@ -109,7 +109,7 @@ namespace RMUD
                         Core.ProcessPlayerCommand(matchedCommand.Command, matchedCommand.Matches[0], Command.Actor);
                 }
                 else
-                    MudObject.SendMessage(Command.Actor, "huh?");
+                    MudObject.SendMessage(Command.Actor, "huh?"); // Todo: This is redundant now.
             }
 
             Core.GlobalRules.LogRules(null);

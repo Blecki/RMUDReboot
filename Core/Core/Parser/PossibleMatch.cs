@@ -5,25 +5,27 @@ using System.Text;
 
 namespace RMUD
 {
-    public class PossibleMatch : Dictionary<String, Object>
+    public class PossibleMatch : Dictionary<String, Object> // Todo: Should this be a member rather than inheritance?
     {
         public LinkedListNode<String> Next = null;
+        public int ParseDepth = 0;
 
         public PossibleMatch(LinkedListNode<String> Next)
         {
             this.Next = Next;
         }
 
-        private PossibleMatch(Dictionary<String, Object> Arguments, LinkedListNode<String> Next)
+        private PossibleMatch(Dictionary<String, Object> Arguments, LinkedListNode<String> Next, int ParseDepth)
         {
             this.Next = Next;
+            this.ParseDepth = ParseDepth;
             foreach (var pair in Arguments)
                 this.Upsert(pair.Key, pair.Value);
         }
 
         public PossibleMatch Clone()
         {
-            return new PossibleMatch(this, Next);
+            return new PossibleMatch(this, Next, ParseDepth);
         }
 
         /// <summary>
@@ -34,7 +36,7 @@ namespace RMUD
         /// <returns></returns>
         public PossibleMatch With(String ArgumentName, Object Value)
         {
-            var r = new PossibleMatch(this, Next);
+            var r = new PossibleMatch(this, Next, ParseDepth);
             r.Upsert(ArgumentName, Value);
             return r;
         }
@@ -57,7 +59,7 @@ namespace RMUD
         /// <returns></returns>
         public PossibleMatch Advance()
         {
-            return new PossibleMatch(this, Next.Next);
+            return new PossibleMatch(this, Next.Next, ParseDepth + 1);
         }
 
         /// <summary>
@@ -68,7 +70,7 @@ namespace RMUD
         /// <returns></returns>
         public PossibleMatch AdvanceWith(String ArgumentName, Object Value)
         {
-            var r = new PossibleMatch(this, Next.Next);
+            var r = new PossibleMatch(this, Next.Next, ParseDepth + 1);
             r.Upsert(ArgumentName, Value);
             return r;
         }
@@ -81,7 +83,7 @@ namespace RMUD
         /// <returns></returns>
         public PossibleMatch EndWith(String ArgumentName, Object Value)
         {
-            var r = new PossibleMatch(this, null);
+            var r = new PossibleMatch(this, null, ParseDepth + 1);
             r.Upsert(ArgumentName, Value);
             return r;
         }

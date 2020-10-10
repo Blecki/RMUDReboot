@@ -5,12 +5,20 @@ using System.Text;
 
 namespace RMUD
 {
+    public class BestFailedMatch
+    {
+        public CommandEntry Command;
+        public PossibleMatch Match;
+    }
+
     /// <summary>
     /// Represents the context the parser is attempting to make a match within.
     /// </summary>
     public class MatchContext
     {
         public MudObject ExecutingActor;
+        public CommandEntry BestFailedCommand = null;
+        public PossibleMatch BestFailedMatch = null;
 
         /// <summary>
         /// The objects in scope will not change while matching a command, as command matchers by definition

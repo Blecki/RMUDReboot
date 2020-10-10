@@ -98,7 +98,18 @@ namespace RMUD
                         new PossibleMatch[] { new PossibleMatch(null) });
                 }
 
-                // Only accept matches that consumed all of the input.
+                // If there were matches, record the deepest parse as the best possible failure.
+                if (matches.Count() > 0)
+                {
+                    var bestFailedDepth = matches.Select(m => m.ParseDepth).Max();
+                    if (matchContext.BestFailedMatch == null || bestFailedDepth > matchContext.BestFailedMatch.ParseDepth)
+                    {
+                        matchContext.BestFailedCommand = command;
+                        matchContext.BestFailedMatch = matches.FirstOrDefault(m => m.ParseDepth == bestFailedDepth);
+                    }
+                }
+
+                // Only accept matches that consumed all of the input as valid, successful matches. 
                 matches = matches.Where(m => m.Next == null);
 
                 // If we did consume all of the input, we will assume this match is successful. Note it is 
@@ -106,7 +117,21 @@ namespace RMUD
                 if (matches.Count() > 0)
                     return new MatchedCommand(command, matches);
             }
-            return null;
+
+            // No command matched; lets return a dummy command that display's the huh? text.
+            return new MatchedCommand(
+                new CommandEntry()
+                    .ProceduralRule((match, actor) => 
+                        {
+                            MudObject.SendMessage(actor, "Huh?");
+                            if (matchContext.BestFailedCommand != null)
+                            {
+                                MudObject.SendMessage(actor, "The best failed match was " + matchContext.BestFailedCommand.ManualName + ", which reached a depth of " + matchContext.BestFailedMatch.ParseDepth);
+                            }
+                            return SharpRuleEngine.PerformResult.Continue;
+                        }), 
+                new PossibleMatch[] { new PossibleMatch(null) }
+            );
         }
     }
 }
