@@ -29,7 +29,7 @@ namespace RMUD
             this.Optional = Optional;
         }
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             var R = new List<PossibleMatch>();
 			if (State.Next != null && State.Next.Value.ToUpper() == Word)
@@ -39,7 +39,7 @@ namespace RMUD
             return R;
         }
 
-        public String FindFirstKeyWord() { return Word; }
-		public String Emit() { return Optional ? (Word.ToLower() + "?") : Word.ToLower(); }
+        override public String FindFirstKeyWord() { return Word; }
+        override public String Emit() { return Optional ? (Word.ToLower() + "?") : Word.ToLower(); }
     }
 }

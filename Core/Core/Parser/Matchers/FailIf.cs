@@ -24,7 +24,7 @@ namespace RMUD
             this.Message = Message;
         }
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             if (Test(State, Context)) throw new CommandParser.MatchAborted(Message);
             var r = new List<PossibleMatch>();
@@ -32,7 +32,7 @@ namespace RMUD
             return r;
         }
 
-        public String FindFirstKeyWord() { return null; }
-        public String Emit() { return "[FAIL-IF]"; }
+        override public String FindFirstKeyWord() { return null; }
+        override public String Emit() { return "[FAIL-IF]"; }
     }
 }

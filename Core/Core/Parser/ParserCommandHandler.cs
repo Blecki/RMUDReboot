@@ -99,17 +99,11 @@ namespace RMUD
             }
             else
             {
-
-                if (matchedCommand != null)
-                {
-                    // If there are multiple matches, replace this handler with a disambiguation handler.
-                    if (matchedCommand.Matches.Count > 1)
-                        Command.Actor.SetProperty("command handler", new DisambigCommandHandler(Command.Actor, matchedCommand, this));
-                    else
-                        Core.ProcessPlayerCommand(matchedCommand.Command, matchedCommand.Matches[0], Command.Actor);
-                }
+                // If there are multiple matches, replace this handler with a disambiguation handler.
+                if (matchedCommand.Matches.Count > 1)
+                    Command.Actor.SetProperty("command handler", new DisambigCommandHandler(Command.Actor, matchedCommand, this));
                 else
-                    MudObject.SendMessage(Command.Actor, "huh?"); // Todo: This is redundant now.
+                    Core.ProcessPlayerCommand(matchedCommand.Command, matchedCommand.Matches[0], Command.Actor);
             }
 
             Core.GlobalRules.LogRules(null);

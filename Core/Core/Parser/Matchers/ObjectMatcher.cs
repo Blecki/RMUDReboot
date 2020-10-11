@@ -98,7 +98,7 @@ namespace RMUD
             this.Settings = Settings;
         }
 
-		public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
 		{
             var useObjectScoring = ScoreResults != null;
 
@@ -153,7 +153,7 @@ namespace RMUD
 			return R;
 		}
 
-        public String FindFirstKeyWord() { return null; }
-		public String Emit() { return "[OBJECT => '" + CaptureName + "']"; }
+        override public String FindFirstKeyWord() { return null; }
+        override public String Emit() { return "[OBJECT => '" + CaptureName + "']"; }
     }
 }

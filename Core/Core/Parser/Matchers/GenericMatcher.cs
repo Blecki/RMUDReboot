@@ -24,12 +24,12 @@ namespace RMUD
             this.HelpDescription = HelpDescription;
         }
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             return MatchFunc(State, Context);
         }
 
-        public String FindFirstKeyWord() { return null; }
-        public String Emit() { return HelpDescription; }
+        override public String FindFirstKeyWord() { return null; }
+        override public String Emit() { return HelpDescription; }
     }
 }

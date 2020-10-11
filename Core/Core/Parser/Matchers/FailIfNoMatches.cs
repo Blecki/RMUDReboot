@@ -24,7 +24,7 @@ namespace RMUD
             this.Message = Message;
         }
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             var R = new List<PossibleMatch>();
             R.AddRange(Sub.Match(State, Context));
@@ -32,7 +32,7 @@ namespace RMUD
             return R;
         }
 
-        public String FindFirstKeyWord() { return Sub.FindFirstKeyWord(); }
-        public String Emit() { return Sub.Emit(); }
+        override public String FindFirstKeyWord() { return Sub.FindFirstKeyWord(); }
+        override public String Emit() { return Sub.Emit(); }
     }
 }

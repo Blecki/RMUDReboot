@@ -77,6 +77,7 @@ namespace RMUD
             foreach (var command in Commands)
             {
                 IEnumerable<PossibleMatch> matches;
+                matchContext.CurrentParseCommand = command;
 
                 try
                 {
@@ -98,17 +99,6 @@ namespace RMUD
                         new PossibleMatch[] { new PossibleMatch(null) });
                 }
 
-                // If there were matches, record the deepest parse as the best possible failure.
-                if (matches.Count() > 0)
-                {
-                    var bestFailedDepth = matches.Select(m => m.ParseDepth).Max();
-                    if (matchContext.BestFailedMatch == null || bestFailedDepth > matchContext.BestFailedMatch.ParseDepth)
-                    {
-                        matchContext.BestFailedCommand = command;
-                        matchContext.BestFailedMatch = matches.FirstOrDefault(m => m.ParseDepth == bestFailedDepth);
-                    }
-                }
-
                 // Only accept matches that consumed all of the input as valid, successful matches. 
                 matches = matches.Where(m => m.Next == null);
 
@@ -127,6 +117,8 @@ namespace RMUD
                             if (matchContext.BestFailedCommand != null)
                             {
                                 MudObject.SendMessage(actor, "The best failed match was " + matchContext.BestFailedCommand.ManualName + ", which reached a depth of " + matchContext.BestFailedMatch.ParseDepth);
+                                if (!String.IsNullOrEmpty(matchContext.BestFailedParseStageDescription))
+                                    MudObject.SendMessage(actor, matchContext.BestFailedParseStageDescription);
                             }
                             return SharpRuleEngine.PerformResult.Continue;
                         }), 

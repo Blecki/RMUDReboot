@@ -43,13 +43,11 @@
     <Compile Include="Close.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="DescribeRules.cs" />
-    <Compile Include="Examine.cs" />
     <Compile Include="PushBetweenRooms.cs" />
     <Compile Include="Go.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Lock.cs" />
     <Compile Include="Look.cs" />
-    <Compile Include="LookUnderOrBehind.cs" />
     <Compile Include="MiscRules.cs" />
     <Compile Include="ModuleInfo.cs" />
     <Compile Include="Open.cs" />

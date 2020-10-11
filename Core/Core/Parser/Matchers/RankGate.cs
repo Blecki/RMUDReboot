@@ -22,7 +22,7 @@ namespace RMUD
 			this.RequiredRank = RequiredRank;
 		}
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             var R = new List<PossibleMatch>();
             if (Context.ExecutingActor.GetProperty<int>("rank") >= RequiredRank)
@@ -32,7 +32,7 @@ namespace RMUD
 			return R;
         }
 
-        public String FindFirstKeyWord() { return null; }
-		public String Emit() { return "<Rank must be >= " + RequiredRank + ">"; }
+        override public String FindFirstKeyWord() { return null; }
+        override public String Emit() { return "<Rank must be >= " + RequiredRank + ">"; }
     }
 }

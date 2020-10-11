@@ -22,7 +22,7 @@ namespace RMUD
 			this.ArgumentName = ArgumentName;
         }
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             var r = new List<PossibleMatch>();
             if (State.Next != null)
@@ -30,7 +30,7 @@ namespace RMUD
 			return r;
         }
 
-        public String FindFirstKeyWord() { return null; }
-		public String Emit() { return "[WORD => '" + ArgumentName + "']"; }
+        override public String FindFirstKeyWord() { return null; }
+        override public String Emit() { return "[WORD => '" + ArgumentName + "']"; }
     }
 }

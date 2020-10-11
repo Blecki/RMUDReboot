@@ -24,7 +24,7 @@ namespace RMUD
             this.Sub = Sub;
         }
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             var r = Sub.Match(State, Context);
             var highestScoreFound = MatchPreference.VeryUnlikely;
@@ -36,8 +36,8 @@ namespace RMUD
             return new List<PossibleMatch>(r.Where(m => highestScoreFound == GetScore(m, ScoreArgument)));
         }
 
-        public String FindFirstKeyWord() { return Sub.FindFirstKeyWord(); }
-        public String Emit() { return Sub.Emit(); }
+        override public String FindFirstKeyWord() { return Sub.FindFirstKeyWord(); }
+        override public String Emit() { return Sub.Emit(); }
 
         private static MatchPreference GetScore(PossibleMatch Match, String ScoreArgumentName)
         {

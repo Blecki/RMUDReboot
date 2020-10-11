@@ -22,7 +22,7 @@ namespace RMUD
 			Matchers.AddRange(matchers);
 		}
 
-        public List<PossibleMatch> Match(PossibleMatch State, MatchContext Context)
+        override protected List<PossibleMatch> ImplementMatch(PossibleMatch State, MatchContext Context)
         {
             var Matches = new List<PossibleMatch>();
             foreach (var Matcher in Matchers)
@@ -33,7 +33,7 @@ namespace RMUD
             return Matches;
         }
 
-        public String FindFirstKeyWord()
+        override public String FindFirstKeyWord()
         {
             foreach (var sub in Matchers)
             {
@@ -43,7 +43,7 @@ namespace RMUD
             return null;
         }
 
-		public String Emit() { return "( " + String.Join(" | ", Matchers.Select(m => m.Emit())) + " )"; }
+        override public String Emit() { return "( " + String.Join(" | ", Matchers.Select(m => m.Emit())) + " )"; }
     }
 
 }
