@@ -85,10 +85,8 @@ namespace RMUD
                 }
                 catch (MatchAborted ma)
                 {
-                    // The match didn't fail; it generated an error. These means the match progressed to a point 
-                    // where the author of the command felt that the input could not logically match any other
-                    // command, however, the input was still malformed in some way. Abort matching, and dummy up
-                    // a command entry to display the error message to the player.
+                    // The match didn't fail; it generated an error. This usually represents an oversite in the command's grammar.
+                    // Abort matching, and dummy up a command entry to display the error message to the player.
                     return new MatchedCommand( 
                         new CommandEntry().ProceduralRule((match, actor) => 
                         {
@@ -113,13 +111,17 @@ namespace RMUD
                 new CommandEntry()
                     .ProceduralRule((match, actor) => 
                         {
-                            MudObject.SendMessage(actor, "Huh?");
-                            if (matchContext.BestFailedCommand != null)
+                            // Todo: Expand match arguments into error message.
+                            if (matchContext.BestFailedCommand != null && matchContext.BestFailedMatch.ParseDepth > 0)
                             {
+                                MudObject.SendMessage(actor, "That's the name of a command, but I couldn't figure out what you meant.");
                                 MudObject.SendMessage(actor, "The best failed match was " + matchContext.BestFailedCommand.ManualName + ", which reached a depth of " + matchContext.BestFailedMatch.ParseDepth);
                                 if (!String.IsNullOrEmpty(matchContext.BestFailedParseStageDescription))
                                     MudObject.SendMessage(actor, matchContext.BestFailedParseStageDescription);
                             }
+                            else
+                                MudObject.SendMessage(actor, "I don't think that is a command I know. I could not parse any of it.");
+                            
                             return SharpRuleEngine.PerformResult.Continue;
                         }), 
                 new PossibleMatch[] { new PossibleMatch(null) }

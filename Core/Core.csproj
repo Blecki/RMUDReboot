@@ -58,6 +58,7 @@
     <Compile Include="Core\Heartbeat.cs" />
     <Compile Include="Core\FormatMessage.cs" />
     <Compile Include="Core\ModuleAssembly.cs" />
+    <Compile Include="Core\Parser\Matchers\SetValue.cs" />
     <Compile Include="Core\Rules\SharpRuleEngine\GlobalRules.cs" />
     <Compile Include="Core\Rules\SharpRuleEngine\Rule.cs" />
     <Compile Include="Core\Rules\SharpRuleEngine\RuleBook.cs" />

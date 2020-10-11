@@ -9,7 +9,7 @@ namespace RMUD
     {
         public static void AtStartup(RuleEngine GlobalRules)
         {
-            PropertyManifest.RegisterProperty("short", typeof(String), "object", new StringSerializer());
+            PropertyManifest.RegisterProperty("short", typeof(String), "unnamed object", new StringSerializer());
             PropertyManifest.RegisterProperty("long", typeof(String), "", new StringSerializer());
             PropertyManifest.RegisterProperty("article", typeof(String), "a", new StringSerializer());
             PropertyManifest.RegisterProperty("nouns", typeof(NounList), null, new DefaultSerializer());

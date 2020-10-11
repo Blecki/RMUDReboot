@@ -4,69 +4,12 @@ using System.Linq;
 using System.Text;
 using RMUD;
 
-namespace StandardActionsModule
+namespace StandardActionsModule.Look
 {
-    internal class Look : CommandFactory
+    internal class LocaleRules
     {
-        public override void Create(CommandParser Parser)
-        {
-            Parser.AddCommand(
-                Sequence(
-                    Or(
-                        KeyWord("LOOK"),
-                        KeyWord("EXAMINE"),
-                        KeyWord("L"),
-                        KeyWord("X"),
-                        KeyWord("EX")).Stage("I got as far as knowing you wanted to look."),
-                    Optional(
-                        Or(
-                            KeyWord("AT").Stage("I got as far as knowing you wanted to look at something."),
-                            RelativeLocation("RELLOC").Stage("I got as far as knowing you wanted to look in, on, under, or behind something."))),
-                    Optional(Object("OBJECT", InScope).Stage("I got as far as figuring out the thing involved."))))
-                .Name("LOOK")
-                .ID("StandardActions:Look")
-                .Manual("Take a look around, or at an object; or in, on, under, or behind something.")
-                .ProceduralRule((match, actor) =>
-                {
-                    if (match.ContainsKey("OBJECT"))
-                    {
-                        if (match.ContainsKey("RELLOC"))
-                        {
-                            if (Core.GlobalRules.ConsiderCheckRule("can look relloc?", match["ACTOR"], match["OBJECT"], match["RELLOC"]) == SharpRuleEngine.CheckResult.Disallow)
-                                return SharpRuleEngine.PerformResult.Stop;
-                            Core.GlobalRules.ConsiderPerformRule("look relloc", match["ACTOR"], match["OBJECT"], match["RELLOC"]);
-                        }
-                        else
-                        {
-                            if (Core.GlobalRules.ConsiderCheckRule("can examine?", match["ACTOR"], match["OBJECT"]) == SharpRuleEngine.CheckResult.Disallow)
-                                return SharpRuleEngine.PerformResult.Stop;
-                            Core.GlobalRules.ConsiderPerformRule("describe", match["ACTOR"], match["OBJECT"]);
-                        }
-                        return SharpRuleEngine.PerformResult.Continue;
-                    }
-                    else
-                    {
-                        Core.GlobalRules.ConsiderPerformRule("describe locale", match["ACTOR"], (match["ACTOR"] as MudObject).Location);
-                        return SharpRuleEngine.PerformResult.Continue;
-                    }
-                });
-        }
-
         public static void AtStartup(RuleEngine GlobalRules)
         {
-            Core.StandardMessage("nowhere", "You aren't anywhere.");
-            Core.StandardMessage("dark", "It's too dark to see.");
-            Core.StandardMessage("also here", "Also here: <l0>.");
-            Core.StandardMessage("on which", "(on which is <l0>)");
-            Core.StandardMessage("obvious exits", "Obvious exits:");
-            Core.StandardMessage("through", "through <the0>");
-            Core.StandardMessage("to", "to <the0>");
-            Core.StandardMessage("dont see that", "I don't see that here.");
-            Core.StandardMessage("cant look relloc", "You can't look <s0> that.");
-            Core.StandardMessage("is closed error", "^<the0> is closed.");
-            Core.StandardMessage("relloc it is", "^<s0> <the1> is..");
-            Core.StandardMessage("nothing relloc it", "There is nothing <s0> <the1>.");
-
             GlobalRules.DeclarePerformRuleBook<MudObject, MudObject>("describe in locale", "[Actor, Item] : Generate a locale description for the item.", "actor", "item");
 
             GlobalRules.DeclarePerformRuleBook<MudObject, MudObject>("describe locale", "[Actor, Room] : Generates a description of the locale.", "actor", "room");
@@ -208,67 +151,6 @@ namespace StandardActionsModule
                     return SharpRuleEngine.PerformResult.Continue;
                 })
                 .Name("List exits in locale description rule.");
-
-            GlobalRules.DeclareCheckRuleBook<MudObject, MudObject>("can examine?", "[Actor, Item] : Can the viewer examine the item?", "actor", "item");
-
-            GlobalRules.Check<MudObject, MudObject>("can examine?")
-                .First
-                .Do((viewer, item) => MudObject.CheckIsVisibleTo(viewer, item))
-                .Name("Can't examine what isn't here rule.");
-
-            GlobalRules.Check<MudObject, MudObject>("can examine?")
-                .Last
-                .Do((viewer, item) => SharpRuleEngine.CheckResult.Allow)
-                .Name("Default can examine everything rule.");
-
-            GlobalRules.DeclareCheckRuleBook<MudObject, MudObject, RelativeLocations>("can look relloc?", "[Actor, Item, Relative Location] : Can the actor look in/on/under/behind the item?", "actor", "item", "relloc");
-
-            GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .Do((actor, item, relloc) => MudObject.CheckIsVisibleTo(actor, item))
-                .Name("Container must be visible rule.");
-
-            GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .When((actor, item, relloc) => (item.LocationsSupported & relloc) != relloc)
-                .Do((actor, item, relloc) =>
-                {
-                    MudObject.SendMessage(actor, "@cant look relloc", Relloc.GetRelativeLocationName(relloc));
-                    return SharpRuleEngine.CheckResult.Disallow;
-                })
-                .Name("Container must support relloc rule.");
-
-            GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .When((actor, item, relloc) => (relloc == RelativeLocations.In) && !item.GetProperty<bool>("open?"))
-                .Do((actor, item, relloc) =>
-                {
-                    MudObject.SendMessage(actor, "@is closed error", item);
-                    return SharpRuleEngine.CheckResult.Disallow;
-                })
-                .Name("Container must be open to look in rule.");
-
-            GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .Do((actor, item, relloc) => SharpRuleEngine.CheckResult.Allow)
-                .Name("Default allow looking relloc rule.");
-
-            GlobalRules.DeclarePerformRuleBook<MudObject, MudObject, RelativeLocations>("look relloc", "[Actor, Item, Relative Location] : Handle the actor looking on/under/in/behind the item.", "actor", "item", "relloc");
-
-            GlobalRules.Perform<MudObject, MudObject, RelativeLocations>("look relloc")
-                .Do((actor, item, relloc) =>
-                {
-                    var contents = new List<MudObject>(item.EnumerateObjects(relloc));
-
-                    if (contents.Count > 0)
-                    {
-                        MudObject.SendMessage(actor, "@relloc it is", Relloc.GetRelativeLocationName(relloc), item);
-                        foreach (var thing in contents)
-                            MudObject.SendMessage(actor, "  <a0>", thing);
-                    }
-                    else
-                        MudObject.SendMessage(actor, "@nothing relloc it", Relloc.GetRelativeLocationName(relloc), item);
-
-                    return SharpRuleEngine.PerformResult.Continue;
-                })
-                .Name("List contents in relative location rule.");
-
         }
     }
 }

@@ -43,11 +43,16 @@
     <Compile Include="Close.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="DescribeRules.cs" />
+    <Compile Include="Look\Messages.cs" />
+    <Compile Include="Look\LocaleRules.cs" />
+    <Compile Include="Look\ObjectRules.cs" />
+    <Compile Include="Look\LinkRules.cs" />
+    <Compile Include="Look\RellocRules.cs" />
     <Compile Include="PushBetweenRooms.cs" />
     <Compile Include="Go.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Lock.cs" />
-    <Compile Include="Look.cs" />
+    <Compile Include="Look\Parser.cs" />
     <Compile Include="MiscRules.cs" />
     <Compile Include="ModuleInfo.cs" />
     <Compile Include="Open.cs" />

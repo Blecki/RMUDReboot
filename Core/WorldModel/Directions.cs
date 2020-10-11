@@ -89,10 +89,10 @@ namespace RMUD
                 case Direction.DOWN:
                 case Direction.IN:
                 case Direction.OUT:
-                case Direction.PORT:
-                case Direction.STARBOARD:
-                case Direction.FORE:
-                case Direction.AFT:
+                case Direction.PORT: return new DirectionVector(-1, 0);
+                case Direction.STARBOARD: return new DirectionVector(1, 0);
+                case Direction.FORE: return new DirectionVector(0, -1);
+                case Direction.AFT: return new DirectionVector(0, 1);
                 default: return new DirectionVector(0, 0);
             }
         }
@@ -169,14 +169,39 @@ namespace RMUD
                 case Direction.DOWN: return "from below";
                 case Direction.IN: return "from inside";
                 case Direction.OUT: return "from outside";
-                case Direction.PORT: return "from port";
-                case Direction.STARBOARD: return "from starboard";
+                case Direction.PORT: return "from portward";
+                case Direction.STARBOARD: return "from starboardward";
                 case Direction.FORE: return "from foreward";
                 case Direction.AFT: return "from aftward";
                 default: return "";
             }
         }
 
-	}
+        public static String FriendlyRelativeMessage(Direction Of)
+        {
+            switch (Of)
+            {
+                case Direction.NOWHERE: return "to the wherever";
+                case Direction.NORTH: return "to the north";
+                case Direction.NORTHEAST: return "to the northeast";
+                case Direction.EAST: return "to the east";
+                case Direction.SOUTHEAST: return "to the southeast";
+                case Direction.SOUTH: return "to the south";
+                case Direction.SOUTHWEST: return "to the southwest";
+                case Direction.WEST: return "to the west";
+                case Direction.NORTHWEST: return "to the northwest";
+                case Direction.UP: return "above";
+                case Direction.DOWN: return "below";
+                case Direction.IN: return "inside";
+                case Direction.OUT: return "outside";
+                case Direction.PORT: return "portward";
+                case Direction.STARBOARD: return "starboardward";
+                case Direction.FORE: return "foreward";
+                case Direction.AFT: return "aftward";
+                default: return "";
+            }
+        }
+
+    }
 
 }
