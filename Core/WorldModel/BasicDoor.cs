@@ -14,11 +14,11 @@ namespace RMUD
     {
         public BasicDoor()
         {
-            GetProperty<NounList>("nouns").Add("DOOR");
+            AddNoun("DOOR");
 
             // Doors can be referred to as 'the open door' or 'the closed door' as appropriate.
-            GetProperty<NounList>("nouns").Add("CLOSED", actor => !GetProperty<bool>("open?"));
-            GetProperty<NounList>("nouns").Add("OPEN", actor => GetProperty<bool>("open?"));
+            AddNoun("CLOSED").When(actor => !GetProperty<bool>("open?"));
+            AddNoun("OPEN").When(actor => GetProperty<bool>("open?"));
 
             SetProperty("open?", false);
             SetProperty("openable?", true);

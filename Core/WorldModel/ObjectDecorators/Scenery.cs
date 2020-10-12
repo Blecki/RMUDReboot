@@ -21,7 +21,7 @@ namespace RMUD
             scenery.SetProperty("scenery?", true);
             scenery.SetProperty("long", Description);
 			foreach (var noun in Nouns)
-				scenery.GetProperty<NounList>("nouns").Add(noun.ToUpper());
+				scenery.AddNoun(noun.ToUpper());
             AddScenery(scenery);
             return scenery;
 		}

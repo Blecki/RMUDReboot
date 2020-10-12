@@ -7,7 +7,7 @@ namespace World.Homestead
         public override void Initialize()
         {
             Short = "skull key";
-            GetProperty<NounList>("nouns").Add("KEY", "SKULL");
+            AddNoun("KEY", "SKULL");
         }
     }
 }

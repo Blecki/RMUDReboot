@@ -88,7 +88,7 @@ namespace RMUD
                 case Direction.UP:
                 case Direction.DOWN:
                 case Direction.IN:
-                case Direction.OUT:
+                case Direction.OUT: return new DirectionVector(0, 0);
                 case Direction.PORT: return new DirectionVector(-1, 0);
                 case Direction.STARBOARD: return new DirectionVector(1, 0);
                 case Direction.FORE: return new DirectionVector(0, -1);

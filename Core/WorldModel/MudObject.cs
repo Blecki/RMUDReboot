@@ -82,26 +82,23 @@ namespace RMUD
             IsPersistent = false;
 		}
 
-        public MudObject(String Short, String Long)
+        public MudObject(String Short, String Long) : this()
         {
             SetProperty("short", Short);
             SetProperty("long", Long);
-            SetProperty("nouns", new NounList(Short.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)));
+
+            AddNoun(Short.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
 
             var firstChar = Short.ToLower()[0];
             if (firstChar == 'a' || firstChar == 'e' || firstChar == 'i' || firstChar == 'o' || firstChar == 'u')
                 SetProperty("article", "an");
-
-            State = ObjectState.Alive;
-            IsPersistent = false;
-
         }
 
         public void SimpleName(String Short, params String[] Synonyms)
         {
             SetProperty("short", Short);
-            GetProperty<NounList>("nouns").Add(Short.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
-            GetProperty<NounList>("nouns").Add(Synonyms);
+            AddNoun(Short.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+            AddNoun(Synonyms);
         }
 
         /// <summary>

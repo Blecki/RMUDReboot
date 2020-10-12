@@ -86,7 +86,7 @@ And we can dance")
                     var ruleID = Guid.NewGuid();
                     var counter = 100;
 
-                    target.GetProperty<NounList>("nouns").Add("silly");
+                    target.AddNoun("silly");
 
                     target.Value<MudObject, bool>("silly?").Do((thing) => true).ID(ruleID.ToString())
                         .Name("Silly things are silly rule.");

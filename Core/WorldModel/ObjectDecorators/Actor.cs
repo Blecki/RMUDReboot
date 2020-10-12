@@ -27,8 +27,8 @@ namespace RMUD
             SetProperty("actor?", true);
             SetProperty("preserve?", true);
 
-            GetProperty<NounList>("nouns").Add("MAN", (a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Male);
-            GetProperty<NounList>("nouns").Add("WOMAN", (a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Female);
+            AddNoun("MAN").When((a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Male);
+            AddNoun("WOMAN").When((a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Female);
         }
 
     }

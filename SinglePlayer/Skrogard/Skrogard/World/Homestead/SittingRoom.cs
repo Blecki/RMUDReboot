@@ -27,7 +27,7 @@ namespace World.Homestead
 
             Short = "plush chair";
             Long = "Long ago, this was a fine leather chair. These days there are more patches then original construction, though it still appears very plush.";
-            GetProperty<NounList>("nouns").Add("plush", "chair");
+            AddNoun("plush", "chair");
 
             Move(GetObject("Homestead.Jaygmundre"), this, RMUD.RelativeLocations.On);
 

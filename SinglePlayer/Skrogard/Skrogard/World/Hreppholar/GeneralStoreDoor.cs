@@ -6,7 +6,7 @@ namespace World.Hreppholar
     {
         public override void Initialize()
         {
-            GetProperty<NounList>("nouns").Add("general", "store");
+            AddNoun("general", "store");
             Short = "General Store Door";
             Long = "A simple door of wood and copper mesh.";
         }

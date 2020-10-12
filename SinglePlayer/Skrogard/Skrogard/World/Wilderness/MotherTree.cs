@@ -31,7 +31,7 @@ namespace World.Wilderness
 
             Short = "Mother Tree";
 
-            GetProperty<NounList>("nouns").Add("mother", "tree", "oak", "forest");
+            AddNoun("mother", "tree", "oak", "forest");
 
             Perform<MudObject, MudObject>("describe in locale").Do((actor, item) =>
             {

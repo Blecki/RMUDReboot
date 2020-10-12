@@ -6,7 +6,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            GetProperty<NounList>("nouns").Add("poster");
+            AddNoun("poster");
             Locked = true;
             IsMatchingKey = k => object.ReferenceEquals(k, GetObject("Homestead.SkullKey"));
             Short = "poster door";

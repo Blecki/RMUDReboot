@@ -15,6 +15,12 @@ namespace RMUD
         NoLog = 8
     }
 
+    [AttributeUsage(AttributeTargets.Method)]
+    public class RunAtStartupAttribute : Attribute
+    {
+
+    }
+
     public static partial class Core
     {
         /// <summary>
@@ -32,38 +38,45 @@ namespace RMUD
 
             foreach (var type in Module.Assembly.GetTypes())
                 if (type.FullName.StartsWith(Module.Info.BaseNameSpace))
-                    foreach (var method in type.GetMethods())
-                        if (method.IsStatic && method.Name == "AtStartup")
-                        {
-                            var methodParameters = method.GetParameters();
+                    foreach (var method in type.GetMethods(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public))
+                    {
+                        var isStartupFunction = false;
+                        var attribute = method.GetCustomAttributes(false).FirstOrDefault(a => a.GetType() == typeof(RunAtStartupAttribute));
+                        if (attribute != null)
+                            isStartupFunction = true;
 
-                            if (methodParameters.Length == 0)
+                        if (method.Name == "AtStartup")
+                            isStartupFunction = true;
+
+                        if (!isStartupFunction) continue;
+
+                        var methodParameters = method.GetParameters();
+
+                        if (methodParameters.Length == 0)
+                        {
+                            try
                             {
-                                try
-                                {
-                                    method.Invoke(null, null);
-                                }
-                                catch (Exception e)
-                                {
-                                    LogWarning("Error while loading module " + Module.FileName + " : " + e.Message);
-                                }
+                                method.Invoke(null, null);
                             }
-                            else if (methodParameters.Length == 1 && methodParameters[0].ParameterType == typeof(RuleEngine))
+                            catch (Exception e)
                             {
-                                try
-                                {
-                                    method.Invoke(null, new Object[] { GlobalRules });
-                                }
-                                catch (Exception e)
-                                {
-                                    LogWarning("Error while loading module " + Module.FileName + " : " + e.Message);
-                                }
-                            }
-                            else
-                            {
-                                LogWarning("Error while loading module " + Module.FileName + " : AtStartup method had incompatible signature.");
+                                LogWarning("Error while loading module " + Module.FileName + " : " + e.Message);
                             }
                         }
+                        else if (methodParameters.Length == 1 && methodParameters[0].ParameterType == typeof(RuleEngine))
+                        {
+                            try
+                            {
+                                method.Invoke(null, new Object[] { GlobalRules });
+                            }
+                            catch (Exception e)
+                            {
+                                LogWarning("Error while loading module " + Module.FileName + " : " + e.Message);
+                            }
+                        }
+                        else
+                            LogWarning("Error while loading module " + Module.FileName + " : AtStartup method had incompatible signature.");
+                    }
         }
 
         /// <summary>

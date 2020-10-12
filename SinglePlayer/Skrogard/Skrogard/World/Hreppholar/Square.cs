@@ -29,7 +29,7 @@ namespace World.Hreppholar
 
             Short = "fountain";
             Long = "This old fountain is made from welded together bits of scrap. It depicts a girl, lips pursed, who would be spurting a stream of water if the pump still worked.";
-            GetProperty<NounList>("nouns").Add("old", "dried", "fountain", "dried-up");
+            AddNoun("old", "dried", "fountain", "dried-up");
 
             Move(new RMUD.MudObject("steel penny", "A small coin marked on one side with a serpent, and the other with a woman's face."), this, RMUD.RelativeLocations.In);
 

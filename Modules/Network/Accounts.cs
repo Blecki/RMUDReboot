@@ -67,7 +67,7 @@ namespace NetworkModule
             var playerObject = Core.Database.GetObject(Core.SettingsObject.PlayerBaseObject + "@" + Account.UserName);
 
             playerObject.SetProperty("short", Account.UserName);
-            playerObject.GetProperty<NounList>("nouns").Add(Account.UserName.ToUpper());
+            playerObject.AddNoun(Account.UserName.ToUpper());
             MudObject.PersistInstance(playerObject);
             return playerObject;
         }

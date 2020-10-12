@@ -2,8 +2,7 @@
 
 namespace World.Homestead
 {
-
-    public class Kitchen : RMUD.MudObject
+    public class Kitchen : MudObject
     {
         public override void Initialize()
         {
@@ -16,24 +15,24 @@ namespace World.Homestead
             OpenLink(Direction.WEST, "Homestead.SittingRoom");
             OpenLink(Direction.OUT, "Homestead.Homestead");
 
-            Move(GetObject("Homestead.Table"), this, RelativeLocations.Contents);
+            Move(GetObject("Homestead.Table"), this);
             Move(GetObject("Homestead.SkullKey"), GetObject("Homestead.Table"), RelativeLocations.On);
         }
     }
 
-    public class Table : RMUD.MudObject
+    public class Table : MudObject
     {
         public Table()
         {
-            Container(RMUD.RelativeLocations.On | RMUD.RelativeLocations.Under, RMUD.RelativeLocations.On);
+            Container(RelativeLocations.On | RelativeLocations.Under, RelativeLocations.On);
 
             Short = "metal table";
             Long = "This table is little more than a sheet of metal with some legs grafted on. It is dented and stained and still bares old paint from its days as armor plating.";
-            GetProperty<NounList>("nouns").Add("metal", "table");
+            AddNoun("metal", "table");
 
-            Move(new RMUD.MudObject("empty plasma bag", "A small translucent pouch made of tough plastic. All that's left inside is the residue of a red liquid."), this, RMUD.RelativeLocations.On);
+            Move(new MudObject("empty plasma bag", "A small translucent pouch made of tough plastic. All that's left inside is the residue of a red liquid."), this, RelativeLocations.On);
 
-            Check<RMUD.MudObject, RMUD.MudObject>("can take?").ThisOnly().Do((actor, thing) =>
+            Check<MudObject, MudObject>("can take?").ThisOnly().Do((actor, thing) =>
             {
                 SendMessage(actor, "It's far too heavy.");
                 return SharpRuleEngine.CheckResult.Disallow;

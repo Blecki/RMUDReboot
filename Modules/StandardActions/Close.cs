@@ -15,12 +15,12 @@ namespace StandardActionsModule
                 Sequence(
                     KeyWord("CLOSE"),
                     BestScore("SUBJECT",
-                        MustMatch("@not here",
+                        //MustMatch("@not here",
                             Object("SUBJECT", InScope, (actor, thing) =>
                                 {
                                     if (Core.GlobalRules.ConsiderCheckRuleSilently("can close?", actor, thing) == CheckResult.Allow) return MatchPreference.Likely;
                                     return MatchPreference.Unlikely;
-                                })))))
+                                }).Stage("I got as far as telling that you wanted to close something, but couldn't tell what."))))
                 .ID("StandardActions:Close")
                 .Manual("Closes a thing.")
                 .Check("can close?", "ACTOR", "SUBJECT")

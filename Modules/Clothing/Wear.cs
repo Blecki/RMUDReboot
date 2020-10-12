@@ -17,6 +17,7 @@ namespace ClothingModule
                     BestScore("OBJECT",
                         MustMatch("@clothing wear what",
                             Object("OBJECT", InScope, PreferHeld)))))
+                .ID("Clothing:Wear")
                 .Manual("Cover your disgusting flesh.")
                 .Check("can wear?", "ACTOR", "OBJECT")
                 .BeforeActing()

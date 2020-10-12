@@ -6,7 +6,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            GetProperty<NounList>("nouns").Add("workshop");
+            AddNoun("workshop");
             Short = "workshop door";
             Long = "This metal door has no knob or handle, but appears to swing in both directions.";
         }

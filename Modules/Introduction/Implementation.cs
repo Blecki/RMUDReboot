@@ -18,6 +18,7 @@ namespace IntroductionModule
                         KeyWord("MYSELF"),
                         KeyWord("ME"),
                         KeyWord("SELF"))))
+                .ID("Introduction:IntroduceMyself")
                 .Manual("This is a specialized version of the commad to handle 'introduce me'.")
                 .BeforeActing()
                 .Perform("introduce self", "ACTOR")
@@ -33,6 +34,7 @@ namespace IntroductionModule
                             if (item.GetProperty<bool>("actor?")) return MatchPreference.Likely;
                             return MatchPreference.Unlikely;
                         }))))
+                .ID("Introduction:Introduce")
                 .Manual("Introduces someone you know to everyone present. Now they will know them, too.")
                 .Check("can introduce?", "ACTOR", "OBJECT")
                 .BeforeActing()

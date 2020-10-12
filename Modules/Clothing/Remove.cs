@@ -17,6 +17,7 @@ namespace ClothingModule
                     BestScore("OBJECT",
                         MustMatch("@clothing remove what",
                             Object("OBJECT", InScope, PreferWorn)))))
+                .ID("Clothing:Remove")
                 .Manual("Expose your amazingly supple flesh.")
                 .Check("can remove?", "ACTOR", "OBJECT")
                 .BeforeActing()

@@ -29,9 +29,8 @@ namespace World.Hreppholar
 
             Short = "Bjorn";
 
-            GetProperty<NounList>("nouns").Add("shopkeeper", "shop", "keeper", "keep");
-            GetProperty<NounList>("nouns").Add("bjorn", a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
-            GetProperty<NounList>("nouns").Add("b", a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
+            AddNoun("shopkeeper", "shop", "keeper", "keep");
+            AddNoun("bjorn", "b").When(a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
 
             this.Wear("overalls", ClothingLayer.Outer, ClothingBodyPart.Legs);
             this.Wear("simple white shirt", ClothingLayer.Outer, ClothingBodyPart.Torso);

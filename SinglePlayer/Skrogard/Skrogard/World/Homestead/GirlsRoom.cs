@@ -26,7 +26,7 @@ namespace World.Homestead
 
             Short = "small bed";
             Long = "This small, plush bed looks quite soft.";
-            GetProperty<NounList>("nouns").Add("small", "bed");
+            AddNoun("small", "bed");
 
             Check<RMUD.MudObject, RMUD.MudObject>("can take?")
                 .ThisOnly()

@@ -6,7 +6,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            GetProperty<NounList>("nouns").Add("flower");
+            AddNoun("flower");
             Short = "flower door";
             Long = "A crudely painted pastel flower decorates this door.";
         }

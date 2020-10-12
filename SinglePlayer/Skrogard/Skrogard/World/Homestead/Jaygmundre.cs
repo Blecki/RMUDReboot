@@ -45,8 +45,7 @@ namespace World.Homestead
 
             Short = "Jaygmundre";
 
-            GetProperty<NounList>("nouns").Add("jaygmundre", a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
-            GetProperty<NounList>("nouns").Add("jay", a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
+            AddNoun("jaygmundre", "jay", "j").When(a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
 
             this.Wear("mechanical suit", ClothingLayer.Outer, ClothingBodyPart.Torso);
         }
