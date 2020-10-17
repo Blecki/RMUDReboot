@@ -13,7 +13,7 @@
         Perform<MudObject, MudObject>("drop").Do((actor, item) =>
             {
                 var wolf = GetObject("palantine/wolf");
-                if (wolf.Location == actor.Location)
+                if (wolf.Location.HasValue(out var wolfLoc) && actor.Location.HasValue(out var pLoc) && wolfLoc == pLoc)
                 {
                     ConsiderPerformRule("handle-entrail-drop", wolf, this);
                     return PerformResult.Stop;

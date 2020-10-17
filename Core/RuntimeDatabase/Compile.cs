@@ -13,7 +13,7 @@ namespace RMUD
         private String GetFileHeader()
         {
             var builder = new StringBuilder();
-            builder.Append("using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\n");
+            builder.Append("using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nusing static RMUD.Core;\n\n");
 
             foreach (var module in Core.IntegratedModules)
                 builder.AppendLine("using " + module.Info.BaseNameSpace + ";\n");
@@ -23,7 +23,9 @@ namespace RMUD
 
         private Assembly CompileCode(String Source, String ErrorPath, Func<int,String> TranslateBulkFilenames = null)
         {
-            CodeDomProvider codeProvider = CodeDomProvider.CreateProvider("CSharp");
+            //CodeDomProvider codeProvider = CodeDomProvider.CreateProvider("CSharp");
+
+            CodeDomProvider codeProvider = new Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider();
 
             var parameters = new CompilerParameters();
             parameters.GenerateInMemory = true;

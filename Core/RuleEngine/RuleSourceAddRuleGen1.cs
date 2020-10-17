@@ -1,11 +1,4 @@
-﻿
-
-
-
-
-
-
-//This is generated code. Do not modify this file; modify the template that produces it.
+﻿//This is generated code. Do not modify this file; modify the template that produces it.
 
 using System;
 
@@ -31,7 +24,6 @@ namespace RMUD
 			return Rules.AddRule<CheckResult>(Name).Associate(this);
 		}
 
-
 		public RuleBuilder<T0, PerformResult> Perform<T0>(String Name)
 		{
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
@@ -49,7 +41,6 @@ namespace RMUD
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
 			return Rules.AddRule<T0, CheckResult>(Name).Associate(this);
 		}
-
 		public RuleBuilder<T0, T1, PerformResult> Perform<T0, T1>(String Name)
 		{
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
@@ -67,7 +58,6 @@ namespace RMUD
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
 			return Rules.AddRule<T0, T1, CheckResult>(Name).Associate(this);
 		}
-
 		public RuleBuilder<T0, T1, T2, PerformResult> Perform<T0, T1, T2>(String Name)
 		{
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
@@ -85,7 +75,6 @@ namespace RMUD
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
 			return Rules.AddRule<T0, T1, T2, CheckResult>(Name).Associate(this);
 		}
-
 		public RuleBuilder<T0, T1, T2, T3, PerformResult> Perform<T0, T1, T2, T3>(String Name)
 		{
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
@@ -103,6 +92,5 @@ namespace RMUD
 			if (Rules == null) Rules = new RuleSet(GlobalRules);
 			return Rules.AddRule<T0, T1, T2, T3, CheckResult>(Name).Associate(this);
 		}
-
 	}
 }

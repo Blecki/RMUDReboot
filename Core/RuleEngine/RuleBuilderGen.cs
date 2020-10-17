@@ -1,11 +1,4 @@
-﻿
-
-
-
-
-
-
-//This is generated code. Do not modify this file; modify the template that produces it.
+﻿//This is generated code. Do not modify this file; modify the template that produces it.
 
 using System;
 
@@ -85,7 +78,6 @@ namespace RMUD
 		}}
     }
 
-
 	public class RuleBuilder<T0, TR>
     {
         public Rule<TR> Rule;
@@ -157,7 +149,6 @@ namespace RMUD
 			{
 				if (System.Object.ReferenceEquals(P0, AssociatedObject)) return true; 
 				
-
 				return false;
 			});
         }
@@ -193,7 +184,6 @@ namespace RMUD
 			});
 		}}
 	}
-
 
 	public class RuleBuilder<T0, T1, TR>
     {
@@ -267,7 +257,6 @@ namespace RMUD
 				if (System.Object.ReferenceEquals(P0, AssociatedObject)) return true; 
 				if (System.Object.ReferenceEquals(P1, AssociatedObject)) return true; 
 				
-
 				return false;
 			});
         }
@@ -303,7 +292,6 @@ namespace RMUD
 			});
 		}}
 	}
-
 
 	public class RuleBuilder<T0, T1, T2, TR>
     {
@@ -378,7 +366,6 @@ namespace RMUD
 				if (System.Object.ReferenceEquals(P1, AssociatedObject)) return true; 
 				if (System.Object.ReferenceEquals(P2, AssociatedObject)) return true; 
 				
-
 				return false;
 			});
         }
@@ -414,7 +401,6 @@ namespace RMUD
 			});
 		}}
 	}
-
 
 	public class RuleBuilder<T0, T1, T2, T3, TR>
     {
@@ -490,7 +476,6 @@ namespace RMUD
 				if (System.Object.ReferenceEquals(P2, AssociatedObject)) return true; 
 				if (System.Object.ReferenceEquals(P3, AssociatedObject)) return true; 
 				
-
 				return false;
 			});
         }
@@ -526,6 +511,5 @@ namespace RMUD
 			});
 		}}
 	}
-
 
 }

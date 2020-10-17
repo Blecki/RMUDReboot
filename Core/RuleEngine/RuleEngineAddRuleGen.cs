@@ -1,11 +1,4 @@
-﻿
-
-
-
-
-
-
-//This is generated code. Do not modify this file; modify the template that produces it.
+﻿//This is generated code. Do not modify this file; modify the template that produces it.
 
 using System;
 using System.Collections.Generic;
@@ -50,7 +43,6 @@ namespace RMUD
 			return new RuleBuilder<CheckResult> { Rule = rule };
         }
 
-
 		public void DeclarePerformRuleBook<T0>(String Name, String Description, params String[] ArgumentNames)
 		{
 			Rules.FindOrCreateRuleBook<PerformResult>(Name, 1).Description = Description;
@@ -86,7 +78,6 @@ namespace RMUD
 			CreateNewRule(() => { Rules.FindOrCreateRuleBook<CheckResult>(Name, 1).AddRule(rule); });
 			return new RuleBuilder<T0, CheckResult> { Rule = rule };
         }
-
 
 		public void DeclarePerformRuleBook<T0, T1>(String Name, String Description, params String[] ArgumentNames)
 		{
@@ -124,7 +115,6 @@ namespace RMUD
 			return new RuleBuilder<T0, T1, CheckResult> { Rule = rule };
         }
 
-
 		public void DeclarePerformRuleBook<T0, T1, T2>(String Name, String Description, params String[] ArgumentNames)
 		{
 			Rules.FindOrCreateRuleBook<PerformResult>(Name, 3).Description = Description;
@@ -161,7 +151,6 @@ namespace RMUD
 			return new RuleBuilder<T0, T1, T2, CheckResult> { Rule = rule };
         }
 
-
 		public void DeclarePerformRuleBook<T0, T1, T2, T3>(String Name, String Description, params String[] ArgumentNames)
 		{
 			Rules.FindOrCreateRuleBook<PerformResult>(Name, 4).Description = Description;
@@ -197,7 +186,6 @@ namespace RMUD
 			CreateNewRule(() => { Rules.FindOrCreateRuleBook<CheckResult>(Name, 4).AddRule(rule); });
 			return new RuleBuilder<T0, T1, T2, T3, CheckResult> { Rule = rule };
         }
-
 
 	}
 }

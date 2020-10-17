@@ -7,6 +7,8 @@ using System.IO;
 using System.Net;
 using NetworkModule.Telnet;
 
+using static RMUD.Core;
+
 namespace RMUD
 {
     class Program
