@@ -60,19 +60,19 @@ namespace RMUD
 
 		public static MatchPreference PreferNotHeld(MudObject Actor, MudObject Object)
 		{
-			if (Actor.Contains(Object, RelativeLocations.Held)) return MatchPreference.Unlikely;
+			if (Actor.Contains(Object, RelativeLocations.HELD)) return MatchPreference.Unlikely;
 			return MatchPreference.Plausible;
 		}
 
 		public static MatchPreference PreferHeld(MudObject Actor, MudObject Object)
 		{
-			if (Actor.Contains(Object, RelativeLocations.Held)) return MatchPreference.Likely;
+			if (Actor.Contains(Object, RelativeLocations.HELD)) return MatchPreference.Likely;
 			return MatchPreference.Plausible;
 		}
 
         public static MatchPreference PreferWOrn(MudObject Actor, MudObject Object)
         {
-            if (Actor.Contains(Object, RelativeLocations.Worn)) return MatchPreference.Likely;
+            if (Actor.Contains(Object, RelativeLocations.WORN)) return MatchPreference.Likely;
             return MatchPreference.Plausible;
         }
 

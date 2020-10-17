@@ -15,7 +15,7 @@ namespace World.Homestead
             OpenLink(Direction.EAST, "Homestead.Kitchen");
             OpenLink(Direction.DOWN, "Homestead.Cellar");
 
-            Move(GetObject("Homestead.Chair"), this, RelativeLocations.Contents);
+            Move(GetObject("Homestead.Chair"), this, RelativeLocations.CONTENTS);
         }
     }
 
@@ -23,18 +23,18 @@ namespace World.Homestead
     {
         public Chair()
         {
-            Container(RMUD.RelativeLocations.On | RMUD.RelativeLocations.Under, RMUD.RelativeLocations.On);
+            Container(RMUD.RelativeLocations.ON | RMUD.RelativeLocations.UNDER, RMUD.RelativeLocations.ON);
 
             Short = "plush chair";
             Long = "Long ago, this was a fine leather chair. These days there are more patches then original construction, though it still appears very plush.";
             AddNoun("plush", "chair");
 
-            Move(GetObject("Homestead.Jaygmundre"), this, RMUD.RelativeLocations.On);
+            Move(GetObject("Homestead.Jaygmundre"), this, RMUD.RelativeLocations.ON);
 
             Check<RMUD.MudObject, RMUD.MudObject>("can take?").Do((actor, thing) =>
             {
                 SendMessage(actor, "It's far too heavy.");
-                return SharpRuleEngine.CheckResult.Disallow;
+                return CheckResult.Disallow;
             });
         }
     }

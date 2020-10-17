@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -20,10 +19,18 @@ namespace StandardActionsModule
                 .Manual("Move between rooms. 'Go' is optional, a raw cardinal works just as well.")
                 .ProceduralRule((match, actor) =>
                 {
-                    var direction = match["DIRECTION"] as Direction?;
-                    var link = actor.Location.EnumerateObjects().FirstOrDefault(thing => thing.GetProperty<bool>("portal?") && thing.GetProperty<Direction>("link direction") == direction.Value);
-                    match.Upsert("LINK", link);
-                    return PerformResult.Continue;
+                    if (actor.Location.HasValue(out var loc))
+                    {
+                        var direction = match["DIRECTION"] as Direction?;
+                        var link = loc.EnumerateObjects().FirstOrDefault(thing => thing.GetProperty<bool>("portal?") && thing.GetProperty<Direction>("link direction") == direction.Value);
+                        match.Upsert("LINK", link);
+                        return PerformResult.Continue;
+                    }
+                    else
+                    {
+                        MudObject.SendMessage(actor, "You do not appear to be anywhere.");
+                        return PerformResult.Stop;
+                    }
                 }, "lookup link rule")
                 .ID("StandardActions:Go")
                 .Check("can go?", "ACTOR", "LINK")

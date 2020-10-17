@@ -21,21 +21,21 @@ namespace StandardActionsModule.Look
                 .Do((actor, item, relloc) =>
                 {
                     MudObject.SendMessage(actor, "@cant look relloc", Relloc.GetRelativeLocationName(relloc));
-                    return SharpRuleEngine.CheckResult.Disallow;
+                    return CheckResult.Disallow;
                 })
                 .Name("Container must support relloc rule.");
 
             GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .When((actor, item, relloc) => (relloc == RelativeLocations.In) && !item.GetProperty<bool>("open?"))
+                .When((actor, item, relloc) => (relloc == RelativeLocations.IN) && !item.GetProperty<bool>("open?"))
                 .Do((actor, item, relloc) =>
                 {
                     MudObject.SendMessage(actor, "@is closed error", item);
-                    return SharpRuleEngine.CheckResult.Disallow;
+                    return CheckResult.Disallow;
                 })
                 .Name("Container must be open to look in rule.");
 
             GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .Do((actor, item, relloc) => SharpRuleEngine.CheckResult.Allow)
+                .Do((actor, item, relloc) => CheckResult.Allow)
                 .Name("Default allow looking relloc rule.");
 
             GlobalRules.DeclarePerformRuleBook<MudObject, MudObject, RelativeLocations>("look relloc", "[Actor, Item, Relative Location] : Handle the actor looking on/under/in/behind the item.", "actor", "item", "relloc");
@@ -54,7 +54,7 @@ namespace StandardActionsModule.Look
                     else
                         MudObject.SendMessage(actor, "@nothing relloc it", Relloc.GetRelativeLocationName(relloc), item);
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("List contents in relative location rule.");
         }

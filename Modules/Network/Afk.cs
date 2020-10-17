@@ -25,7 +25,7 @@ namespace NetworkModule
                         MudObject.SendMessage(actor, "AFK message set.");
                     }
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 	}

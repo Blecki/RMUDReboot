@@ -91,7 +91,7 @@ namespace RMUD
                         new CommandEntry().ProceduralRule((match, actor) => 
                         {
                             MudObject.SendMessage(actor, ma.Message);
-                            return SharpRuleEngine.PerformResult.Continue;
+                            return PerformResult.Continue;
                         }), 
                         // We need a fake match just so it can be passed to the procedural rule.
                         new PossibleMatch[] { new PossibleMatch(null) });
@@ -117,12 +117,12 @@ namespace RMUD
                                 MudObject.SendMessage(actor, "That's the name of a command, but I couldn't figure out what you meant.");
                                 MudObject.SendMessage(actor, "The best failed match was " + matchContext.BestFailedCommand.ManualName + ", which reached a depth of " + matchContext.BestFailedMatch.ParseDepth);
                                 if (!String.IsNullOrEmpty(matchContext.BestFailedParseStageDescription))
-                                    MudObject.SendMessage(actor, matchContext.BestFailedParseStageDescription);
+                                    MudObject.SendMessage(actor, Core.FormatParserMessage(actor, matchContext.BestFailedParseStageDescription, matchContext.BestFailedMatch));
                             }
                             else
                                 MudObject.SendMessage(actor, "I don't think that is a command I know. I could not parse any of it.");
                             
-                            return SharpRuleEngine.PerformResult.Continue;
+                            return PerformResult.Continue;
                         }), 
                 new PossibleMatch[] { new PossibleMatch(null) }
             );

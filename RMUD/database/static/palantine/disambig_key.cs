@@ -3,6 +3,6 @@
     public override void Initialize()
     {
         Short = "barrel key";
-        GetProperty<NounList>("nouns").Add("KEY", "BARREL");
+        AddNoun("KEY", "BARREL");
     }
 }

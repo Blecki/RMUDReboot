@@ -27,7 +27,7 @@ namespace World
                 {
                     MudObject.SendExternalMessage(actor, "@jump", actor);
                     MudObject.SendMessage(actor, "You jump about.");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Default jump rule.");
         }

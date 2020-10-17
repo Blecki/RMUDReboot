@@ -12,6 +12,7 @@ namespace RMUD
     {
         public static void AtStartup(RuleEngine GlobalRules)
         {
+            // Todo: Obsolete?
             Core.StandardMessage("not here", "I don't see that here.");
             Core.StandardMessage("gone", "The doesn't seem to be here any more.");
             Core.StandardMessage("dont have that", "You don't have that.");

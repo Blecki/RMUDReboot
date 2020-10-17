@@ -58,7 +58,7 @@ Instead of examining the trampled message:
                         SendMessage(actor, "YOU HAVE WON!");
                         Core.Shutdown();
                     }
-                    return SharpRuleEngine.PerformResult.Stop;
+                    return PerformResult.Stop;
                 });
 
             /*
@@ -72,10 +72,10 @@ Instead of examining the trampled message:
                 .Do((match, actor) =>
                 {
                     if (match.TypedValue<CommandEntry>("COMMAND").IsNamed("GO"))
-                        return SharpRuleEngine.PerformResult.Continue;
+                        return PerformResult.Continue;
                     messageScuffed = true;
                     SendMessage(actor, "In the dark? You could easily disturb something.");
-                    return SharpRuleEngine.PerformResult.Stop;
+                    return PerformResult.Stop;
                 });
 
             /*
@@ -91,7 +91,7 @@ Instead of examining the trampled message:
                 {
                     messageScuffed = true;
                     SendMessage(actor, "Blundering around in the dark isn't a good idea!");
-                    return SharpRuleEngine.PerformResult.Stop;
+                    return PerformResult.Stop;
                 });
         }
     }

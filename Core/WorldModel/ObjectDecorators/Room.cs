@@ -19,7 +19,7 @@ namespace RMUD
 	{
         public void Room(RoomType Type)
         {
-            Container(RelativeLocations.Contents, RelativeLocations.Contents);
+            Container(RelativeLocations.CONTENTS, RelativeLocations.CONTENTS);
             SetProperty("room type", Type);
         }
 
@@ -39,7 +39,7 @@ namespace RMUD
             Portal.SetProperty("link direction", Direction);
             Portal.SetProperty("link destination", Destination);
             Portal.Location = this;
-            Add(Portal, RelativeLocations.Contents);
+            Add(Portal, RelativeLocations.CONTENTS);
         }
     }
 }

@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -57,16 +56,25 @@ namespace StandardActionsModule
                 // command is matched, these rules will be called in the order declared.
                 .ProceduralRule((match, actor) =>
                 {
-                    // The direction matched was stored in the match as "DIRECTION".
-                    var direction = match["DIRECTION"] as Direction?;
-                    // Rooms have a collection of objects that are in them. Links happen to have two specific 
-                    // properties set that we can use to find them: First, 'portal?' will be true, and 
-                    // 'link direction' will hold the direction the link goes in. So we search for the link.
-                    var link = actor.Location.EnumerateObjects().FirstOrDefault(thing => thing.GetProperty<bool>("portal?") && thing.GetProperty<Direction>("link direction") == direction.Value);
-                    // Store the link in the match, and later procedural rules will be able to find it.
-                    match.Upsert("LINK", link);
-                    // Procedural rules return PerformResults. If they return stop, the command stops right there.
-                    return PerformResult.Continue;
+                    // Guard against a null location.
+                    if (actor.Location.HasValue(out var loc))
+                    {
+                        // The direction matched was stored in the match as "DIRECTION".
+                        var direction = match["DIRECTION"] as Direction?;
+                        // Rooms have a collection of objects that are in them. Links happen to have two specific 
+                        // properties set that we can use to find them: First, 'portal?' will be true, and 
+                        // 'link direction' will hold the direction the link goes in. So we search for the link.
+                        var link = loc.EnumerateObjects().FirstOrDefault(thing => thing.GetProperty<bool>("portal?") && thing.GetProperty<Direction>("link direction") == direction.Value);
+                        // Store the link in the match, and later procedural rules will be able to find it.
+                        match.Upsert("LINK", link);
+                        // Procedural rules return PerformResults. If they return stop, the command stops right there.
+                        return PerformResult.Continue;
+                    }
+                    else
+                    {
+                        MudObject.SendMessage(actor, "You do not appear to be anywhere.");
+                        return PerformResult.Stop; // Stop will stop execution immediately.
+                    }
                 }, "lookup link rule") // We can also name procedural rules. This is always a good idea, as the
                 // name will help with debugging the rules later.
 

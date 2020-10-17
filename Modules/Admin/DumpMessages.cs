@@ -19,7 +19,7 @@ namespace AdminModule
                     Core.DumpMessagesForCustomization(builder);
                     System.IO.File.WriteAllText("messages.txt", builder.ToString());
                     MudObject.SendMessage(actor, "Messages dumped to messages.txt.");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
 		}
 	}

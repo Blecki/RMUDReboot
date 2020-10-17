@@ -94,12 +94,12 @@ namespace RMUD
                 catch (System.Threading.ThreadAbortException)
                 {
                     LogError("Command worker thread was aborted. Timeout hit?");
-                    Core.ClearPendingMessages();
+                    Core.DiscardPendingMessages();
                 }
                 catch (Exception e)
                 {
                     LogCommandError(e);
-                    Core.ClearPendingMessages();
+                    Core.DiscardPendingMessages();
                 }
 
                 NextCommand = null;
@@ -168,7 +168,7 @@ namespace RMUD
                             {
                                 //Kill the command processor thread.
                                 IndividualCommandThread.Abort();
-                                ClearPendingMessages();
+                                DiscardPendingMessages();
                                 var client = PendingCommand.Actor.GetProperty<Client>("client");
                                 if (client != null)
                                 {
@@ -241,7 +241,7 @@ namespace RMUD
                     catch (Exception e)
                     {
                         LogCommandError(e);
-                        Core.ClearPendingMessages();
+                        Core.DiscardPendingMessages();
                     }
                     if (PendingCommand.ProcessingCompleteCallback != null)
                         PendingCommand.ProcessingCompleteCallback();

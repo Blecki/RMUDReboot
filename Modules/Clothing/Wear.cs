@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace ClothingModule
 {
@@ -39,7 +38,7 @@ namespace ClothingModule
                 });
 
             GlobalRules.Check<MudObject, MudObject>("can wear?")
-                .When((a, b) => a.RelativeLocationOf(b) == RelativeLocations.Worn)
+                .When((a, b) => a.RelativeLocationOf(b) == RelativeLocations.WORN)
                 .Do((a, b) =>
                 {
                     MudObject.SendMessage(a, "@clothing already wearing");
@@ -62,7 +61,7 @@ namespace ClothingModule
                 {
                     MudObject.SendMessage(actor, "@clothing you wear", target);
                     MudObject.SendExternalMessage(actor, "@clothing they wear", actor, target);
-                    MudObject.Move(target, actor, RelativeLocations.Worn);
+                    MudObject.Move(target, actor, RelativeLocations.WORN);
                     return PerformResult.Continue;
                 });
         }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Reflection;
-using SharpRuleEngine;
 
 namespace RMUD
 {
@@ -17,7 +16,7 @@ namespace RMUD
             GlobalRules.Perform("heartbeat").Do(() =>
                 {
                     MudObject.TimeOfDay += Core.SettingsObject.ClockAdvanceRate;
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 }).Name("Advance clock on heartbeat rule");
         }
     }

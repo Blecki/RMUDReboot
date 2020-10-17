@@ -16,10 +16,14 @@ namespace RMUD
         }
     }
 
-	public partial class MudObject : SharpRuleEngine.RuleSource
+    public class PropertyPayload<T>
     {
-        public override SharpRuleEngine.RuleEngine GlobalRules { get { return Core.GlobalRules; } }
+        public String Name;
+        public T Value;
+    }
 
+	public partial class MudObject
+    {
         /// Fundamental properties of every mud object: Don't mess with them.
         public ObjectState State = ObjectState.Unitialized; 
 		public String Path { get; set; }
@@ -29,8 +33,7 @@ namespace RMUD
         public bool IsInstance { get { return IsNamedObject && Instance != null; } }
         public String GetFullName() { return Path + "@" + Instance; }
         public bool IsPersistent { get; set; }
-        public MudObject Location { get; set; }
-        public override SharpRuleEngine.RuleSource LinkedRuleSource { get { return Location; } }
+        public MaybeNull<MudObject> Location { get; set; }
 
         public virtual void Initialize() { }
 
@@ -57,20 +60,38 @@ namespace RMUD
         
         public T GetProperty<T>(String Name)
         {
+            T r;
             if (Properties.ContainsKey(Name))
-                return (T)Properties[Name];
+                r = (T)Properties[Name];
             else
             {
                 var info = PropertyManifest.GetPropertyInformation(Name);
                 if (info == null)
                     throw new InvalidOperationException("Property " + Name + " does not exist.");
-                return (T)info.DefaultValue;
+                r = (T)info.DefaultValue;
             }
+
+            var payload = new PropertyPayload<T>
+            {
+                Name = Name,
+                Value = r
+            };
+
+            ConsiderPerformRule("modify property", this, payload);
+
+            return payload.Value;
         }
         
         public bool HasProperty(String Name)
         {
             return Properties.ContainsKey(Name);
+        }
+
+        public RuleBuilder<MudObject, PropertyPayload<T>, PerformResult> PropertyModifier<T>(String Name)
+        {
+            return Perform<MudObject, PropertyPayload<T>>("modify property")
+                .When((@object, payload) => payload.Name == Name)
+                .Name("A generated rule to modify the property [" + Name + "]");
         }
 
         #endregion

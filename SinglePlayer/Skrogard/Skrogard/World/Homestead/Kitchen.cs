@@ -1,4 +1,5 @@
 ﻿using RMUD;
+using StandardActionsModule;
 
 namespace World.Homestead
 {
@@ -16,7 +17,7 @@ namespace World.Homestead
             OpenLink(Direction.OUT, "Homestead.Homestead");
 
             Move(GetObject("Homestead.Table"), this);
-            Move(GetObject("Homestead.SkullKey"), GetObject("Homestead.Table"), RelativeLocations.On);
+            Move(GetObject("Homestead.SkullKey"), GetObject("Homestead.Table"), RelativeLocations.ON);
         }
     }
 
@@ -24,18 +25,18 @@ namespace World.Homestead
     {
         public Table()
         {
-            Container(RelativeLocations.On | RelativeLocations.Under, RelativeLocations.On);
+            Container(RelativeLocations.ON | RelativeLocations.UNDER, RelativeLocations.ON);
 
             Short = "metal table";
             Long = "This table is little more than a sheet of metal with some legs grafted on. It is dented and stained and still bares old paint from its days as armor plating.";
             AddNoun("metal", "table");
 
-            Move(new MudObject("empty plasma bag", "A small translucent pouch made of tough plastic. All that's left inside is the residue of a red liquid."), this, RelativeLocations.On);
+            Move(new MudObject("empty plasma bag", "A small translucent pouch made of tough plastic. All that's left inside is the residue of a red liquid."), this, RelativeLocations.ON);
 
-            Check<MudObject, MudObject>("can take?").ThisOnly().Do((actor, thing) =>
+            this.CheckCanTake().ThisOnly().Do((actor, thing) =>
             {
                 SendMessage(actor, "It's far too heavy.");
-                return SharpRuleEngine.CheckResult.Disallow;
+                return CheckResult.Disallow;
             });
         }
     }

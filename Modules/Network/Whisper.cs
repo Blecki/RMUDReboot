@@ -25,9 +25,9 @@ namespace NetworkModule
                     if (System.Object.ReferenceEquals(actor, match["PLAYER"]))
                     {
                         MudObject.SendMessage(actor, "Talking to yourself?");
-                        return SharpRuleEngine.PerformResult.Stop;
+                        return PerformResult.Stop;
                     }
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .ProceduralRule((match, actor) =>
                 {
@@ -37,7 +37,7 @@ namespace NetworkModule
                     var client = player.GetProperty<Client>("client");
                     if (client is NetworkClient && (client as NetworkClient).IsAfk)
                         MudObject.SendMessage(actor, "^<the0> is afk : " + player.GetProperty<Account>("account").AFKMessage, player);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 	}

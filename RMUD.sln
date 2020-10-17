@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloakOfDarkness", "SinglePl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skrogard", "SinglePlayer\Skrogard\Skrogard\Skrogard.csproj", "{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombatModule", "Modules\CombatModule\CombatModule.csproj", "{B938561D-1131-4956-AA03-080AB917F0B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,14 @@ Global
 		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Release|x86.ActiveCfg = Release|Any CPU
 		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE}.Release|x86.Build.0 = Release|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Debug|x86.Build.0 = Debug|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{B938561D-1131-4956-AA03-080AB917F0B9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,6 +193,7 @@ Global
 		{68D0E431-5DCA-4A25-A1B2-2F5B857821B1} = {5695FB1B-65C3-4659-BCFE-62037DC92A81}
 		{A8EA5CC5-9C0A-47E3-A68C-9E8367CEF1FC} = {5695FB1B-65C3-4659-BCFE-62037DC92A81}
 		{D98BB5D3-956C-4D4C-8894-4AFCF190D3CE} = {5695FB1B-65C3-4659-BCFE-62037DC92A81}
+		{B938561D-1131-4956-AA03-080AB917F0B9} = {53B4E8EC-40AA-4166-92FF-543837FCD305}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F2FB861-7B3B-4667-B5D5-2638C0FD52A5}

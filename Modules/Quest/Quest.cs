@@ -20,7 +20,7 @@ namespace QuestModule
                         MudObject.SendMessage(actor, "You do not have an active quest.");
                     else
                         MudObject.SendMessage(actor, "Active quest: <a0>.", actor.GetProperty<MudObject>("active-quest"));
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 }, "display the active quest rule.");
         }
     }

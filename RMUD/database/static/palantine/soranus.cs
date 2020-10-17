@@ -35,7 +35,7 @@
 
         Short = "Soranus";
 
-        GetProperty<NounList>("nouns").Add("soranus", a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
+        AddNoun("soranus").When(a => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, this));
 
         this.Wear("toga", ClothingLayer.Outer, ClothingBodyPart.Torso);
         this.Wear(GetObject("palantine/entrails"));

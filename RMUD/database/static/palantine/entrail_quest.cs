@@ -22,9 +22,9 @@
                 SendMessage(questor, "You have accepted the entrail quest.");
 
                 var entrails = GetObject("palantine/entrails");
-                if (GetObject("palantine/soranus").Contains(entrails, RelativeLocations.Worn))
+                if (GetObject("palantine/soranus").Contains(entrails, RelativeLocations.WORN))
                 {
-                    Move(entrails, questor, RelativeLocations.Held);
+                    Move(entrails, questor, RelativeLocations.HELD);
                     SendMessage(questor, "^<the0> gives you some entrails.", GetObject("palantine/soranus"));
                 }
                 return PerformResult.Continue;
@@ -44,7 +44,7 @@
                 SendMessage(questor, "Entrail quest failed.");
                 this.ResetQuestObject(GetObject("palantine/wolf"));
                 this.ResetQuestObject(GetObject("palantine/soranus"));
-                Move(GetObject("palantine/entrails"), GetObject("palantine/soranus"), RelativeLocations.Worn);
+                Move(GetObject("palantine/entrails"), GetObject("palantine/soranus"), RelativeLocations.WORN);
                 Active = false;
                 return PerformResult.Continue;
             });

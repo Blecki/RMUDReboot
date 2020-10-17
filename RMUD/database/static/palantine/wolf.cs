@@ -16,13 +16,13 @@
         Short = "wolf";
         Long = "This is a snarling grey beast with a long snout and upright ears. It has a tail that does not wag even a little.";
 
-        GetProperty<NounList>("nouns").Add("wolf");
+        AddNoun("wolf");
 
         Perform<MudObject, MudObject>("handle-entrail-drop").Do((wolf, entrails) =>
             {
                 MudObject.SendLocaleMessage(this, "The wolf snatches up the entrails.");
                 IsFed = true;
-                MudObject.Move(entrails, MudObject.GetObject("palantine/soranus"), RelativeLocations.Worn);
+                MudObject.Move(entrails, MudObject.GetObject("palantine/soranus"), RelativeLocations.WORN);
                 return PerformResult.Stop;
             });
 

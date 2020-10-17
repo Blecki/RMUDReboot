@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -42,10 +41,10 @@ namespace StandardActionsModule
                 .Name("Describe open or closed state rule.");
 
             GlobalRules.Perform<MudObject, MudObject>("describe")
-                .When((viewer, item) => (item.LocationsSupported & RelativeLocations.On) == RelativeLocations.On)
+                .When((viewer, item) => (item.LocationsSupported & RelativeLocations.ON) == RelativeLocations.ON)
                 .Do((viewer, item) =>
                 {
-                    var contents = item.GetContents(RelativeLocations.On);
+                    var contents = item.GetContents(RelativeLocations.ON);
                     if (contents.Count() > 0)
                         MudObject.SendMessage(viewer, "@describe on", item, contents);
                     return PerformResult.Continue;
@@ -57,12 +56,12 @@ namespace StandardActionsModule
                     {
                         if (item.GetProperty<bool>("container?")) return false;
                         if (!item.GetProperty<bool>("open?")) return false;
-                        if (item.EnumerateObjects(RelativeLocations.In).Count() == 0) return false;
+                        if (item.EnumerateObjects(RelativeLocations.IN).Count() == 0) return false;
                         return true;
                     })
                 .Do((viewer, item) =>
                 {
-                    var contents = item.GetContents(RelativeLocations.In);
+                    var contents = item.GetContents(RelativeLocations.IN);
                     if (contents.Count() > 0)
                         MudObject.SendMessage(viewer, "@describe in", item, contents);
                     return PerformResult.Continue;
@@ -75,7 +74,7 @@ namespace StandardActionsModule
                 .When((viewer, actor) => actor.GetProperty<bool>("actor?"))
                 .Do((viewer, actor) =>
                 {
-                    var heldItems = new List<MudObject>(actor.EnumerateObjects(RelativeLocations.Held));
+                    var heldItems = new List<MudObject>(actor.EnumerateObjects(RelativeLocations.HELD));
                     if (heldItems.Count == 0)
                         MudObject.SendMessage(viewer, "@empty handed", actor);
                     else

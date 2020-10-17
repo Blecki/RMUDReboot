@@ -22,9 +22,9 @@ namespace NetworkModule
                             "[" + Core.SettingsObject.GetNameForRank(client.Player.GetProperty<int>("rank")) + "] <a0> ["
                             + client.ConnectionDescription + "]"
                             + (client.IsAfk ? (" afk: " + client.Player.GetProperty<Account>("account").AFKMessage) : "")
-                            + (client.Player.Location != null ? (" -- " + client.Player.Location.Path) : ""),
+                            + (client.Player.Location.HasValue(out var loc) ? (" -- " + loc.Path) : ""),
                             client.Player);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 	}

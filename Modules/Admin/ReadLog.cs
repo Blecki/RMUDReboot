@@ -28,7 +28,7 @@ namespace AdminModule
                     }
                     else
                         MudObject.SendMessage(actor, "I could not find that log file.");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
     }

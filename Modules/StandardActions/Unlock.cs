@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -40,7 +39,7 @@ namespace StandardActionsModule
             {
                 MudObject.SendMessage(actor, "@you unlock", target);
                 MudObject.SendExternalMessage(actor, "@they unlock", actor, target, key);
-                return SharpRuleEngine.PerformResult.Continue;
+                return PerformResult.Continue;
             });
         }
     }

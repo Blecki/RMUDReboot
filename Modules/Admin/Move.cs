@@ -34,7 +34,7 @@ namespace AdminModule
                     }
                     else
                         MudObject.SendMessage(actor, "I could not find the destination.");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
     }

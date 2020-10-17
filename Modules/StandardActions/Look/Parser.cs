@@ -32,12 +32,12 @@ namespace StandardActionsModule.Look
                         SetValue("LOOKBRANCH", LookBranch.LOCALE),
                         Sequence(
                             SetValue("LOOKBRANCH", LookBranch.OBJECT),
-                            KeyWord("AT"),
+                            Optional(KeyWord("AT")),
                             Object("OBJECT", InScope).Stage("I think you were trying to look at something, but I couldn't tell what.")),
                         Sequence(
                             SetValue("LOOKBRANCH", LookBranch.RELLOC),
                             RelativeLocation("RELLOC"),
-                            Object("OBJECT", InScope).Stage("I think you were trying to look [RELLOC] something, but I couldn't tell what.")),
+                            Object("OBJECT", InScope).Stage("I think you were trying to look <RELLOC> something, but I couldn't tell what.")),
                         Sequence(
                             SetValue("LOOKBRANCH", LookBranch.LINK),
                             Cardinal("DIRECTION"))
@@ -52,36 +52,47 @@ namespace StandardActionsModule.Look
                     switch ((match["LOOKBRANCH"] as LookBranch?).Value)
                     {
                         case LookBranch.LOCALE:
-                            Core.GlobalRules.ConsiderPerformRule("describe locale", match["ACTOR"], (match["ACTOR"] as MudObject).Location);
-                            return SharpRuleEngine.PerformResult.Continue;
+                            {
+                                if ((match["ACTOR"] as MudObject).Location.HasValue(out var loc))
+                                    Core.GlobalRules.ConsiderPerformRule("describe locale", match["ACTOR"], loc);
+                                return PerformResult.Continue;
+                            }
                         case LookBranch.OBJECT:
-                            if (Core.GlobalRules.ConsiderCheckRule("can examine?", match["ACTOR"], match["OBJECT"]) == SharpRuleEngine.CheckResult.Disallow)
-                                return SharpRuleEngine.PerformResult.Stop;
+                            if (Core.GlobalRules.ConsiderCheckRule("can examine?", match["ACTOR"], match["OBJECT"]) == CheckResult.Disallow)
+                                return PerformResult.Stop;
                             Core.GlobalRules.ConsiderPerformRule("describe", match["ACTOR"], match["OBJECT"]);
-                            return SharpRuleEngine.PerformResult.Continue;
+                            return PerformResult.Continue;
                         case LookBranch.RELLOC:
-                            if (Core.GlobalRules.ConsiderCheckRule("can look relloc?", match["ACTOR"], match["OBJECT"], match["RELLOC"]) == SharpRuleEngine.CheckResult.Disallow)
-                                return SharpRuleEngine.PerformResult.Stop;
+                            if (Core.GlobalRules.ConsiderCheckRule("can look relloc?", match["ACTOR"], match["OBJECT"], match["RELLOC"]) == CheckResult.Disallow)
+                                return PerformResult.Stop;
                             Core.GlobalRules.ConsiderPerformRule("look relloc", match["ACTOR"], match["OBJECT"], match["RELLOC"]);
-                            return SharpRuleEngine.PerformResult.Continue;
+                            return PerformResult.Continue;
                         case LookBranch.LINK:
                             {
-                                var direction = match["DIRECTION"] as Direction?;
-                                var link = actor.Location.EnumerateObjects().FirstOrDefault(thing => thing.GetProperty<bool>("portal?") && thing.GetProperty<Direction>("link direction") == direction.Value);
-                                match.Upsert("LINK", link);
-                                var destination = MudObject.GetObject(link.GetProperty<String>("link destination"));
-                                if (destination == null)
+                                if (actor.Location.HasValue(out var loc))
                                 {
-                                    MudObject.SendMessage(actor, "@bad link");
-                                    return SharpRuleEngine.PerformResult.Stop;
+                                    var direction = match["DIRECTION"] as Direction?;
+                                    var link = loc.EnumerateObjects().FirstOrDefault(thing => thing.GetProperty<bool>("portal?") && thing.GetProperty<Direction>("link direction") == direction.Value);
+                                    match.Upsert("LINK", link);
+                                    var destination = MudObject.GetObject(link.GetProperty<String>("link destination"));
+                                    if (destination == null)
+                                    {
+                                        MudObject.SendMessage(actor, "@bad link");
+                                        return PerformResult.Stop;
+                                    }
+                                    if (Core.GlobalRules.ConsiderCheckRule("can examine?", match["ACTOR"], match["LINK"]) == CheckResult.Disallow)
+                                        return PerformResult.Stop;
+                                    Core.GlobalRules.ConsiderPerformRule("describe", match["ACTOR"], match["LINK"]);
                                 }
-                                if (Core.GlobalRules.ConsiderCheckRule("can examine?", match["ACTOR"], match["LINK"]) == SharpRuleEngine.CheckResult.Disallow)
-                                    return SharpRuleEngine.PerformResult.Stop;
-                                Core.GlobalRules.ConsiderPerformRule("describe", match["ACTOR"], match["LINK"]);
+                                else
+                                {
+                                    MudObject.SendMessage(actor, "You do not appear to be anywhere.");
+                                    return PerformResult.Stop;
+                                }
                             }
-                            return SharpRuleEngine.PerformResult.Continue;
+                            return PerformResult.Continue;
                         default:
-                            return SharpRuleEngine.PerformResult.Continue;
+                            return PerformResult.Continue;
                     }
                 });
         }

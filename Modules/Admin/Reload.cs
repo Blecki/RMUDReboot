@@ -23,7 +23,7 @@ namespace AdminModule
                     var newObject = Core.Database.ReloadObject(target);
                     if (newObject == null) MudObject.SendMessage(actor, "Failed to reload " + target);
                     else MudObject.SendMessage(actor, "Reloaded " + target);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
 
             Parser.AddCommand(
@@ -39,7 +39,7 @@ namespace AdminModule
                      if (Core.Database.ResetObject(target) == null) 
                          MudObject.SendMessage(actor, "Failed to reset " + target);
                      else MudObject.SendMessage(actor, "Reset " + target);
-                     return SharpRuleEngine.PerformResult.Continue;
+                     return PerformResult.Continue;
                  });
 
         }

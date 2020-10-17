@@ -22,7 +22,7 @@ namespace NetworkModule
                         client.Disconnect();
                     }
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 	}

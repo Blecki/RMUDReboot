@@ -28,11 +28,11 @@ namespace AdminModule
                             if (target == null)
                             {
                                 MudObject.SendMessage(actor, "I can't find whomever it is you want to submit to your foolish whims.");
-                                return SharpRuleEngine.PerformResult.Stop;
+                                return PerformResult.Stop;
                             }
                             match.Upsert("OBJECT", target);
                         }
-                        return SharpRuleEngine.PerformResult.Continue;
+                        return PerformResult.Continue;
                     }, "Convert path to object rule.")
                 .ProceduralRule((match, actor) =>
                 {
@@ -54,7 +54,7 @@ namespace AdminModule
                     else
                         MudObject.SendMessage(actor, "The command did not match.");
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 	}

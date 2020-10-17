@@ -9,7 +9,7 @@ namespace CloakOfDarkness
             Actor();
 
             SetProperty("short", "you");
-            Move(GetObject("Cloak"), this, RelativeLocations.Worn);
+            Move(GetObject("Cloak"), this, RelativeLocations.WORN);
         }
     }
 }

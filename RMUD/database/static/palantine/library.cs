@@ -18,7 +18,7 @@ public class kuz_shelf : MudObject
     {
         Short = "dusty shelf full of books";
         Long = "There are so many books, and they all look so interesting and inviting. You could just go right ahead and take one.";
-        GetProperty<NounList>("nouns").Add("BOOK", "BOOKS", "SHELF", "DUSTY");
+        AddNoun("BOOK", "BOOKS", "SHELF", "DUSTY");
 
         Perform<MudObject, MudObject>("describe in locale").Do((actor, item) =>
             {
@@ -26,9 +26,9 @@ public class kuz_shelf : MudObject
                 return PerformResult.Continue;
             });
 
-        Check<MudObject, MudObject>("can take?").Do((a, b) => CheckResult.Allow);
+        this.CheckCanTake().Do((a, b) => CheckResult.Allow);
 
-        Perform<MudObject, MudObject>("take").Do((actor, target) =>
+        this.PerformTake().Do((actor, target) =>
             {
                 var newBook = new kuz_book();
                 Move(newBook, actor);
@@ -93,7 +93,7 @@ public class kuz_book : MudObject
         var cover = Covers[Random.Next(0, Covers.Count)];
         Short = cover + " copy of " + title;
         if (!System.String.IsNullOrEmpty(volume)) Short += ", " + volume;
-        GetProperty<NounList>("nouns").Add("BOOK");
+        AddNoun("BOOK");
         Long = Latin;
 
         if (cover == "embossed")

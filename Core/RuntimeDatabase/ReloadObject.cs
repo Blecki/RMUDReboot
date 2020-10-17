@@ -32,13 +32,13 @@ namespace RMUD
                     }
                  
 				//Preserve location
-				if (existing is MudObject && newObject is MudObject)
+				if (existing is MudObject _existing && newObject is MudObject _newObject)
 				{
-					if ((existing as MudObject).Location != null)
+                    if (_existing.Location.HasValue(out var loc) && _newObject.Location.HasValue(out var newLoc))
 					{
-                        var loc = existing.Location.RelativeLocationOf(existing);
-						MudObject.Move(newObject as MudObject, (existing as MudObject).Location, loc);
-						MudObject.Move(existing as MudObject, null, RelativeLocations.None);
+                        var relloc = loc.RelativeLocationOf(existing);
+						MudObject.Move(newObject as MudObject, newLoc, relloc);
+						MudObject.Move(existing as MudObject, null, RelativeLocations.NONE);
 					}
 				}
 

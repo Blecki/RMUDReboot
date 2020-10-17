@@ -15,7 +15,7 @@ namespace World
                 .Do((match, actor) =>
                     {
                         Console.WriteLine();
-                        return SharpRuleEngine.PerformResult.Continue;
+                        return PerformResult.Continue;
                     });
 
             GlobalRules.Perform<MudObject>("after every command")
@@ -23,7 +23,7 @@ namespace World
                 .Do((actor) =>
                 {
                     Console.WriteLine();
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
 
             GlobalRules.Perform<World.Player>("singleplayer game started")
@@ -34,7 +34,7 @@ namespace World
                     RMUD.MudObject.Move(Skrogard.Game.Player, RMUD.MudObject.GetObject("Caves.Pod"));
                     RMUD.Core.EnqueuActorCommand(Skrogard.Game.Player, "look");
                     RMUD.Core.ProcessCommands();
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 

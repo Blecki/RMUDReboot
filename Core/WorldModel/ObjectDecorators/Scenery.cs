@@ -29,7 +29,7 @@ namespace RMUD
         public void AddScenery(MudObject Scenery)
         {
             Scenery.SetProperty("scenery?", true);
-            Add(Scenery, RelativeLocations.Contents);
+            Add(Scenery, RelativeLocations.CONTENTS);
             Scenery.Location = this;
         }
     }

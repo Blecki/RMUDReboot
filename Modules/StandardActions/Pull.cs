@@ -17,7 +17,7 @@ namespace StandardActionsModule
                         MustMatch("@not here",
                             Object("SUBJECT", InScope, (actor, item) =>
                             {
-                                if (Core.GlobalRules.ConsiderCheckRuleSilently("can pull?", actor, item) != SharpRuleEngine.CheckResult.Allow)
+                                if (Core.GlobalRules.ConsiderCheckRuleSilently("can pull?", actor, item) != CheckResult.Allow)
                                     return MatchPreference.Unlikely;
                                 return MatchPreference.Plausible;
                             })))))
@@ -45,7 +45,7 @@ namespace StandardActionsModule
                 .Do((a, t) => 
                     {
                         MudObject.SendMessage(a, "@does nothing");
-                        return SharpRuleEngine.CheckResult.Disallow;
+                        return CheckResult.Disallow;
                     })
                 .Name("Default disallow pulling rule.");
 
@@ -53,7 +53,7 @@ namespace StandardActionsModule
                 .Do((actor, target) =>
                 {
                     MudObject.SendMessage(actor, "@nothing happens");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Default handle pulling rule.");
 
@@ -63,7 +63,7 @@ namespace StandardActionsModule
                 .Do((actor, thing) =>
                 {
                     MudObject.SendMessage(actor, "@unappreciated", thing);
-                    return SharpRuleEngine.CheckResult.Disallow;
+                    return CheckResult.Disallow;
                 })
                 .Name("Can't pull people rule.");
         }

@@ -22,7 +22,7 @@ namespace RMUD
     {
         public void Actor()
         {
-            Container(RelativeLocations.Held | RelativeLocations.Worn, RelativeLocations.Held);
+            Container(RelativeLocations.HELD | RelativeLocations.WORN, RelativeLocations.HELD);
 
             SetProperty("actor?", true);
             SetProperty("preserve?", true);

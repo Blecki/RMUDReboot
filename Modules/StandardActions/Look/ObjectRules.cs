@@ -19,7 +19,7 @@ namespace StandardActionsModule.Look
 
             GlobalRules.Check<MudObject, MudObject>("can examine?")
                 .Last
-                .Do((viewer, item) => SharpRuleEngine.CheckResult.Allow)
+                .Do((viewer, item) => CheckResult.Allow)
                 .Name("Default can examine everything rule.");
         }
     }

@@ -66,7 +66,7 @@ namespace StandardActionsModule
                 .Do((actor, text) =>
                 {
                     MudObject.SendLocaleMessage(actor, "@speak", actor, text);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Default motormouth rule.");
 
@@ -76,7 +76,7 @@ namespace StandardActionsModule
                 .Do((actor, text) =>
                 {
                     MudObject.SendLocaleMessage(actor, "@emote", actor, text);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Default exhibitionist rule.");
         }

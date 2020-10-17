@@ -13,7 +13,7 @@ namespace RMUD
         private String GetFileHeader()
         {
             var builder = new StringBuilder();
-            builder.Append("using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing SharpRuleEngine;\n");
+            builder.Append("using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\n");
 
             foreach (var module in Core.IntegratedModules)
                 builder.AppendLine("using " + module.Info.BaseNameSpace + ";\n");

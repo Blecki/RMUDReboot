@@ -17,7 +17,7 @@ namespace World.Homestead
             OpenLink(Direction.EAST, "Homestead.Ledge");
             OpenLink(Direction.IN, "Homestead.Kitchen");
 
-            Move(new MudObject("glass shards", "These long shards of dirty glass are quite sharp. Be careful."), this, RelativeLocations.Contents);
+            Move(new MudObject("glass shards", "These long shards of dirty glass are quite sharp. Be careful."), this, RelativeLocations.CONTENTS);
         }
     }
 }

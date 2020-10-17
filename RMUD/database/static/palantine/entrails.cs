@@ -3,7 +3,7 @@
     public override void Initialize()
     {
         Short = "entrails";
-        GetProperty<NounList>("nouns").Add("entrails");
+        AddNoun("entrails");
 
         SetProperty("clothing layer", ClothingLayer.Over);
         SetProperty("clothing part", ClothingBodyPart.Cloak);

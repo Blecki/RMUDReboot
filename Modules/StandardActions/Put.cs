@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -36,9 +35,9 @@ namespace StandardActionsModule
                         if ((match["OBJECT"] as MudObject).GetProperty<bool>("container?"))
                             match.Upsert("RELLOC", (match["OBJECT"] as MudObject).DefaultLocation);
                         else
-                            match.Upsert("RELLOC", RelativeLocations.On);
+                            match.Upsert("RELLOC", RelativeLocations.ON);
                     }
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 }, "Supply default for optional relloc procedural rule.")
                 .Check("can put?", "ACTOR", "SUBJECT", "OBJECT", "RELLOC")
                 .BeforeActing()
@@ -108,7 +107,7 @@ namespace StandardActionsModule
             GlobalRules.Check<MudObject, MudObject, MudObject, RelativeLocations>("can put?")
                 .Do((actor, item, container, relloc) =>
                 {
-                    if (relloc == RelativeLocations.In && !container.GetProperty<bool>("open?"))
+                    if (relloc == RelativeLocations.IN && !container.GetProperty<bool>("open?"))
                     {
                         MudObject.SendMessage(actor, "@is closed error", container);
                         return CheckResult.Disallow;

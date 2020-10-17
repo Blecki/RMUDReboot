@@ -28,7 +28,7 @@ namespace ClothingModule
         Cloak,
     }
 
-    public static class Factory// : RMUD.MudObject
+    public static class Factory
     {
         public static RMUD.MudObject Create(String Short, ClothingLayer Layer, ClothingBodyPart BodyPart)
         {

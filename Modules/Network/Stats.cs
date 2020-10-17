@@ -15,7 +15,7 @@ namespace NetworkModule
                 .Do((actor) =>
                 {
                     MudObject.SendMessage(actor, "CLIENTS");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
 
             GlobalRules.Perform<MudObject, String>("stats")
@@ -28,7 +28,7 @@ namespace NetworkModule
                             MudObject.SendMessage(actor, (client as NetworkClient).ConnectionDescription + (client.Player == null ? "" : (" - " + client.Player.GetProperty<String>("short"))));
                         else
                             MudObject.SendMessage(actor, "local " + (client.Player == null ? "" : (" - " + client.Player.GetProperty<String>("short"))));
-                    return SharpRuleEngine.PerformResult.Stop;
+                    return PerformResult.Stop;
                 });
         }
     }

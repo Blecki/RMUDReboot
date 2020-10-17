@@ -16,14 +16,14 @@ namespace StandardActionsModule.Look
                 {
                     if (item.GetProperty<bool>("openable?") && !item.GetProperty<bool>("open?"))
                     {
-                        return SharpRuleEngine.PerformResult.Stop;
+                        return PerformResult.Stop;
                     }
 
                     var destination = MudObject.GetObject(item.GetProperty<String>("link destination"));
                     if (destination == null)
                     {
                         MudObject.SendMessage(viewer, "@bad link");
-                        return SharpRuleEngine.PerformResult.Stop;
+                        return PerformResult.Stop;
                     }
 
                     if (item.GetProperty<bool>("openable?"))
@@ -35,7 +35,7 @@ namespace StandardActionsModule.Look
                     }
 
                     GlobalRules.ConsiderPerformRule("describe locale", viewer, destination);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Look through a link rule.");
         }

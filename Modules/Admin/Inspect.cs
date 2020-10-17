@@ -23,7 +23,7 @@ namespace AdminModule
                     {
                         if (!match.ContainsKey("OBJECT"))
                             match.Upsert("OBJECT", actor.Location);
-                        return SharpRuleEngine.PerformResult.Continue;
+                        return PerformResult.Continue;
                     }, "Convert locale option to standard form rule.")
                 .ProceduralRule((match, actor) =>
                 {
@@ -33,10 +33,10 @@ namespace AdminModule
                     MudObject.SendMessage(actor, "Path: <s0>", target.Path);
                     MudObject.SendMessage(actor, "Instance: <s0>", target.Instance);
                     MudObject.SendMessage(actor, "Persistent: <s0>", target.IsPersistent.ToString());
-                    if (target.Location == null)
+                    if (!target.Location.HasValue(out var loc))
                         MudObject.SendMessage(actor, "Location: NOWHERE");
                     else
-                        MudObject.SendMessage(actor, "Location: <s0>", target.Location.GetFullName());
+                        MudObject.SendMessage(actor, "Location: <s0>", loc.GetFullName());
                     MudObject.SendMessage(actor, "*** DYNAMIC PROPERTIES ***");
 
                     foreach (var property in target.Properties)
@@ -47,7 +47,7 @@ namespace AdminModule
 
                     MudObject.SendMessage(actor, "*** END OF LISTING ***");
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 }, "List all the damn things rule.");
         }
 	}

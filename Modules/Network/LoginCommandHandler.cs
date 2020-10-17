@@ -70,7 +70,7 @@ namespace NetworkModule
 			}
 			catch (Exception e)
 			{
-				Core.ClearPendingMessages();
+				Core.DiscardPendingMessages();
                 MudObject.SendMessage(Command.Actor, e.Message);
 			}
 		}

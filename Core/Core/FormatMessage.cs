@@ -69,6 +69,22 @@ namespace RMUD
             From.Advance();
             return true;
         }
+
+        internal static bool ReadIdentifier(StringIterator From, out String Into)
+        {
+            Into = "";
+            if (From.Next != '<') return false;
+            From.Advance();
+            while(!From.AtEnd && From.Next != '>')
+            {
+                Into += From.Next;
+                From.Advance();
+            }
+
+            if (From.AtEnd) return false;
+            From.Advance();
+            return true;
+        }
     }
 
     public static partial class Core
@@ -198,5 +214,59 @@ namespace RMUD
                 if (x == list.Count - 2 && !String.IsNullOrEmpty(CoordinatingConjunction)) FormattedMessage.Append(CoordinatingConjunction + " ");
             }
         }
+
+        /// <summary>
+        /// Parse and format a message intended for a specific recipient.
+        /// </summary>
+        /// <param name="Recipient"></param>
+        /// <param name="Message">The message, possibly containing specifiers.</param>
+        /// <param name="Objects">Specifier indicies refer to this list of objects.</param>
+        /// <returns></returns>
+        public static String FormatParserMessage(MudObject Recipient, String Message, PossibleMatch Objects)
+        {
+            //A leading @ indicates that the message should be interpretted as an entry in the global message table.
+            if (Message[0] == '@') Message = Core.GetMessage(Message.Substring(1));
+
+            var formattedMessage = new StringBuilder();
+            var iterator = new StringIterator(Message);
+
+            while (!iterator.AtEnd)
+            {
+                if (iterator.Next == '<') //We have located a specifier.
+                {
+                    if (MessageFormatParser.ReadIdentifier(iterator, out var propertyName) && Objects.ContainsKey(propertyName))
+                            formattedMessage.Append(Objects[propertyName] == null ? "%NULL" : Objects[propertyName].ToString());
+                }
+                else
+                {
+                    formattedMessage.Append(iterator.Next);
+                    iterator.Advance();
+                }
+            }
+
+            Message = formattedMessage.ToString();
+            formattedMessage.Clear();
+            iterator = new StringIterator(Message);
+
+            //Apply the ^ transform: Capitalize the letter following the ^ and remove the ^.
+            while (!iterator.AtEnd)
+            {
+                if (iterator.Next == '^')
+                {
+                    iterator.Advance();
+                    if (iterator.AtEnd) break;
+                    formattedMessage.Append(new String(iterator.Next, 1).ToUpper());
+                    iterator.Advance();
+                }
+                else
+                {
+                    formattedMessage.Append(iterator.Next);
+                    iterator.Advance();
+                }
+            }
+
+            return formattedMessage.ToString();
+        }
+
     }
 }

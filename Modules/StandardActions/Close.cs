@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -20,7 +19,7 @@ namespace StandardActionsModule
                                 {
                                     if (Core.GlobalRules.ConsiderCheckRuleSilently("can close?", actor, thing) == CheckResult.Allow) return MatchPreference.Likely;
                                     return MatchPreference.Unlikely;
-                                }).Stage("I got as far as telling that you wanted to close something, but couldn't tell what."))))
+                                }).Stage("I got as far as knowing that you wanted to close something, but couldn't tell what."))))
                 .ID("StandardActions:Close")
                 .Manual("Closes a thing.")
                 .Check("can close?", "ACTOR", "SUBJECT")

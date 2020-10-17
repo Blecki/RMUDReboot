@@ -28,7 +28,7 @@ namespace AliasModule
                     var aliases = actor.GetProperty<Dictionary<String, String>>("aliases");
                     aliases.Add(match["NAME"].ToString().ToUpper(), match["RAW-COMMAND"].ToString());
                     MudObject.SendMessage(actor, "Alias added.");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
 
             Parser.AddCommand(
@@ -48,7 +48,7 @@ namespace AliasModule
                     var commands = match["ALIAS"].ToString().Split(';');
                     foreach (var command in commands)
                         Core.EnqueuActorCommand(actor, command);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 	}

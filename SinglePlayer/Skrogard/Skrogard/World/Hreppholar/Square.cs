@@ -25,18 +25,18 @@ namespace World.Hreppholar
     {
         public Fountain()
         {
-            Container(RMUD.RelativeLocations.In, RMUD.RelativeLocations.In);
+            Container(RMUD.RelativeLocations.IN, RMUD.RelativeLocations.IN);
 
             Short = "fountain";
             Long = "This old fountain is made from welded together bits of scrap. It depicts a girl, lips pursed, who would be spurting a stream of water if the pump still worked.";
             AddNoun("old", "dried", "fountain", "dried-up");
 
-            Move(new RMUD.MudObject("steel penny", "A small coin marked on one side with a serpent, and the other with a woman's face."), this, RMUD.RelativeLocations.In);
+            Move(new RMUD.MudObject("steel penny", "A small coin marked on one side with a serpent, and the other with a woman's face."), this, RMUD.RelativeLocations.IN);
 
             Check<RMUD.MudObject, RMUD.MudObject>("can take?").ThisOnly().Do((actor, thing) =>
             {
                 SendMessage(actor, "That appears to be attached rather securely to the ground.");
-                return SharpRuleEngine.CheckResult.Disallow;
+                return CheckResult.Disallow;
             });
         }
     }

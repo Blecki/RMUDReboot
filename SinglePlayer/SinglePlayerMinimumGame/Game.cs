@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RMUD;
 
 namespace Minimum
 {
@@ -26,7 +27,7 @@ namespace Minimum
                     RMUD.MudObject.Move(Player, RMUD.MudObject.GetObject("Start"));
                     RMUD.Core.EnqueuActorCommand(Player, "look");
         
-                    return SharpRuleEngine.PerformResult.Stop;
+                    return PerformResult.Stop;
                 });
         }
     }

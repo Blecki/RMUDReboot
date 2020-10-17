@@ -29,7 +29,7 @@ namespace StandardActionsModule
             GlobalRules.Perform<MudObject>("inventory")
                 .Do(a =>
                 {
-                    var heldObjects = a.GetContents(RelativeLocations.Held);
+                    var heldObjects = a.GetContents(RelativeLocations.HELD);
                     if (heldObjects.Count == 0) MudObject.SendMessage(a, "@empty handed", a);
                     else
                     {
@@ -37,7 +37,7 @@ namespace StandardActionsModule
                         foreach (var item in heldObjects)
                             MudObject.SendMessage(a, "  <a0>", item);
                     }
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("List held items in inventory rule.");
         }

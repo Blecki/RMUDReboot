@@ -50,6 +50,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ancora\AstNode.cs" />
+    <Compile Include="Ancora\Failure.cs" />
+    <Compile Include="Ancora\Grammar.cs" />
+    <Compile Include="Ancora\OperatorTable.cs" />
+    <Compile Include="Ancora\Parser.cs" />
+    <Compile Include="Ancora\ParseResult.cs" />
+    <Compile Include="Ancora\Parsers\Alternative.cs" />
+    <Compile Include="Ancora\Parsers\Character.cs" />
+    <Compile Include="Ancora\Parsers\Debug.cs" />
+    <Compile Include="Ancora\Parsers\Expression.cs" />
+    <Compile Include="Ancora\Parsers\HardError.cs" />
+    <Compile Include="Ancora\Parsers\Identifier.cs" />
+    <Compile Include="Ancora\Parsers\KeyWord.cs" />
+    <Compile Include="Ancora\Parsers\LateBound.cs" />
+    <Compile Include="Ancora\Parsers\Maybe.cs" />
+    <Compile Include="Ancora\Parsers\NoneOrMany.cs" />
+    <Compile Include="Ancora\Parsers\OneOrMany.cs" />
+    <Compile Include="Ancora\Parsers\Operator.cs" />
+    <Compile Include="Ancora\Parsers\Sequence.cs" />
+    <Compile Include="Ancora\Parsers\Token.cs" />
+    <Compile Include="Ancora\Program.cs" />
+    <Compile Include="Ancora\StringIterator.cs" />
+    <Compile Include="Ancora\TestGrammar.cs" />
     <Compile Include="Core\Client.cs" />
     <Compile Include="Core\CommandQueue.cs" />
     <Compile Include="Core\ErrorLog.cs" />
@@ -59,34 +82,36 @@
     <Compile Include="Core\FormatMessage.cs" />
     <Compile Include="Core\ModuleAssembly.cs" />
     <Compile Include="Core\Parser\Matchers\SetValue.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\GlobalRules.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\Rule.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleBook.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleBuilderGen.cs">
+    <Compile Include="NeverNull.cs" />
+    <Compile Include="MaybeNull.cs" />
+    <Compile Include="RuleEngine\GlobalRules.cs" />
+    <Compile Include="RuleEngine\Rule.cs" />
+    <Compile Include="RuleEngine\RuleBook.cs" />
+    <Compile Include="RuleEngine\RuleBuilderGen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RuleBuilderGen.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleDelegatesGen.cs">
+    <Compile Include="RuleEngine\RuleDelegatesGen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RuleDelegatesGen.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleEngine.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleEngineAddRuleGen.cs">
+    <Compile Include="RuleEngine\RuleEngine.cs" />
+    <Compile Include="RuleEngine\RuleEngineAddRuleGen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RuleEngineAddRuleGen.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleResult.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleSet.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleSetAddRuleGen.cs">
+    <Compile Include="RuleEngine\RuleResult.cs" />
+    <Compile Include="RuleEngine\RuleSet.cs" />
+    <Compile Include="RuleEngine\RuleSetAddRuleGen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RuleSetAddRuleGen.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleSource.cs" />
-    <Compile Include="Core\Rules\SharpRuleEngine\RuleSourceAddRuleGen1.cs">
+    <Compile Include="RuleEngine\RuleSource.cs" />
+    <Compile Include="RuleEngine\RuleSourceAddRuleGen1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RuleSourceAddRuleGen.tt</DependentUpon>
@@ -97,8 +122,8 @@
     <Compile Include="Core\ManPages.cs" />
     <Compile Include="Core\MarkForUpdate.cs" />
     <Compile Include="Core\MessageTable.cs" />
-    <Compile Include="Core\Meta\Man.cs" />
-    <Compile Include="Core\Meta\Version.cs" />
+    <Compile Include="Core\MetaCommands\Man.cs" />
+    <Compile Include="Core\MetaCommands\Version.cs" />
     <Compile Include="Core\Move.cs" />
     <Compile Include="Core\MudCore.cs" />
     <Compile Include="Core\ObjectContainsObject.cs" />
@@ -132,7 +157,6 @@
     <Compile Include="Core\PendingMessages.cs" />
     <Compile Include="Core\ExecuteCommand.cs" />
     <Compile Include="Core\Random.cs" />
-    <Compile Include="Core\Rules\RuleEngine.cs" />
     <Compile Include="Core\SendMessage.cs" />
     <Compile Include="Core\Serialization\ContainerSerializer.cs" />
     <Compile Include="Core\Serialization\DictionaryStringObjectSerializer.cs" />
@@ -189,27 +213,27 @@
     <Compile Include="WorldModel\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core\Rules\SharpRuleEngine\RuleGen.t4" />
+    <None Include="RuleEngine\RuleGen.t4" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Rules\SharpRuleEngine\RuleBuilderGen.tt">
+    <Content Include="RuleEngine\RuleBuilderGen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RuleBuilderGen.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Rules\SharpRuleEngine\RuleDelegatesGen.tt">
+    <Content Include="RuleEngine\RuleDelegatesGen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RuleDelegatesGen.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Rules\SharpRuleEngine\RuleEngineAddRuleGen.tt">
+    <Content Include="RuleEngine\RuleEngineAddRuleGen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RuleEngineAddRuleGen.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Rules\SharpRuleEngine\RuleSetAddRuleGen.tt">
+    <Content Include="RuleEngine\RuleSetAddRuleGen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RuleSetAddRuleGen.cs</LastGenOutput>
     </Content>
-    <Content Include="Core\Rules\SharpRuleEngine\RuleSourceAddRuleGen.tt">
+    <Content Include="RuleEngine\RuleSourceAddRuleGen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RuleSourceAddRuleGen1.cs</LastGenOutput>
     </Content>

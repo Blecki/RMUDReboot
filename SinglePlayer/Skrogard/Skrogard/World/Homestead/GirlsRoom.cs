@@ -22,7 +22,7 @@ namespace World.Homestead
     {
         public Bed()
         {
-            Container(RMUD.RelativeLocations.On | RMUD.RelativeLocations.Under, RMUD.RelativeLocations.On);
+            Container(RMUD.RelativeLocations.ON | RMUD.RelativeLocations.UNDER, RMUD.RelativeLocations.ON);
 
             Short = "small bed";
             Long = "This small, plush bed looks quite soft.";
@@ -33,10 +33,10 @@ namespace World.Homestead
                 .Do((actor, thing) =>
             {
                 SendMessage(actor, "It's far too heavy.");
-                return SharpRuleEngine.CheckResult.Disallow;
+                return CheckResult.Disallow;
             });
 
-            Move(GetObject("Homestead.Skull"), this, RelativeLocations.On);
+            Move(GetObject("Homestead.Skull"), this, RelativeLocations.ON);
         }
     }
 }

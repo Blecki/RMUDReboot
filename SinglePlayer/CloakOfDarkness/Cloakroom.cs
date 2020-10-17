@@ -41,7 +41,7 @@ to the game, they would automatically be described correctly as well.]
     {
         public Hook()
         {
-            Container(RelativeLocations.On, RelativeLocations.On);
+            Container(RelativeLocations.ON, RelativeLocations.ON);
         }
 
         public override void Initialize()
@@ -53,7 +53,7 @@ to the game, they would automatically be described correctly as well.]
                 .Do((actor, item) =>
                 {
                     SendMessage(actor, "It's screwed into the wall.");
-                    return SharpRuleEngine.CheckResult.Disallow;
+                    return CheckResult.Disallow;
                 });
         }
     }   

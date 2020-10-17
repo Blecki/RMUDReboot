@@ -32,7 +32,7 @@ the weather outside seems to be getting worse."
                .Do((actor, link) =>
                {
                    MudObject.SendMessage(actor, "You've only just arrived, and besides, the weather outside seems to be getting worse.");
-                   return SharpRuleEngine.CheckResult.Disallow;
+                   return CheckResult.Disallow;
                });
         }
     }

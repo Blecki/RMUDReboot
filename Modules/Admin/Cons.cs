@@ -43,7 +43,7 @@ namespace AdminModule
                         MudObject.SendMessage(actor, "@cons no results");
 
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
                
 		}

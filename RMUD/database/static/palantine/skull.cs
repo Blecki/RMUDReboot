@@ -8,7 +8,7 @@
         PersistInstance(this);
 
         Short = "human skull";
-        GetProperty<NounList>("nouns").Add("human", "skull");
+        AddNoun("human", "skull");
 
         Perform<MudObject, MudObject>("describe")
             .Do((viewer, thing) =>

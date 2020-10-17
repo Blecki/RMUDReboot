@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -49,7 +48,7 @@ namespace StandardActionsModule
                 .Name("Item must be visible to take rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can take?")
-                .When((actor, item) => actor.Contains(item, RelativeLocations.Held))
+                .When((actor, item) => actor.Contains(item, RelativeLocations.HELD))
                 .Do((actor, item) =>
                 {
                     MudObject.SendMessage(actor, "@already have that");

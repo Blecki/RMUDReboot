@@ -29,13 +29,13 @@ namespace RMUD
 
             var word = State.Next.Value.ToUpper();
             if (word == "ON")
-                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.On));
+                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.ON));
             else  if (word == "IN")
-                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.In));
+                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.IN));
             else if (word == "UNDER")
-                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.Under));
+                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.UNDER));
             else if (word == "BEHIND")
-                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.Behind));
+                r.Add(State.AdvanceWith(ArgumentName, RelativeLocations.BEHIND));
 			return r;
         }
 

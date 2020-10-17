@@ -25,7 +25,8 @@ namespace AdminModule
                 .ProceduralRule((match, actor) =>
                 {
                     ClearGrid();
-                    PopulateGrid(actor.Location, MapWidth / 2, MapHeight / 2);
+                    if (actor.Location.HasValue(out var loc))
+                        PopulateGrid(loc, MapWidth / 2, MapHeight / 2);
 
                     // Prep output grid
                     var mapGrid = new int[RenderWidth, RenderHeight];
@@ -80,7 +81,7 @@ namespace AdminModule
 
                     ClearGrid();
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 }, "Implement sonar device rule.");
         }
 

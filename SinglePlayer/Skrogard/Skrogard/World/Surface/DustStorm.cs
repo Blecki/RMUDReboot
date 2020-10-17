@@ -26,7 +26,7 @@ namespace World.Surface
                     else
                         Link.SetProperty("link destination", "Surface.DustStorm");
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
     }

@@ -17,7 +17,7 @@ namespace StandardActionsModule
                 .Do((actor) =>
                 {
                     Core.EnqueuActorCommand(actor, "look");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("New players look rule.");
         }

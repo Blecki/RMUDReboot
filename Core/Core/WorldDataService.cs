@@ -31,7 +31,7 @@ namespace RMUD
             {
                 MudObject.SendMessage(Actor, "Named Object: " + Core.Database.NamedObjects.Count);
                 MudObject.SendMessage(Actor, "Rooms: " + Core.Database.NamedObjects.Where(obj => obj.Value.HasProperty("room type")).Count());
-                return SharpRuleEngine.PerformResult.Continue;
+                return PerformResult.Continue;
             });
         }
 
@@ -116,11 +116,11 @@ namespace RMUD
                         item.Item1.Location = newObject;
                     }
 
-                if (existing.Location != null)
+                if (existing.Location.HasValue(out var loc))
                 {
-                    var loc = existing.Location.RelativeLocationOf(existing);
-                    MudObject.Move(newObject, existing.Location, loc);
-                    MudObject.Move(existing, null, RelativeLocations.None);
+                    var relloc = loc.RelativeLocationOf(existing);
+                    MudObject.Move(newObject, loc, relloc);
+                    MudObject.Move(existing, null, RelativeLocations.NONE);
                 }
 
                 existing.Destroy(false);

@@ -2,7 +2,7 @@
 {
     public override void Initialize()
     {
-        GetProperty<NounList>("nouns").Add("RED");
+        AddNoun("RED");
         Locked = true;
         IsMatchingKey = k => object.ReferenceEquals(k, GetObject("palantine\\disambig_key"));
         Short = "red door";

@@ -46,7 +46,7 @@ public class Jupiter : RMUD.MudObject
 {
     public Jupiter()
     {
-        GetProperty<NounList>("nouns").Add("jupiter");
+        AddNoun("jupiter");
         Long = "Jupiter holds in his left hand a gleaming thunderbolt. It glows bright enough to light the entire chamber. In his right, he holds a chisel.";
 
         Value<RMUD.MudObject, RMUD.LightingLevel>("light level").Do(a => RMUD.LightingLevel.Bright);
@@ -59,16 +59,16 @@ public class Table : RMUD.MudObject
 {
     public Table()
     {
-        Container(RMUD.RelativeLocations.On | RMUD.RelativeLocations.Under, RMUD.RelativeLocations.On);
+        Container(RMUD.RelativeLocations.ON | RMUD.RelativeLocations.UNDER, RMUD.RelativeLocations.ON);
 
         Short = "ancient table";
         Long = "As the years have worn long the wood of this table has dried and shrunk, and split, and what was once a finely crafted table is now pitted and gouged. The top is still mostly smooth, from use but not from care.";
-        GetProperty<NounList>("nouns").Add("ancient", "table");
+        AddNoun("ancient", "table");
         SetProperty("article", "an");
 
-        Move(new RMUD.MudObject("matchbook", "A small book of matches with a thunderbolt on the cover."), this, RMUD.RelativeLocations.Under);
+        Move(new RMUD.MudObject("matchbook", "A small book of matches with a thunderbolt on the cover."), this, RMUD.RelativeLocations.UNDER);
 
-        Check<RMUD.MudObject, RMUD.MudObject>("can take?").Do((actor, thing) =>
+        this.CheckCanTake().Do((actor, thing) =>
         {
             SendMessage(actor, "It's far too heavy.");
             return CheckResult.Disallow;

@@ -21,7 +21,7 @@ public class lamp : MudObject
 {
     public lamp()
     {
-        GetProperty<NounList>("nouns").Add("gas", "lamp");
+        AddNoun("gas", "lamp");
         Long = "This little gas lamp somehow manages to fill the endless closet with light.";
 
         Value<MudObject, LightingLevel>("light level").Do(a => LightingLevel.Bright);

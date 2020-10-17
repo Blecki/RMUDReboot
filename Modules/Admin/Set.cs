@@ -30,7 +30,7 @@ namespace AdminModule
                     if (propertyInfo == null)
                     {
                         MudObject.SendMessage(actor, "That property does not exist.");
-                        return SharpRuleEngine.PerformResult.Stop;
+                        return PerformResult.Stop;
                     }
 
                     var realValue = propertyInfo.Converter.ConvertFromString(stringValue);
@@ -38,7 +38,7 @@ namespace AdminModule
                     _object.SetProperty(property_name, realValue);
                     
                     MudObject.SendMessage(actor, "Property set.");
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
     }

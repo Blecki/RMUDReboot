@@ -16,7 +16,7 @@ namespace RMUD
 
         private static RelativeLocations StringToRelativeLocation(String Str)
         {
-            RelativeLocations r = RelativeLocations.None;
+            RelativeLocations r = RelativeLocations.NONE;
             if (Enum.TryParse(Str, out r))
                 return r;
             else

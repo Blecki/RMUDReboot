@@ -18,8 +18,8 @@ namespace RMUD
         [Persist(typeof(ContainerSerializer))]
         public Dictionary<RelativeLocations, List<MudObject>> Lists { get; set; }
 
-        public RelativeLocations Supported = RelativeLocations.None;
-        public RelativeLocations Default = RelativeLocations.None;
+        public RelativeLocations Supported = RelativeLocations.NONE;
+        public RelativeLocations Default = RelativeLocations.NONE;
 
         public void Container(RelativeLocations Locations, RelativeLocations Default)
         {
@@ -51,7 +51,7 @@ namespace RMUD
         {
             if (Lists == null) return;
 
-            if (Locations == RelativeLocations.Default) Locations = Default;
+            if (Locations == RelativeLocations.DEFAULT) Locations = Default;
 
             if ((Supported & Locations) == Locations)
             {
@@ -104,7 +104,7 @@ namespace RMUD
 
         public bool Contains(MudObject Object, RelativeLocations Locations)
         {
-            if (Locations == RelativeLocations.Default) Locations = Default;
+            if (Locations == RelativeLocations.DEFAULT) Locations = Default;
 
             if (Lists != null)
                 if (Lists.ContainsKey(Locations))
@@ -122,7 +122,7 @@ namespace RMUD
                 foreach (var list in Lists)
                     if (list.Value.Contains(Object))
                         return list.Key;
-            return RelativeLocations.None;
+            return RelativeLocations.NONE;
         }
     }
 }

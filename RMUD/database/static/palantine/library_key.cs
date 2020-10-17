@@ -3,6 +3,6 @@
     public override void Initialize()
     {
         Short = "spade key";
-        GetProperty<NounList>("nouns").Add("KEY", "SPADE");
+        AddNoun("KEY", "SPADE");
     }
 }

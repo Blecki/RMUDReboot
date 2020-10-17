@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RMUD;
-using SharpRuleEngine;
 
 namespace StandardActionsModule
 {
@@ -45,7 +44,7 @@ namespace StandardActionsModule
 
             GlobalRules.Check<MudObject, MudObject>("can drop?")
                 .First
-                .When((actor, item) => actor.Contains(item, RelativeLocations.Worn))
+                .When((actor, item) => actor.Contains(item, RelativeLocations.WORN))
                 .Do((actor, item) =>
                 {
                     if (GlobalRules.ConsiderCheckRule("can remove?", actor, item) == CheckResult.Allow)
@@ -63,7 +62,8 @@ namespace StandardActionsModule
             {
                 MudObject.SendMessage(actor, "@you drop", target);
                 MudObject.SendExternalMessage(actor, "@they drop", actor, target);
-                MudObject.Move(target, actor.Location);
+                if (actor.Location.HasValue(out var loc))
+                    MudObject.Move(target, loc);
                 return PerformResult.Continue;
             }).Name("Default drop handler rule.");
         }

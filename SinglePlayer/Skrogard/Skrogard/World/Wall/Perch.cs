@@ -19,7 +19,7 @@ namespace World.Wall
             Perform<MudObject>("jump").Do((actor) =>
             {
                 SendMessage(actor, "And why shouldn't you jump? Oh, right. Because of the sudden stop.");
-                return SharpRuleEngine.PerformResult.Stop;
+                return PerformResult.Stop;
             });
         }
     }

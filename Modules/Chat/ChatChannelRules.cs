@@ -13,7 +13,7 @@ namespace ChatModule
             GlobalRules.DeclareCheckRuleBook<MudObject, MudObject>("can access channel?", "[Client, Channel] : Can the client access the chat channel?", "actor", "channel");
 
             GlobalRules.Check<MudObject, MudObject>("can access channel?")
-                .Do((client, channel) => SharpRuleEngine.CheckResult.Allow)
+                .Do((client, channel) => CheckResult.Allow)
                 .Name("Default allow channel access rule.");
 
             GlobalRules.Perform<MudObject>("player joined")
@@ -21,7 +21,7 @@ namespace ChatModule
                 {
                     foreach (var c in ChatChannel.ChatChannels.Where(c => c.GetProperty<String>("short") == "OOC"))
                         c.Subscribers.Add(player);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Subscribe new players to OOC rule.");
 
@@ -29,7 +29,7 @@ namespace ChatModule
                 .Do(player =>
                 {
                     ChatChannel.RemoveFromAllChannels(player);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Unsubscribe players from all channels when they leave rule.");
 
@@ -43,7 +43,7 @@ namespace ChatModule
                 .Do((actor, channel) =>
                 {
                     MudObject.SendMessage(actor, "You must have a rank of 100 or greater to access this channel.");
-                    return SharpRuleEngine.CheckResult.Disallow;
+                    return CheckResult.Disallow;
                 });
             ChatChannel.ChatChannels.Add(senate);
         }

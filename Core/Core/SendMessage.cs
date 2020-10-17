@@ -68,14 +68,14 @@ namespace RMUD
             Core.OutputQueryTriggered = true;
 
             if (Actor == null) return;
-            if (Actor.Location == null) return;
 
-            foreach (var other in Actor.Location.EnumerateObjects().Where(a => !Object.ReferenceEquals(a, Actor)))
-            {
-                var client = other.GetProperty<Client>("client");
-                if (client != null)
-                    Core.PendingMessages.Add(new PendingMessage(client, Core.FormatMessage(other, Message, MentionedObjects)));
-            }
+            if (Actor.Location.HasValue(out var loc))
+                foreach (var other in loc.EnumerateObjects().Where(a => !Object.ReferenceEquals(a, Actor)))
+                {
+                    var client = other.GetProperty<Client>("client");
+                    if (client != null)
+                        Core.PendingMessages.Add(new PendingMessage(client, Core.FormatMessage(other, Message, MentionedObjects)));
+                }
         }
 
         public static void SendMessage(Client Client, String Message, params Object[] MentionedObjects)

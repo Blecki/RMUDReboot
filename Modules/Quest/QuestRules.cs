@@ -34,7 +34,7 @@ namespace QuestModule
                         }
                     }
 
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Check quest status after acting rule.");
 

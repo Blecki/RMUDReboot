@@ -20,9 +20,9 @@ namespace RMUD
         public static bool ObjectContainsObject(MudObject Super, MudObject Sub)
         {
             if (Object.ReferenceEquals(Super, Sub)) return false; //Objects can't contain themselves...
-            if (Sub.Location == null) return false;
-            if (Object.ReferenceEquals(Super, Sub.Location)) return true;
-            return ObjectContainsObject(Super, Sub.Location);
+            if (!Sub.Location.HasValue(out var loc)) return false;
+            if (Object.ReferenceEquals(Super, loc)) return true;
+            return ObjectContainsObject(Super, loc);
         }
     }
 }

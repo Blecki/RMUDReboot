@@ -13,7 +13,7 @@ namespace Minimum
             Title = "Skrogard";
             DatabaseNameSpace = "World";
             Description = "The Skrogard setting for NaMuBuMo.";
-            Modules = new List<string>(new String[] { "StandardActionsModule.dll", "ConversationModule.dll", "QuestModule.dll", "AliasModule.dll", "IntroductionModule.dll", "AdminModule.dll", "ClothingModule.dll" });
+            Modules = new List<string>(new String[] { "StandardActionsModule.dll", "ConversationModule.dll", "QuestModule.dll", "AliasModule.dll", "IntroductionModule.dll", "AdminModule.dll", "ClothingModule.dll", "CombatModule.dll" });
         }
     }
 }

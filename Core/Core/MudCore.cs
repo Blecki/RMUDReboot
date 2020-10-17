@@ -20,7 +20,7 @@ namespace RMUD
                 .Do((actor) =>
                 {
                     MudObject.Move(actor, MudObject.GetObject(Core.SettingsObject.NewPlayerStartRoom));
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 })
                 .Name("Move to start room rule.");
         }

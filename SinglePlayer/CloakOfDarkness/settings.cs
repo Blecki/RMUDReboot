@@ -15,7 +15,7 @@ namespace CloakOfDarkness
                 .Do((match, actor) =>
                     {
                         Console.WriteLine();
-                        return SharpRuleEngine.PerformResult.Continue;
+                        return PerformResult.Continue;
                     });
 
             GlobalRules.Perform<MudObject>("after every command")
@@ -23,7 +23,7 @@ namespace CloakOfDarkness
                 .Do((actor) =>
                 {
                     Console.WriteLine();
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 });
         }
 

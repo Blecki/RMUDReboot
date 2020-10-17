@@ -21,12 +21,12 @@ namespace QuestModule
                     if (actor.GetProperty<MudObject>("offered-quest") == null)
                     {
                         MudObject.SendMessage(actor, "Nobody has offered you a quest.");
-                        return SharpRuleEngine.PerformResult.Stop;
+                        return PerformResult.Stop;
                     }
                     else
                     {
                         match.Upsert("QUEST", actor.GetProperty<MudObject>("offered-quest"));
-                        return SharpRuleEngine.PerformResult.Continue;
+                        return PerformResult.Continue;
                     }
                 }, "the must have been offered a quest, and bookeeping rule.")
                 .ProceduralRule((match, actor) =>
@@ -35,9 +35,9 @@ namespace QuestModule
                     {
                         MudObject.SendMessage(actor, "The quest is no longer available.");
                         actor.SetProperty("offered-quest", null);
-                        return SharpRuleEngine.PerformResult.Stop;
+                        return PerformResult.Stop;
                     }
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 }, "the quest must be available rule.")
                 .ProceduralRule((match, actor) =>
                 {
@@ -46,7 +46,7 @@ namespace QuestModule
 
                     actor.SetProperty("active-quest", actor.GetProperty<MudObject>("offered-quest"));
                     actor.SetProperty("offered-quest", null);
-                    return SharpRuleEngine.PerformResult.Continue;
+                    return PerformResult.Continue;
                 }, "the any active quest must be abandoned rule.")
                 .Perform("quest accepted", "ACTOR", "QUEST");
         }
