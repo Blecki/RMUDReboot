@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMUD
+namespace SharpRuleEngine
 {
     /// <summary>
     /// Anything that might supply rules for consideration must implement RuleSource. Any object implementing RuleSource
     /// passed as an argument to a consider or value rule function will have it's rules considered when executing the
     /// rulebook.
     /// </summary>
-    public partial class MudObject
+    public partial class RuleSource
     {
         public RuleSet Rules { get; private set; }
 
@@ -21,29 +21,23 @@ namespace RMUD
         /// allows rooms to define rules that affect actions that only involve their contents. MudObject's are implemented
         /// such that their location is their linked rule source.
         /// </summary>
-        public virtual MudObject LinkedRuleSource { get { return null; } }
+        public virtual RuleSource LinkedRuleSource { get { return null; } }
 
-        public virtual RuleEngine GlobalRules { get { return Core.GlobalRules; } }
+        public virtual RuleEngine GlobalRules { get { return SharpRuleEngine.GlobalRules.RuleEngine; } }
 
         public PerformResult ConsiderPerformRule(String Name, params Object[] Arguments)
         {
-            if (GlobalRules != null)
-                return GlobalRules.ConsiderPerformRule(Name, Arguments);
-            return PerformResult.Continue;
+            return GlobalRules.ConsiderPerformRule(Name, Arguments);
         }
 
         public CheckResult ConsiderCheckRule(String Name, params Object[] Arguments)
         {
-            if (GlobalRules != null)
-                return GlobalRules.ConsiderCheckRule(Name, Arguments);
-            return CheckResult.Allow;
+            return GlobalRules.ConsiderCheckRule(Name, Arguments);
         }
 
         public RT ConsiderValueRule<RT>(String Name, params Object[] Arguments)
         {
-            if (GlobalRules != null)
-                return GlobalRules.ConsiderValueRule<RT>(Name, Arguments);
-            return default(RT);
+            return GlobalRules.ConsiderValueRule<RT>(Name, Arguments);
         }
 
         public void DeleteRule(String RuleBookName, String RuleID)
