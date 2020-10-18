@@ -13,7 +13,7 @@ namespace World.Wilderness
 
             OpenLink(Direction.NORTHWEST, "Wilderness.FlowerTrail");
 
-            Core.Move(GetObject("Wilderness.MotherTree"), this);
+            Core.Move(Core.GetObject("Wilderness.MotherTree"), this);
         }
     }
 }

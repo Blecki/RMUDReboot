@@ -105,7 +105,7 @@ namespace AdminModule
             foreach (var link in Location.EnumerateObjects().Where(t => t.HasProperty("link direction")))
             {
                 var destinationName = link.GetProperty<string>("link destination");
-                var destination = MudObject.GetObject(destinationName);
+                var destination = Core.GetObject(destinationName);
                 var direction = link.GetProperty<RMUD.Direction>("link direction");
                 var vec = Link.GetAsVector(direction);
                 PopulateGrid(destination, X + vec.X, Y + vec.Y);
@@ -179,7 +179,7 @@ namespace AdminModule
                 foreach (var link in Location.EnumerateObjects().Where(t => t.HasProperty("link direction")))
                 {
                     var destinationName = link.GetProperty<string>("link destination");
-                    var destination = MudObject.GetObject(destinationName);
+                    var destination = Core.GetObject(destinationName);
                     var direction = link.GetProperty<RMUD.Direction>("link direction");
 
                     if (Link.IsBonusDirection(direction))

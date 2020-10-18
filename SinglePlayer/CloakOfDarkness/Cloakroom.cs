@@ -33,7 +33,7 @@ to the game, they would automatically be described correctly as well.]
 
             OpenLink(Direction.EAST, "Foyer");
 
-            Core.Move(MudObject.GetObject("Hook"), this);
+            Core.Move(Core.GetObject("Hook"), this);
         }
     }
 

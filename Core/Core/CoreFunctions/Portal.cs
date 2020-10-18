@@ -8,7 +8,7 @@ namespace RMUD
     /// <summary>
     /// Contains helper functions for the implementation of portals. (For example, doors.)
     /// </summary>
-    public static class Portal
+    public partial class Core
     {
         public static void AtStartup(RuleEngine GlobalRules)
         {
@@ -32,7 +32,7 @@ namespace RMUD
             // Every object added to a room as a portal will be given the 'portal?' property, with a value of true.
             if (Portal.GetProperty<bool>("portal?") == false) return null; // Not a portal.
 
-            var destination = MudObject.GetObject(Portal.GetProperty<String>("link destination"));
+            var destination = Core.GetObject(Portal.GetProperty<String>("link destination"));
             if (destination == null) return null; // Link is malformed in some way.
             
             var direction = Portal.GetProperty<Direction>("link direction");

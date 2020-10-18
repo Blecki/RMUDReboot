@@ -10,22 +10,22 @@ namespace Minimum
     public static class Game
     {
         public static RMUD.SinglePlayer.Driver Driver { get; set; }
-        internal static RMUD.MudObject Player { get { return Driver.Player; } }
+        internal static MudObject Player { get { return Driver.Player; } }
 
-        public static void SwitchPlayerCharacter(RMUD.MudObject NewCharacter)
+        public static void SwitchPlayerCharacter(MudObject NewCharacter)
         {
             Driver.SwitchPlayerCharacter(NewCharacter);
         }
 
-        public static void AtStartup(RMUD.RuleEngine GlobalRules)
+        public static void AtStartup(RuleEngine GlobalRules)
         {
             GlobalRules.Perform<Player>("singleplayer game started")
                 .First
                 .Do((actor) =>
                 {
-                    SwitchPlayerCharacter(RMUD.MudObject.GetObject("Player"));
-                    RMUD.Core.Move(Player, RMUD.MudObject.GetObject("Start"));
-                    RMUD.Core.EnqueuActorCommand(Player, "look");
+                    SwitchPlayerCharacter(Core.GetObject("Player"));
+                    Core.Move(Player, Core.GetObject("Start"));
+                    Core.EnqueuActorCommand(Player, "look");
         
                     return PerformResult.Stop;
                 });

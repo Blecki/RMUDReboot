@@ -15,7 +15,7 @@ namespace RMUD
 
             GlobalRules.Perform("heartbeat").Do(() =>
                 {
-                    MudObject.TimeOfDay += Core.SettingsObject.ClockAdvanceRate;
+                    Core.TimeOfDay += Core.SettingsObject.ClockAdvanceRate;
                     return PerformResult.Continue;
                 }).Name("Advance clock on heartbeat rule");
         }
@@ -82,7 +82,7 @@ namespace RMUD
                 if (timerFireTime <= now)
                 {
                     ActiveTimers[i].Action();
-                    Core.SendPendingMessages();
+                    SendPendingMessages();
                     ActiveTimers.RemoveAt(i);
                 }
                 else

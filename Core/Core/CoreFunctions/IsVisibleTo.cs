@@ -55,7 +55,7 @@ namespace RMUD
         /// <returns></returns>
         public static CheckResult CheckIsHolding(MudObject Actor, MudObject Item)
         {
-            if (!MudObject.ObjectContainsObject(Actor, Item))
+            if (!ObjectContainsObject(Actor, Item))
             {
                 SendMessage(Actor, "@dont have that");
                 return CheckResult.Disallow;

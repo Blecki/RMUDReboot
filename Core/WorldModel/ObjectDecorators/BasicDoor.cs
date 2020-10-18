@@ -9,24 +9,25 @@ namespace RMUD
     /// A basic door object. Doors are openable. When used as a portal, a door will automatically sync it's open state
     /// with the opposite side of the portal.
     /// </summary>
-    public class BasicDoor : MudObject
+    public partial class ObjectDecorator
     {
-        public BasicDoor()
+        public static void BasicDoor(MudObject This)
         {
-            AddNoun("DOOR");
+            This.AddNoun("DOOR");
 
             // Doors can be referred to as 'the open door' or 'the closed door' as appropriate.
-            AddNoun("CLOSED").When(actor => !GetProperty<bool>("open?"));
-            AddNoun("OPEN").When(actor => GetProperty<bool>("open?"));
+            This.AddNoun("CLOSED").When(actor => !This.GetProperty<bool>("open?"));
+            This.AddNoun("OPEN").When(actor => This.GetProperty<bool>("open?"));
 
-            SetProperty("open?", false);
-            SetProperty("openable?", true);
+            This.SetProperty("open?", false);
+            This.SetProperty("openable?", true);
 
-            Check<MudObject, MudObject>("can open?")
+            // Maybe some global rules so they aren't duped onto every door?
+            This.Check<MudObject, MudObject>("can open?")
                 .Last
                 .Do((a, b) =>
                 {
-                    if (GetProperty<bool>("open?"))
+                    if (This.GetProperty<bool>("open?"))
                     {
                         Core.SendMessage(a, "@already open");
                         return CheckResult.Disallow;
@@ -35,11 +36,11 @@ namespace RMUD
                 })
                 .Name("Can open doors rule.");
 
-            Check<MudObject, MudObject>("can close?")
+            This.Check<MudObject, MudObject>("can close?")
                 .Last
                 .Do((a, b) =>
                 {
-                    if (!GetProperty<bool>("open?"))
+                    if (!This.GetProperty<bool>("open?"))
                     {
                         Core.SendMessage(a, "@already closed");
                         return CheckResult.Disallow;
@@ -48,19 +49,19 @@ namespace RMUD
                 })
                 .Name("Can close doors rule.");
 
-            Perform<MudObject, MudObject>("opened").Do((a, b) =>
+            This.Perform<MudObject, MudObject>("opened").Do((a, b) =>
             {
-                SetProperty("open?", true);
+                This.SetProperty("open?", true);
 
                 // Doors are usually two-sided. If there is an opposite side, we need to open it and emit appropriate
                 // messages.
-                var otherSide = Portal.FindOppositeSide(this);
+                var otherSide = Core.FindOppositeSide(This);
                 if (otherSide != null)
                 {
                     otherSide.SetProperty("open?", true);
                     
                     // This message is defined in the standard actions module. It is perhaps a bit coupled?
-                    Core.SendLocaleMessage(otherSide, "@they open", a, this);
+                    Core.SendLocaleMessage(otherSide, "@they open", a, This);
                     Core.MarkLocaleForUpdate(otherSide);
                 }
 
@@ -68,17 +69,17 @@ namespace RMUD
             })
             .Name("Open a door rule");
 
-            Perform<MudObject, MudObject>("close").Do((a, b) =>
+            This.Perform<MudObject, MudObject>("close").Do((a, b) =>
             {
-                SetProperty("open?", false);
+                This.SetProperty("open?", false);
 
                 // Doors are usually two-sided. If there is an opposite side, we need to close it and emit
                 // appropriate messages.
-                var otherSide = Portal.FindOppositeSide(this);
+                var otherSide = Core.FindOppositeSide(This);
                 if (otherSide != null)
                 {
                     otherSide.SetProperty("open?", false);
-                    Core.SendLocaleMessage(otherSide, "@they close", a, this);
+                    Core.SendLocaleMessage(otherSide, "@they close", a, This);
                     Core.MarkLocaleForUpdate(otherSide);
                 }
 

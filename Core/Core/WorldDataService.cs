@@ -106,7 +106,7 @@ namespace RMUD
 
                 var newObject = Activator.CreateInstance(existing.GetType()) as MudObject;
                 NamedObjects.Upsert(Path, newObject);
-                MudObject.InitializeObject(newObject);
+                Core.InitializeObject(newObject);
 
                 // Any object marked with the 'preserve?' flag should be kept. Other objects should be discarded.
                 foreach (var item in existing.EnumerateObjectsAndRelloc())

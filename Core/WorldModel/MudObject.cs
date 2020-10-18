@@ -138,23 +138,5 @@ namespace RMUD
                     if (child.State != ObjectState.Destroyed)
                         child.Destroy(true);
         }
-
-        public static MudObject GetObject(String Path)
-        {
-            return Core.Database.GetObject(Path);
-        }
-
-        public static MudObject InitializeObject(MudObject Object)
-        {
-            Object.Initialize();
-            Object.State = ObjectState.Alive;
-            Core.GlobalRules.ConsiderPerformRule("update", Object);
-            return Object;
-        }
-
-        public static T GetObject<T>(String Path) where T: MudObject
-        {
-            return GetObject(Path) as T;
-        }
     }
 }

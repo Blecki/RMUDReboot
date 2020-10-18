@@ -70,7 +70,7 @@ namespace RMUD.SinglePlayer
                 new RMUD.SinglePlayer.CompiledDatabase(DatabaseAssembly, gameInfo.DatabaseNameSpace),
                 assemblies.ToArray()))
             {
-                Player = RMUD.MudObject.GetObject(RMUD.Core.SettingsObject.PlayerBaseObject);
+                Player = RMUD.Core.GetObject(RMUD.Core.SettingsObject.PlayerBaseObject);
                 Player.SetProperty("command handler", Core.ParserCommandHandler);
                 Client = new DummyClient(Output);
                 RMUD.Core.TiePlayerToClient(Client, Player);

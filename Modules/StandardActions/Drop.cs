@@ -34,7 +34,7 @@ namespace StandardActionsModule
 
             GlobalRules.Check<MudObject, MudObject>("can drop?")
                 .First
-                .When((actor, item) => !MudObject.ObjectContainsObject(actor, item))
+                .When((actor, item) => !Core.ObjectContainsObject(actor, item))
                 .Do((actor, item) =>
                 {
                     Core.SendMessage(actor, "@dont have that");

@@ -6,7 +6,7 @@
 
         bool Active = false;
 
-        Value<MudObject, MudObject, bool>("quest available?").Do((actor, quest) => !Active && IsVisibleTo(actor, MudObject.GetObject("palantine/soranus")));
+        Value<MudObject, MudObject, bool>("quest available?").Do((actor, quest) => !Active && IsVisibleTo(actor, GetObject("palantine/soranus")));
 
         Value<MudObject, MudObject, bool>("quest complete?").Do((actor, quest) =>
         {

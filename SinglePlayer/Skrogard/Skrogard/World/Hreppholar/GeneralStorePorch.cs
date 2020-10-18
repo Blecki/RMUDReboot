@@ -13,7 +13,7 @@ namespace World.Hreppholar
 
             OpenLink(Direction.NORTH, "Hreppholar.Square");
             OpenLink(Direction.EAST, "Hreppholar.BackAlley");
-            OpenLink(Direction.SOUTH, "Hreppholar.GeneralStore", GetObject("Hreppholar.GeneralStoreDoor@outside"));
+            OpenLink(Direction.SOUTH, "Hreppholar.GeneralStore", Core.GetObject("Hreppholar.GeneralStoreDoor@outside"));
         }
     }
 }

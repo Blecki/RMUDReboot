@@ -30,7 +30,7 @@ namespace ClothingModule
             GlobalRules.DeclarePerformRuleBook<MudObject, MudObject>("worn", "[Actor, Item] : Handle the actor wearing the item.", "actor", "item");
 
             GlobalRules.Check<MudObject, MudObject>("can wear?")
-                .When((a, b) => !MudObject.ObjectContainsObject(a, b))
+                .When((a, b) => !Core.ObjectContainsObject(a, b))
                 .Do((actor, item) =>
                 {
                     Core.SendMessage(actor, "@dont have that");

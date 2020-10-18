@@ -88,9 +88,9 @@ public class kuz_book : MudObject
 
     public kuz_book()
     {
-        var title = TitlesA[Random.Next(0, TitlesA.Count)] + " " + TitlesB[Random.Next(0, TitlesB.Count)];
-        var volume = Volumes[Random.Next(0, Volumes.Count)];
-        var cover = Covers[Random.Next(0, Covers.Count)];
+        var title = TitlesA[Core.Random.Next(0, TitlesA.Count)] + " " + TitlesB[Core.Random.Next(0, TitlesB.Count)];
+        var volume = Volumes[Core.Random.Next(0, Volumes.Count)];
+        var cover = Covers[Core.Random.Next(0, Covers.Count)];
         Short = cover + " copy of " + title;
         if (!System.String.IsNullOrEmpty(volume)) Short += ", " + volume;
         AddNoun("BOOK");

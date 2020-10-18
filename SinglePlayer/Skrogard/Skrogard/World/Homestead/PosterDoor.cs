@@ -8,7 +8,7 @@ namespace World.Homestead
         {
             AddNoun("poster");
             Locked = true;
-            IsMatchingKey = k => object.ReferenceEquals(k, GetObject("Homestead.SkullKey"));
+            IsMatchingKey = k => object.ReferenceEquals(k, Core.GetObject("Homestead.SkullKey"));
             Short = "poster door";
             Long = "This metal door has a poster of a blood mech on it. The blood mech has a skull for a head.";
         }

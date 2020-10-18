@@ -21,7 +21,7 @@ namespace World.Surface
             this.PerformGo()
                 .Do((Actor, Link) =>
                 {
-                    if (Random.Next(10) == 0)
+                    if (Core.Random.Next(10) == 0)
                         Link.SetProperty("link destination", "Surface.Dustbowl");
                     else
                         Link.SetProperty("link destination", "Surface.DustStorm");

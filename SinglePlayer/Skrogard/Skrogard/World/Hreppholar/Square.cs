@@ -17,7 +17,7 @@ namespace World.Hreppholar
             OpenLink(Direction.WEST, "Hreppholar.WestStreet");
             OpenLink(Direction.SOUTH, "Hreppholar.GeneralStorePorch");
 
-            Core.Move(GetObject("Hreppholar.Fountain"), this);
+            Core.Move(Core.GetObject("Hreppholar.Fountain"), this);
         }
     }
 

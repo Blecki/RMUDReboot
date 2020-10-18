@@ -13,7 +13,7 @@ namespace World.Homestead
             SetProperty("long", "Carved from the rock, this room is amazingly cool. The walls are very slightly damp, and the floor uneven. Shelves, empty save the dust, line the walls.");
 
             OpenLink(Direction.UP, "Homestead.SittingRoom");
-            OpenLink(Direction.EAST, "Homestead.Balcony", GetObject("Homestead.StormDoor@inside"));
+            OpenLink(Direction.EAST, "Homestead.Balcony", Core.GetObject("Homestead.StormDoor@inside"));
 
         }
     }

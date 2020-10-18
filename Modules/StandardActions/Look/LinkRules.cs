@@ -19,7 +19,7 @@ namespace StandardActionsModule.Look
                         return PerformResult.Stop;
                     }
 
-                    var destination = MudObject.GetObject(item.GetProperty<String>("link destination"));
+                    var destination = Core.GetObject(item.GetProperty<String>("link destination"));
                     if (destination == null)
                     {
                         Core.SendMessage(viewer, "@bad link");

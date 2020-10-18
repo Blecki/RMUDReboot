@@ -25,7 +25,7 @@ namespace World.Homestead
             this.Response("plasma", (actor, nps, topic) =>
             {
                 Core.SendLocaleMessage(actor, "\"The red stuff? In the bags? You know what plasma is, don't you?\"");
-                var quest = GetObject("Homestead.PlasmaQuest");
+                var quest = Core.GetObject("Homestead.PlasmaQuest");
                 if (GlobalRules.ConsiderValueRule<bool>("quest available?", actor, quest))
                 {
                     Core.SendMessage(actor, "\"Think you can grab some for me?\" <the0> asks.", this);

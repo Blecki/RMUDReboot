@@ -19,7 +19,7 @@ namespace RMUD
                 .First
                 .Do((actor) =>
                 {
-                    Core.Move(actor, MudObject.GetObject(Core.SettingsObject.NewPlayerStartRoom));
+                    Core.Move(actor, Core.GetObject(Core.SettingsObject.NewPlayerStartRoom));
                     return PerformResult.Continue;
                 })
                 .Name("Move to start room rule.");

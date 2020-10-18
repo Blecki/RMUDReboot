@@ -14,7 +14,7 @@ namespace World.Caves
 
             AddScenery("The pod is beat up and a bit rusty. It looks very old.", "pod");
 
-            OpenLink(Direction.EAST, "Homestead.Workshop", GetObject("Homestead.WorkshopDoor@inside"));
+            OpenLink(Direction.EAST, "Homestead.Workshop", Core.GetObject("Homestead.WorkshopDoor@inside"));
             OpenLink(Direction.WEST, "Caves.Lake");
         }
     }

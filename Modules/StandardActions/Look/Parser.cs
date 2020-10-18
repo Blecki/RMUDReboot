@@ -74,7 +74,7 @@ namespace StandardActionsModule.Look
                                     var direction = match["DIRECTION"] as Direction?;
                                     var link = loc.EnumerateObjects().FirstOrDefault(thing => thing.GetProperty<bool>("portal?") && thing.GetProperty<Direction>("link direction") == direction.Value);
                                     match.Upsert("LINK", link);
-                                    var destination = MudObject.GetObject(link.GetProperty<String>("link destination"));
+                                    var destination = Core.GetObject(link.GetProperty<String>("link destination"));
                                     if (destination == null)
                                     {
                                         Core.SendMessage(actor, "@bad link");

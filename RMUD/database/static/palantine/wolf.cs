@@ -22,7 +22,7 @@
             {
                 SendLocaleMessage(this, "The wolf snatches up the entrails.");
                 IsFed = true;
-                Move(entrails, MudObject.GetObject("palantine/soranus"), RelativeLocations.WORN);
+                Move(entrails, GetObject("palantine/soranus"), RelativeLocations.WORN);
                 return PerformResult.Stop;
             });
 

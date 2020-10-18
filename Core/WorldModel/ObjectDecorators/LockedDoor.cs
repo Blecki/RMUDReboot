@@ -12,7 +12,7 @@ namespace RMUD
     /// TODO: "Locked" should be a property.
     /// TODO: Sync locked state with opposite side of portal
     /// </summary>
-	public class LockedDoor : BasicDoor
+	public class LockedDoor : MudObject
 	{
         public Func<MudObject, bool> IsMatchingKey;
 
@@ -20,6 +20,8 @@ namespace RMUD
 
 		public LockedDoor()
 		{
+            ObjectDecorator.BasicDoor(this);
+
 			Locked = true;
 
             SetProperty("lockable?", true);

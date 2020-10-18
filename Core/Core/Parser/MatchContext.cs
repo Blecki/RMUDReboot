@@ -49,7 +49,7 @@ namespace RMUD
                 if (CachedObjectsInScope != null) return CachedObjectsInScope;
                 
                 // Exclude the actor whose scope we are calculating from that scope.
-                CachedObjectsInScope = new List<MudObject>(MudObject.EnumerateVisibleTree(Core.FindLocale(ExecutingActor)).Where(thing => !Object.ReferenceEquals(thing, ExecutingActor)));
+                CachedObjectsInScope = new List<MudObject>(Core.EnumerateVisibleTree(Core.FindLocale(ExecutingActor)).Where(thing => !Object.ReferenceEquals(thing, ExecutingActor)));
 
                 return CachedObjectsInScope;
             }

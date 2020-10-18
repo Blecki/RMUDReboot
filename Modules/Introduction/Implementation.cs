@@ -88,7 +88,7 @@ namespace IntroductionModule
                 {
                     var locale = Core.FindLocale(introductee);
                     if (locale != null)
-                        foreach (var player in MudObject.EnumerateObjectTree(locale).Where(o => o.GetProperty<bool>("actor?")))
+                        foreach (var player in Core.EnumerateObjectTree(locale).Where(o => o.GetProperty<bool>("actor?")))
                             GlobalRules.ConsiderPerformRule("introduce to", introductee, player);
 
                     Core.SendExternalMessage(actor, "^<the0> introduces <the1>.", actor, introductee);
@@ -104,7 +104,7 @@ namespace IntroductionModule
                 {
                     var locale = Core.FindLocale(introductee);
                     if (locale != null)
-                        foreach (var player in MudObject.EnumerateObjectTree(locale).Where(o => o.GetProperty<bool>("actor?")))
+                        foreach (var player in Core.EnumerateObjectTree(locale).Where(o => o.GetProperty<bool>("actor?")))
                             GlobalRules.ConsiderPerformRule("introduce to", introductee, player);
 
                     Core.SendExternalMessage(introductee, "^<the0> introduces themselves.", introductee);

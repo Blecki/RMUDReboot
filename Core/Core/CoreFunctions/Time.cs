@@ -12,7 +12,7 @@ namespace RMUD
         Dark = 0
     }
 
-    public partial class MudObject
+    public partial class Core
     {
         /// <summary>
         /// This should factor in the time of day, and the phase of the moon if at night, to determine if there

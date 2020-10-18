@@ -12,7 +12,7 @@ namespace World.Homestead
             SetProperty("short", "Boy's Bed Room");
             SetProperty("long", "An odor lingers in the air about this room. The bed is a thin piece of foam on metal slats, no spread. Piles of moulding clothes sit in the corners. A thick layer of dust clings to the floor, now marred only by your footprints.");
 
-            OpenLink(Direction.SOUTH, "Homestead.Hallway", GetObject("Homestead.PosterDoor@inside"));
+            OpenLink(Direction.SOUTH, "Homestead.Hallway", Core.GetObject("Homestead.PosterDoor@inside"));
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RMUD
 {
-    public partial class MudObject
+    public partial class Core
     {
         private static IEnumerable<MudObject> _enumerateObjectTree(MudObject C)
         {

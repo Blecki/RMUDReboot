@@ -19,7 +19,6 @@ namespace CombatModule
 
     public static class System
     {
-        public static Random Random = new Random();
         public static DiceGrammar DiceGrammar = new DiceGrammar();
         public static String DefaultWeapon = "";
 
@@ -32,7 +31,7 @@ namespace CombatModule
             var r = DiceGrammar.Root.Parse(itr);
 
             if (r.ResultType == Ancora.ResultType.Success)
-                return DiceGrammar.CalculateDieRoll(r.Node, Random);
+                return DiceGrammar.CalculateDieRoll(r.Node, Core.Random);
             else
                 return 1;
         }
@@ -42,7 +41,7 @@ namespace CombatModule
             if (String.IsNullOrEmpty(DefaultWeapon))
                 return new MudObject();
             else
-                return MudObject.GetObject(DefaultWeapon);
+                return Core.GetObject(DefaultWeapon);
         }
 
         public static void MeleeAttack(MudObject Attacker, MudObject Target)

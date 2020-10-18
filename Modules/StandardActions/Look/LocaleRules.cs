@@ -140,7 +140,7 @@ namespace StandardActionsModule.Look
                             if (!link.GetProperty<bool>("link anonymous?"))
                                 builder.Append(" " + Core.FormatMessage(viewer, Core.GetMessage("through"), link));
 
-                            var destinationRoom = MudObject.GetObject(link.GetProperty<String>("link destination"));
+                            var destinationRoom = Core.GetObject(link.GetProperty<String>("link destination"));
                             if (destinationRoom != null)
                                 builder.Append(" " + Core.FormatMessage(viewer, Core.GetMessage("to"), destinationRoom));
 

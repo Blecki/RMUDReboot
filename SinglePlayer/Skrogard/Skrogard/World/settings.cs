@@ -30,10 +30,10 @@ namespace World
                 .First
                 .Do((actor) =>
                 {
-                    Skrogard.Game.SwitchPlayerCharacter(RMUD.MudObject.GetObject("Player"));
-                    RMUD.Core.Move(Skrogard.Game.Player, RMUD.MudObject.GetObject("Caves.Pod"));
-                    RMUD.Core.EnqueuActorCommand(Skrogard.Game.Player, "look");
-                    RMUD.Core.ProcessCommands();
+                    Skrogard.Game.SwitchPlayerCharacter(Core.GetObject("Player"));
+                    Core.Move(Skrogard.Game.Player, Core.GetObject("Caves.Pod"));
+                    Core.EnqueuActorCommand(Skrogard.Game.Player, "look");
+                    Core.ProcessCommands();
                     return PerformResult.Continue;
                 });
         }

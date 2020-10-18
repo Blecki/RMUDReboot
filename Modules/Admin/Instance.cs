@@ -20,7 +20,7 @@ namespace AdminModule
                 .ProceduralRule((match, actor) =>
                 {
                     var path = match["PATH"].ToString();
-                    var newObject = MudObject.GetObject(path + "@" + Guid.NewGuid().ToString());
+                    var newObject = Core.GetObject(path + "@" + Guid.NewGuid().ToString());
                     if (newObject == null) Core.SendMessage(actor, "Failed to instance " + path + ".");
                     else
                     {

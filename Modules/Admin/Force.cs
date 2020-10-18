@@ -24,7 +24,7 @@ namespace AdminModule
                     {
                         if (match.ContainsKey("PATH"))
                         {
-                            var target = MudObject.GetObject(match["PATH"].ToString());
+                            var target = Core.GetObject(match["PATH"].ToString());
                             if (target == null)
                             {
                                 Core.SendMessage(actor, "I can't find whomever it is you want to submit to your foolish whims.");

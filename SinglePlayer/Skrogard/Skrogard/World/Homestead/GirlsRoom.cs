@@ -12,9 +12,9 @@ namespace World.Homestead
             SetProperty("short", "Girl's Bed Room");
             SetProperty("long", "Every surface in this tiny bedroom is scribed with swirling leaves and bursting flowers, and a great deal of dust. Save for the dust, the floor is immaculate. The bed is neatly made, the dresser clear. A few wilted stuffed animals sit on the bed.");
 
-            OpenLink(Direction.NORTH, "Homestead.Hallway", GetObject("Homestead.FlowerDoor@inside"));
+            OpenLink(Direction.NORTH, "Homestead.Hallway", Core.GetObject("Homestead.FlowerDoor@inside"));
 
-            Core.Move(GetObject("Homestead.Bed"), this);
+            Core.Move(Core.GetObject("Homestead.Bed"), this);
         }
     }
 
@@ -36,7 +36,7 @@ namespace World.Homestead
                 return CheckResult.Disallow;
             });
 
-            Core.Move(GetObject("Homestead.Skull"), this, RelativeLocations.ON);
+            Core.Move(Core.GetObject("Homestead.Skull"), this, RelativeLocations.ON);
         }
     }
 }

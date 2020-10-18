@@ -33,7 +33,7 @@ namespace CombatModule
             GlobalRules.Check<MudObject, MudObject>("can wield?").Do((a, b) => CheckResult.Allow).Name("Improvised weapon rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can wield?")
-                .When((a, b) => !MudObject.ObjectContainsObject(a, b))
+                .When((a, b) => !Core.ObjectContainsObject(a, b))
                 .Do((actor, item) =>
                 {
                     Core.SendMessage(actor, "@dont have that");

@@ -27,7 +27,7 @@ namespace RMUD
                     if (roomType == RMUD.RoomType.Exterior)
                         light = AmbientExteriorLightingLevel;
 
-                    foreach (var item in MudObject.EnumerateVisibleTree(room))
+                    foreach (var item in Core.EnumerateVisibleTree(room))
                     {
                         var lightingLevel = GlobalRules.ConsiderValueRule<LightingLevel>("light level", item);
                         if (lightingLevel > light) light = lightingLevel;

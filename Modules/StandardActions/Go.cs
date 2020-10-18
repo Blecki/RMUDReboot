@@ -98,7 +98,7 @@ namespace StandardActionsModule
             GlobalRules.Perform<MudObject, MudObject>("go")
                 .Do((actor, link) =>
                 {
-                    var destination = MudObject.GetObject(link.GetProperty<String>("link destination"));
+                    var destination = Core.GetObject(link.GetProperty<String>("link destination"));
                     if (destination == null)
                     {
                         Core.SendMessage(actor, "@bad link");

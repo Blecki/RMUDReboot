@@ -53,7 +53,7 @@ namespace RMUD.SinglePlayer
                 }
 
                 if (r != null && r.State == ObjectState.Unitialized)
-                    MudObject.InitializeObject(r);
+                    Core.InitializeObject(r);
 
                 return r;
             }

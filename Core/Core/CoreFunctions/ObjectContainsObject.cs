@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace RMUD
 {
-    public partial class MudObject
+    public partial class Core
     {
         /// <summary>
         /// Determine if an object is contained by another.

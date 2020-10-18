@@ -16,8 +16,8 @@ namespace World.Homestead
             OpenLink(Direction.WEST, "Homestead.SittingRoom");
             OpenLink(Direction.OUT, "Homestead.Homestead");
 
-            Core.Move(GetObject("Homestead.Table"), this);
-            Core.Move(GetObject("Homestead.SkullKey"), GetObject("Homestead.Table"), RelativeLocations.ON);
+            Core.Move(Core.GetObject("Homestead.Table"), this);
+            Core.Move(Core.GetObject("Homestead.SkullKey"), Core.GetObject("Homestead.Table"), RelativeLocations.ON);
         }
     }
 
