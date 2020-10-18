@@ -24,7 +24,7 @@ namespace NetworkModule
                 {
                     if (System.Object.ReferenceEquals(actor, match["PLAYER"]))
                     {
-                        MudObject.SendMessage(actor, "Talking to yourself?");
+                        Core.SendMessage(actor, "Talking to yourself?");
                         return PerformResult.Stop;
                     }
                     return PerformResult.Continue;
@@ -32,11 +32,11 @@ namespace NetworkModule
                 .ProceduralRule((match, actor) =>
                 {
                     var player = match["PLAYER"] as MudObject;
-                    MudObject.SendMessage(player, "[privately " + DateTime.Now + "] ^<the0> : \"" + match["SPEECH"].ToString() + "\"", actor);
-                    MudObject.SendMessage(actor, "[privately to <the0>] ^<the1> : \"" + match["SPEECH"].ToString() + "\"", player, actor);
+                    Core.SendMessage(player, "[privately " + DateTime.Now + "] ^<the0> : \"" + match["SPEECH"].ToString() + "\"", actor);
+                    Core.SendMessage(actor, "[privately to <the0>] ^<the1> : \"" + match["SPEECH"].ToString() + "\"", player, actor);
                     var client = player.GetProperty<Client>("client");
                     if (client is NetworkClient && (client as NetworkClient).IsAfk)
-                        MudObject.SendMessage(actor, "^<the0> is afk : " + player.GetProperty<Account>("account").AFKMessage, player);
+                        Core.SendMessage(actor, "^<the0> is afk : " + player.GetProperty<Account>("account").AFKMessage, player);
                     return PerformResult.Continue;
                 });
         }

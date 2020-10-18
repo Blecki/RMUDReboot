@@ -48,14 +48,14 @@ Instead of examining the trampled message:
                 {
                     if (messageScuffed)
                     {
-                        SendMessage(actor, "The message has been carelessly trampled, making it difficult to read. You can just distinguish the words...");
-                        SendMessage(actor, "YOU HAVE LOST.");
+                        Core.SendMessage(actor, "The message has been carelessly trampled, making it difficult to read. You can just distinguish the words...");
+                        Core.SendMessage(actor, "YOU HAVE LOST.");
                         Core.Shutdown();
                     }
                     else
                     {
-                        SendMessage(actor, "The message, neatly marked in the sawdust, reads...");
-                        SendMessage(actor, "YOU HAVE WON!");
+                        Core.SendMessage(actor, "The message, neatly marked in the sawdust, reads...");
+                        Core.SendMessage(actor, "YOU HAVE WON!");
                         Core.Shutdown();
                     }
                     return PerformResult.Stop;
@@ -74,7 +74,7 @@ Instead of examining the trampled message:
                     if (match.TypedValue<CommandEntry>("COMMAND").IsNamed("GO"))
                         return PerformResult.Continue;
                     messageScuffed = true;
-                    SendMessage(actor, "In the dark? You could easily disturb something.");
+                    Core.SendMessage(actor, "In the dark? You could easily disturb something.");
                     return PerformResult.Stop;
                 });
 
@@ -90,7 +90,7 @@ Instead of examining the trampled message:
                 .Do((match, actor) =>
                 {
                     messageScuffed = true;
-                    SendMessage(actor, "Blundering around in the dark isn't a good idea!");
+                    Core.SendMessage(actor, "Blundering around in the dark isn't a good idea!");
                     return PerformResult.Stop;
                 });
         }

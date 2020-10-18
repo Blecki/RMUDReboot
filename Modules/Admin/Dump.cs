@@ -20,12 +20,12 @@ namespace AdminModule
                 .ProceduralRule((match, actor) =>
                 {
                     var target = match["TARGET"].ToString();
-                        var source = Core.Database.LoadSourceFile(target);
-                        if (!source.Item1)
-                            MudObject.SendMessage(actor, "Could not display source: " + source.Item2);
-                        else
-                            MudObject.SendMessage(actor, "Source of " + target + "\n" + source.Item2);
-                        return PerformResult.Continue;
+                    var source = Core.Database.LoadSourceFile(target);
+                    if (!source.Item1)
+                        Core.SendMessage(actor, "Could not display source: " + source.Item2);
+                    else
+                        Core.SendMessage(actor, "Source of " + target + "\n" + source.Item2);
+                    return PerformResult.Continue;
                 });
         }
     }

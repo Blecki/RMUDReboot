@@ -30,10 +30,10 @@ namespace AdminModule
                         MudObject.Move(target, destination);
                         Core.MarkLocaleForUpdate(destination);
 
-                        MudObject.SendMessage(actor, "Success.");
+                        Core.SendMessage(actor, "Success.");
                     }
                     else
-                        MudObject.SendMessage(actor, "I could not find the destination.");
+                        Core.SendMessage(actor, "I could not find the destination.");
                     return PerformResult.Continue;
                 });
         }

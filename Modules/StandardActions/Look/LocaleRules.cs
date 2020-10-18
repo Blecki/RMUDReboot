@@ -19,7 +19,7 @@ namespace StandardActionsModule.Look
                 .When((viewer, room) => room == null)
                 .Do((viewer, room) =>
                 {
-                    MudObject.SendMessage(viewer, "@nowhere");
+                    Core.SendMessage(viewer, "@nowhere");
                     return PerformResult.Stop;
                 })
                 .Name("Can't describe the locale if there isn't one rule.");
@@ -37,7 +37,7 @@ namespace StandardActionsModule.Look
                 .First
                 .Do((viewer, room) =>
                 {
-                    if (!String.IsNullOrEmpty(room.GetProperty<String>("short"))) MudObject.SendMessage(viewer, room.GetProperty<String>("short"));
+                    if (!String.IsNullOrEmpty(room.GetProperty<String>("short"))) Core.SendMessage(viewer, room.GetProperty<String>("short"));
                     return PerformResult.Continue;
                 })
                 .Name("Display room name rule.");
@@ -47,7 +47,7 @@ namespace StandardActionsModule.Look
                 .When((viewer, room) => room.GetProperty<LightingLevel>("light") == LightingLevel.Dark)
                 .Do((viewer, room) =>
                 {
-                    MudObject.SendMessage(viewer, "@dark");
+                    Core.SendMessage(viewer, "@dark");
                     return PerformResult.Stop;
                 })
                 .Name("Can't see in darkness rule.");
@@ -115,7 +115,7 @@ namespace StandardActionsModule.Look
                     if (normalContents.Count > 0)
                     {
                         describingLocale = true;
-                        MudObject.SendMessage(viewer, "@also here", normalContents);
+                        Core.SendMessage(viewer, "@also here", normalContents);
                         describingLocale = false;
                     }
 
@@ -129,7 +129,7 @@ namespace StandardActionsModule.Look
                 {
                     if (room.EnumerateObjects().Where(l => l.GetProperty<bool>("portal?")).Count() > 0)
                     {
-                        MudObject.SendMessage(viewer, "@obvious exits");
+                        Core.SendMessage(viewer, "@obvious exits");
 
                         foreach (var link in room.EnumerateObjects<MudObject>().Where(l => l.GetProperty<bool>("portal?")))
                         {
@@ -144,7 +144,7 @@ namespace StandardActionsModule.Look
                             if (destinationRoom != null)
                                 builder.Append(" " + Core.FormatMessage(viewer, Core.GetMessage("to"), destinationRoom));
 
-                            MudObject.SendMessage(viewer, builder.ToString());
+                            Core.SendMessage(viewer, builder.ToString());
                         }
                     }
 

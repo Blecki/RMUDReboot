@@ -15,12 +15,12 @@ namespace ClothingModule
                 .Do(a =>
                 {
                     var wornObjects = a.GetContents(RelativeLocations.WORN);
-                    if (wornObjects.Count == 0) MudObject.SendMessage(a, "@nude");
+                    if (wornObjects.Count == 0) Core.SendMessage(a, "@nude");
                     else
                     {
-                        MudObject.SendMessage(a, "@clothing wearing");
+                        Core.SendMessage(a, "@clothing wearing");
                         foreach (var item in wornObjects)
-                            MudObject.SendMessage(a, "  <a0>", item);
+                            Core.SendMessage(a, "  <a0>", item);
                     }
                     return PerformResult.Continue;
                 })
@@ -35,7 +35,7 @@ namespace ClothingModule
                     foreach (var wornItem in actor.EnumerateObjects(RelativeLocations.WORN))
                         if (wornItem.GetProperty<ClothingLayer>("clothing layer") == layer && wornItem.GetProperty<ClothingBodyPart>("clothing part") == part)
                         {
-                            MudObject.SendMessage(actor, "@clothing remove first", wornItem);
+                            Core.SendMessage(actor, "@clothing remove first", wornItem);
                             return CheckResult.Disallow;
                         }
                     return CheckResult.Continue;
@@ -50,7 +50,7 @@ namespace ClothingModule
                     foreach (var wornItem in actor.EnumerateObjects(RelativeLocations.WORN))
                         if (wornItem.GetProperty<ClothingLayer>("clothing layer") < layer && wornItem.GetProperty<ClothingBodyPart>("clothing part") == part)
                         {
-                            MudObject.SendMessage(actor, "@clothing remove first", wornItem);
+                            Core.SendMessage(actor, "@clothing remove first", wornItem);
                             return CheckResult.Disallow;
                         }
                     return CheckResult.Allow;
@@ -65,9 +65,9 @@ namespace ClothingModule
                 {
                     var wornItems = actor.GetContents(RelativeLocations.WORN);
                     if (wornItems.Count == 0)
-                        MudObject.SendMessage(viewer, "@clothing they are nude", actor);
+                        Core.SendMessage(viewer, "@clothing they are nude", actor);
                     else
-                        MudObject.SendMessage(viewer, "@clothing they are wearing", actor, wornItems);
+                        Core.SendMessage(viewer, "@clothing they are wearing", actor, wornItems);
                     return PerformResult.Continue;
                 })
                 .Name("List worn items when describing an actor rule.");

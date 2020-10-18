@@ -14,7 +14,7 @@ namespace NetworkModule
             GlobalRules.Perform<MudObject>("enumerate-stats")
                 .Do((actor) =>
                 {
-                    MudObject.SendMessage(actor, "CLIENTS");
+                    Core.SendMessage(actor, "CLIENTS");
                     return PerformResult.Continue;
                 });
 
@@ -22,12 +22,12 @@ namespace NetworkModule
                 .When((actor, type) => type == "CLIENTS")
                 .Do((actor, type) =>
                 {
-                    MudObject.SendMessage(actor, "~~ CLIENTS ~~");
+                    Core.SendMessage(actor, "~~ CLIENTS ~~");
                     foreach (var client in Clients.ConnectedClients)
                         if (client is NetworkClient)
-                            MudObject.SendMessage(actor, (client as NetworkClient).ConnectionDescription + (client.Player == null ? "" : (" - " + client.Player.GetProperty<String>("short"))));
+                            Core.SendMessage(actor, (client as NetworkClient).ConnectionDescription + (client.Player == null ? "" : (" - " + client.Player.GetProperty<String>("short"))));
                         else
-                            MudObject.SendMessage(actor, "local " + (client.Player == null ? "" : (" - " + client.Player.GetProperty<String>("short"))));
+                            Core.SendMessage(actor, "local " + (client.Player == null ? "" : (" - " + client.Player.GetProperty<String>("short"))));
                     return PerformResult.Stop;
                 });
         }

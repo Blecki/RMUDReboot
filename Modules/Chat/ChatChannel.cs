@@ -33,7 +33,7 @@ namespace ChatModule
             System.IO.File.AppendAllText(chatLogFilename, realMessage + "\n");
 
             foreach (var client in Channel.Subscribers)
-                SendMessage(client, realMessage);
+                Core.SendMessage(client, realMessage);
         }
     }
 }

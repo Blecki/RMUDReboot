@@ -18,7 +18,7 @@ namespace World.Wall
 
             Perform<MudObject>("jump").Do((actor) =>
             {
-                SendMessage(actor, "And why shouldn't you jump? Oh, right. Because of the sudden stop.");
+                Core.SendMessage(actor, "And why shouldn't you jump? Oh, right. Because of the sudden stop.");
                 return PerformResult.Stop;
             });
         }

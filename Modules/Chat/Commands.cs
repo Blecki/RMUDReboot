@@ -23,7 +23,7 @@ namespace ChatModule
                     var channel = match.ValueOrDefault("CHANNEL") as ChatChannel;
                     if (!channel.Subscribers.Contains(actor))
                         channel.Subscribers.Add(actor);
-                    MudObject.SendMessage(actor, "You are now subscribed to <a0>.", channel);
+                    Core.SendMessage(actor, "You are now subscribed to <a0>.", channel);
                     return PerformResult.Continue;
                 });
 
@@ -38,7 +38,7 @@ namespace ChatModule
                 {
                     var channel = match.ValueOrDefault("CHANNEL") as ChatChannel;
                     channel.Subscribers.RemoveAll(c => System.Object.ReferenceEquals(c, actor));
-                    MudObject.SendMessage(actor, "You are now unsubscribed from <a0>.", channel);
+                    Core.SendMessage(actor, "You are now unsubscribed from <a0>.", channel);
                     return PerformResult.Continue;
                 });
 
@@ -48,9 +48,9 @@ namespace ChatModule
                 .Manual("Lists all existing chat channels.")
                 .ProceduralRule((match, actor) =>
                 {
-                    MudObject.SendMessage(actor, "~~ CHANNELS ~~");
+                    Core.SendMessage(actor, "~~ CHANNELS ~~");
                     foreach (var channel in ChatChannel.ChatChannels)
-                        MudObject.SendMessage(actor, (channel.Subscribers.Contains(actor) ? "*" : "") + channel.GetProperty<String>("short"));
+                        Core.SendMessage(actor, (channel.Subscribers.Contains(actor) ? "*" : "") + channel.GetProperty<String>("short"));
                     return PerformResult.Continue;
                 });
 
@@ -70,7 +70,7 @@ namespace ChatModule
                             return PerformResult.Stop;
 
                         channel.Subscribers.Add(actor);
-                        MudObject.SendMessage(actor, "You are now subscribed to <a0>.", channel);
+                        Core.SendMessage(actor, "You are now subscribed to <a0>.", channel);
                     }
                     return PerformResult.Continue;
                 }, "Subscribe to channels before chatting rule.")
@@ -105,7 +105,7 @@ namespace ChatModule
                     var logFilename = ChatChannel.ChatLogsPath + channel.GetProperty<String>("short") + ".txt";
                     if (System.IO.File.Exists(logFilename))
                         foreach (var line in (new RMUD.ReverseLineReader(logFilename)).Take(count).Reverse())
-                            MudObject.SendMessage(actor, line);
+                            Core.SendMessage(actor, line);
                     return PerformResult.Continue;
                 });
         }

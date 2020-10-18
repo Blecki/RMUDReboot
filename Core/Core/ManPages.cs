@@ -27,7 +27,7 @@ namespace RMUD
 
         public void SendManPage(MudObject To)
         {
-            MudObject.SendMessage(To, Text);
+            Core.SendMessage(To, Text);
         }
     }
     

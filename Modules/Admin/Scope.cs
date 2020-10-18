@@ -17,8 +17,8 @@ namespace AdminModule
                 .Manual("List all of the objects in scope")
                 .ProceduralRule((match, actor) =>
                 {
-                    foreach (var thing in MudObject.EnumerateVisibleTree(MudObject.FindLocale(actor)))
-                        MudObject.SendMessage(actor, thing.GetProperty<String>("short") + " - " + thing.GetType().Name);
+                    foreach (var thing in MudObject.EnumerateVisibleTree(Core.FindLocale(actor)))
+                        Core.SendMessage(actor, thing.GetProperty<String>("short") + " - " + thing.GetType().Name);
                     return PerformResult.Continue;
                 }, "List all the damn things in scope rule.");
         }

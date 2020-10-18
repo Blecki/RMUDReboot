@@ -25,7 +25,7 @@ namespace RMUD.Modules.Meta
                 {
                     if (!match.ContainsKey("TOPIC"))
                     {
-                        MudObject.SendMessage(actor, "@help topics");
+                        Core.SendMessage(actor, "@help topics");
                         var line = "";
                         foreach (var manPage in ManPages.Pages.Select(p => p.Name).Distinct().OrderBy(s => s))
                         {
@@ -34,7 +34,7 @@ namespace RMUD.Modules.Meta
                             else if (line.Length < 40) line += new String(' ', 40 - line.Length);
                             else
                             {
-                                MudObject.SendMessage(actor, line);
+                                Core.SendMessage(actor, line);
                                 line = "";
                             }
                         }
@@ -47,7 +47,7 @@ namespace RMUD.Modules.Meta
                             foreach (var manPage in pages)
                                 manPage.SendManPage(actor);
                         else
-                            MudObject.SendMessage(actor, "@no help topic");
+                            Core.SendMessage(actor, "@no help topic");
 
                     }
                     return PerformResult.Continue;

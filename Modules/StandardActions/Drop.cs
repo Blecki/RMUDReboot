@@ -37,7 +37,7 @@ namespace StandardActionsModule
                 .When((actor, item) => !MudObject.ObjectContainsObject(actor, item))
                 .Do((actor, item) =>
                 {
-                    MudObject.SendMessage(actor, "@dont have that");
+                    Core.SendMessage(actor, "@dont have that");
                     return CheckResult.Disallow;
                 })
                 .Name("Must be holding it to drop it rule.");
@@ -60,8 +60,8 @@ namespace StandardActionsModule
 
             GlobalRules.Perform<MudObject, MudObject>("drop").Do((actor, target) =>
             {
-                MudObject.SendMessage(actor, "@you drop", target);
-                MudObject.SendExternalMessage(actor, "@they drop", actor, target);
+                Core.SendMessage(actor, "@you drop", target);
+                Core.SendExternalMessage(actor, "@they drop", actor, target);
                 if (actor.Location.HasValue(out var loc))
                     MudObject.Move(target, loc);
                 return PerformResult.Continue;

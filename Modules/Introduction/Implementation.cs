@@ -51,20 +51,20 @@ namespace IntroductionModule
                 .When((a, b) => !b.GetProperty<bool>("actor?"))
                 .Do((a, b) =>
                 {
-                    MudObject.SendMessage(a, "That just sounds silly.");
+                    Core.SendMessage(a, "That just sounds silly.");
                     return CheckResult.Disallow;
                 })
                 .Name("Can only introduce actors rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can introduce?")
-                .Do((a, b) => MudObject.CheckIsVisibleTo(a, b))
+                .Do((a, b) => Core.CheckIsVisibleTo(a, b))
                 .Name("Introducee must be visible rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can introduce?")
                 .When((a, b) => !GlobalRules.ConsiderValueRule<bool>("actor knows actor?", a, b))
                 .Do((a, b) =>
                 {
-                    MudObject.SendMessage(a, "How can you introduce <the0> when you don't know them yourself?", b);
+                    Core.SendMessage(a, "How can you introduce <the0> when you don't know them yourself?", b);
                     return CheckResult.Disallow;
                 })
                 .Name("Can't introduce who you don't know rule.");
@@ -74,7 +74,7 @@ namespace IntroductionModule
                 .When((viewer, actor) => GlobalRules.ConsiderValueRule<bool>("actor knows actor?", viewer, actor))
                 .Do((viewer, actor) =>
                 {
-                    MudObject.SendMessage(viewer, "^<the0>, a " + (actor.GetProperty<Gender>("gender") == Gender.Male ? "man." : "woman."), actor);
+                    Core.SendMessage(viewer, "^<the0>, a " + (actor.GetProperty<Gender>("gender") == Gender.Male ? "man." : "woman."), actor);
                     return PerformResult.Continue;
                 })
                 .Name("Report gender of known actors rule.");
@@ -86,13 +86,13 @@ namespace IntroductionModule
             GlobalRules.Perform<MudObject, MudObject>("introduce")
                 .Do((actor, introductee) =>
                 {
-                    var locale = MudObject.FindLocale(introductee);
+                    var locale = Core.FindLocale(introductee);
                     if (locale != null)
                         foreach (var player in MudObject.EnumerateObjectTree(locale).Where(o => o.GetProperty<bool>("actor?")))
                             GlobalRules.ConsiderPerformRule("introduce to", introductee, player);
 
-                    MudObject.SendExternalMessage(actor, "^<the0> introduces <the1>.", actor, introductee);
-                    MudObject.SendMessage(actor, "You introduce <the0>.", introductee);
+                    Core.SendExternalMessage(actor, "^<the0> introduces <the1>.", actor, introductee);
+                    Core.SendMessage(actor, "You introduce <the0>.", introductee);
                     return PerformResult.Continue;
                 })
                 .Name("Report introduction rule.");
@@ -102,13 +102,13 @@ namespace IntroductionModule
             GlobalRules.Perform<MudObject>("introduce self")
                 .Do((introductee) =>
                 {
-                    var locale = MudObject.FindLocale(introductee);
+                    var locale = Core.FindLocale(introductee);
                     if (locale != null)
                         foreach (var player in MudObject.EnumerateObjectTree(locale).Where(o => o.GetProperty<bool>("actor?")))
                             GlobalRules.ConsiderPerformRule("introduce to", introductee, player);
 
-                    MudObject.SendExternalMessage(introductee, "^<the0> introduces themselves.", introductee);
-                    MudObject.SendMessage(introductee, "You introduce yourself.");
+                    Core.SendExternalMessage(introductee, "^<the0> introduces themselves.", introductee);
+                    Core.SendMessage(introductee, "You introduce yourself.");
 
                     return PerformResult.Continue;
                 })

@@ -45,7 +45,7 @@ namespace StandardActionsModule
                 .When((actor, item) => !item.GetProperty<bool>("openable?"))
                 .Do((a, b) =>
                 {
-                    MudObject.SendMessage(a, "@not openable");
+                    Core.SendMessage(a, "@not openable");
                     return CheckResult.Disallow;
                 })
                 .Name("Can't open the unopenable rule.");
@@ -56,12 +56,12 @@ namespace StandardActionsModule
 
             GlobalRules.Perform<MudObject, MudObject>("opened").Do((actor, target) =>
             {
-                MudObject.SendMessage(actor, "@you open", target);
-                MudObject.SendExternalMessage(actor, "@they open", actor, target);
+                Core.SendMessage(actor, "@you open", target);
+                Core.SendExternalMessage(actor, "@they open", actor, target);
                 return PerformResult.Continue;
             }).Name("Default report opening rule.");
 
-            GlobalRules.Check<MudObject, MudObject>("can open?").First.Do((actor, item) => MudObject.CheckIsVisibleTo(actor, item)).Name("Item must be visible rule.");
+            GlobalRules.Check<MudObject, MudObject>("can open?").First.Do((actor, item) => Core.CheckIsVisibleTo(actor, item)).Name("Item must be visible rule.");
         }
     }
 

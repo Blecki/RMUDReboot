@@ -54,7 +54,7 @@ namespace ConversationModule
         {
             return Response(To, Topic, (actor, npc, topic) =>
                 {
-                    MudObject.SendMessage(actor, StringResponse, npc);
+                    Core.SendMessage(actor, StringResponse, npc);
                     return PerformResult.Stop;
                 });
         }
@@ -81,7 +81,7 @@ namespace ConversationModule
         {
             DefaultResponse(To, (actor, npc, topic) =>
             {
-                MudObject.SendMessage(actor, StringResponse);
+                Core.SendMessage(actor, StringResponse);
                 return PerformResult.Stop;
             });
         }

@@ -77,7 +77,7 @@ namespace StandardActionsModule.Look
                                     var destination = MudObject.GetObject(link.GetProperty<String>("link destination"));
                                     if (destination == null)
                                     {
-                                        MudObject.SendMessage(actor, "@bad link");
+                                        Core.SendMessage(actor, "@bad link");
                                         return PerformResult.Stop;
                                     }
                                     if (Core.GlobalRules.ConsiderCheckRule("can examine?", match["ACTOR"], match["LINK"]) == CheckResult.Disallow)
@@ -86,7 +86,7 @@ namespace StandardActionsModule.Look
                                 }
                                 else
                                 {
-                                    MudObject.SendMessage(actor, "You do not appear to be anywhere.");
+                                    Core.SendMessage(actor, "You do not appear to be anywhere.");
                                     return PerformResult.Stop;
                                 }
                             }

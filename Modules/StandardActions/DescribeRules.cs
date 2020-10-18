@@ -23,7 +23,7 @@ namespace StandardActionsModule
                 .When((viewer, item) => !String.IsNullOrEmpty(item.GetProperty<String>("long")))
                 .Do((viewer, item) =>
                 {
-                    MudObject.SendMessage(viewer, item.GetProperty<String>("long"));
+                    Core.SendMessage(viewer, item.GetProperty<String>("long"));
                     return PerformResult.Continue;
                 })
                 .Name("Basic description rule.");
@@ -33,9 +33,9 @@ namespace StandardActionsModule
                 .Do((viewer, item) =>
                 {
                     if (item.GetProperty<bool>("open?"))
-                        MudObject.SendMessage(viewer, "@is open", item);
+                        Core.SendMessage(viewer, "@is open", item);
                     else
-                        MudObject.SendMessage(viewer, "@is closed", item);
+                        Core.SendMessage(viewer, "@is closed", item);
                     return PerformResult.Continue;
                 })
                 .Name("Describe open or closed state rule.");
@@ -46,7 +46,7 @@ namespace StandardActionsModule
                 {
                     var contents = item.GetContents(RelativeLocations.ON);
                     if (contents.Count() > 0)
-                        MudObject.SendMessage(viewer, "@describe on", item, contents);
+                        Core.SendMessage(viewer, "@describe on", item, contents);
                     return PerformResult.Continue;
                 })
                 .Name("List things on container in description rule.");
@@ -63,7 +63,7 @@ namespace StandardActionsModule
                 {
                     var contents = item.GetContents(RelativeLocations.IN);
                     if (contents.Count() > 0)
-                        MudObject.SendMessage(viewer, "@describe in", item, contents);
+                        Core.SendMessage(viewer, "@describe in", item, contents);
                     return PerformResult.Continue;
                 })
                 .Name("List things in open container in description rule.");
@@ -76,9 +76,9 @@ namespace StandardActionsModule
                 {
                     var heldItems = new List<MudObject>(actor.EnumerateObjects(RelativeLocations.HELD));
                     if (heldItems.Count == 0)
-                        MudObject.SendMessage(viewer, "@empty handed", actor);
+                        Core.SendMessage(viewer, "@empty handed", actor);
                     else
-                        MudObject.SendMessage(viewer, "@holding", actor, heldItems);
+                        Core.SendMessage(viewer, "@holding", actor, heldItems);
 
                     return PerformResult.Continue;
                 })
@@ -110,7 +110,7 @@ namespace StandardActionsModule
         {
             return RuleBuilder.Do((viewer, thing) =>
             {
-                MudObject.SendMessage(viewer, Str);
+                Core.SendMessage(viewer, Str);
                 return PerformResult.Stop;
             });
         }

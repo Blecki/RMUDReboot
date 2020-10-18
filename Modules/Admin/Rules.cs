@@ -37,25 +37,25 @@ namespace AdminModule
         private static void DisplaySingleBook(MudObject Actor, RuleSet From, String BookName)
         {
             if (From == null || From.FindRuleBook(BookName) == null)
-                MudObject.SendMessage(Actor, "[no rules]");
+                Core.SendMessage(Actor, "[no rules]");
             else
             {
                 var book = From.FindRuleBook(BookName);
                 DisplayBookHeader(Actor, book);
                 foreach (var rule in book.Rules)
-                    MudObject.SendMessage(Actor, rule.DescriptiveName == null ? "[Unnamed rule]" : rule.DescriptiveName);
+                    Core.SendMessage(Actor, rule.DescriptiveName == null ? "[Unnamed rule]" : rule.DescriptiveName);
             }
         }
 
         private static void DisplayBookHeader(MudObject Actor, RuleBook Book)
         {
-            MudObject.SendMessage(Actor, Book.Name + " -> " + Book.ResultType.Name + " : " + Book.Description);
+            Core.SendMessage(Actor, Book.Name + " -> " + Book.ResultType.Name + " : " + Book.Description);
         }
 
         private static void DisplayBookList(MudObject Actor, RuleSet Rules)
         {
             if (Rules == null || Rules.RuleBooks.Count == 0)
-                MudObject.SendMessage(Actor, "[no rules]");
+                Core.SendMessage(Actor, "[no rules]");
             else
                 foreach (var book in Rules.RuleBooks)
                     DisplayBookHeader(Actor, book);

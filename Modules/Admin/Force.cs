@@ -27,7 +27,7 @@ namespace AdminModule
                             var target = MudObject.GetObject(match["PATH"].ToString());
                             if (target == null)
                             {
-                                MudObject.SendMessage(actor, "I can't find whomever it is you want to submit to your foolish whims.");
+                                Core.SendMessage(actor, "I can't find whomever it is you want to submit to your foolish whims.");
                                 return PerformResult.Stop;
                             }
                             match.Upsert("OBJECT", target);
@@ -44,15 +44,15 @@ namespace AdminModule
                     if (matchedCommand != null)
                     {
                         if (matchedCommand.Matches.Count > 1)
-                            MudObject.SendMessage(actor, "The command was ambigious.");
+                            Core.SendMessage(actor, "The command was ambigious.");
                         else
                         {
-                            MudObject.SendMessage(actor, "Enacting your will.");
+                            Core.SendMessage(actor, "Enacting your will.");
                             Core.ProcessPlayerCommand(matchedCommand.Command, matchedCommand.Matches[0], target);
                         }
                     }
                     else
-                        MudObject.SendMessage(actor, "The command did not match.");
+                        Core.SendMessage(actor, "The command did not match.");
 
                     return PerformResult.Continue;
                 });

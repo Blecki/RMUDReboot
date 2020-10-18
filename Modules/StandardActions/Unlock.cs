@@ -37,8 +37,8 @@ namespace StandardActionsModule
 
             GlobalRules.Perform<MudObject, MudObject, MudObject>("unlocked").Do((actor, target, key) =>
             {
-                MudObject.SendMessage(actor, "@you unlock", target);
-                MudObject.SendExternalMessage(actor, "@they unlock", actor, target, key);
+                Core.SendMessage(actor, "@you unlock", target);
+                Core.SendExternalMessage(actor, "@they unlock", actor, target, key);
                 return PerformResult.Continue;
             });
         }

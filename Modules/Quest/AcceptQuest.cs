@@ -20,7 +20,7 @@ namespace QuestModule
                 {
                     if (actor.GetProperty<MudObject>("offered-quest") == null)
                     {
-                        MudObject.SendMessage(actor, "Nobody has offered you a quest.");
+                        Core.SendMessage(actor, "Nobody has offered you a quest.");
                         return PerformResult.Stop;
                     }
                     else
@@ -33,7 +33,7 @@ namespace QuestModule
                 {
                     if (!Core.GlobalRules.ConsiderValueRule<bool>("quest available?", actor, actor.GetProperty<MudObject>("offered-quest")))
                     {
-                        MudObject.SendMessage(actor, "The quest is no longer available.");
+                        Core.SendMessage(actor, "The quest is no longer available.");
                         actor.SetProperty("offered-quest", null);
                         return PerformResult.Stop;
                     }

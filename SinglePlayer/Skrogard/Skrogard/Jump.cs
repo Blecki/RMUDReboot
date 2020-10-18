@@ -25,8 +25,8 @@ namespace World
             GlobalRules.Perform<MudObject>("jump")
                 .Do((actor) =>
                 {
-                    MudObject.SendExternalMessage(actor, "@jump", actor);
-                    MudObject.SendMessage(actor, "You jump about.");
+                    Core.SendExternalMessage(actor, "@jump", actor);
+                    Core.SendMessage(actor, "You jump about.");
                     return PerformResult.Continue;
                 })
                 .Name("Default jump rule.");

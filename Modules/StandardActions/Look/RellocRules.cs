@@ -13,14 +13,14 @@ namespace StandardActionsModule.Look
             GlobalRules.DeclareCheckRuleBook<MudObject, MudObject, RelativeLocations>("can look relloc?", "[Actor, Item, Relative Location] : Can the actor look in/on/under/behind the item?", "actor", "item", "relloc");
 
             GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .Do((actor, item, relloc) => MudObject.CheckIsVisibleTo(actor, item))
+                .Do((actor, item, relloc) => Core.CheckIsVisibleTo(actor, item))
                 .Name("Container must be visible rule.");
 
             GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
                 .When((actor, item, relloc) => (item.LocationsSupported & relloc) != relloc)
                 .Do((actor, item, relloc) =>
                 {
-                    MudObject.SendMessage(actor, "@cant look relloc", Relloc.GetRelativeLocationName(relloc));
+                    Core.SendMessage(actor, "@cant look relloc", Relloc.GetRelativeLocationName(relloc));
                     return CheckResult.Disallow;
                 })
                 .Name("Container must support relloc rule.");
@@ -29,7 +29,7 @@ namespace StandardActionsModule.Look
                 .When((actor, item, relloc) => (relloc == RelativeLocations.IN) && !item.GetProperty<bool>("open?"))
                 .Do((actor, item, relloc) =>
                 {
-                    MudObject.SendMessage(actor, "@is closed error", item);
+                    Core.SendMessage(actor, "@is closed error", item);
                     return CheckResult.Disallow;
                 })
                 .Name("Container must be open to look in rule.");
@@ -47,12 +47,12 @@ namespace StandardActionsModule.Look
 
                     if (contents.Count > 0)
                     {
-                        MudObject.SendMessage(actor, "@relloc it is", Relloc.GetRelativeLocationName(relloc), item);
+                        Core.SendMessage(actor, "@relloc it is", Relloc.GetRelativeLocationName(relloc), item);
                         foreach (var thing in contents)
-                            MudObject.SendMessage(actor, "  <a0>", thing);
+                            Core.SendMessage(actor, "  <a0>", thing);
                     }
                     else
-                        MudObject.SendMessage(actor, "@nothing relloc it", Relloc.GetRelativeLocationName(relloc), item);
+                        Core.SendMessage(actor, "@nothing relloc it", Relloc.GetRelativeLocationName(relloc), item);
 
                     return PerformResult.Continue;
                 })

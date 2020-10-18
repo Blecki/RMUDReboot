@@ -27,13 +27,13 @@ namespace ConversationModule
                 .When((actor, item) => !item.GetProperty<bool>("actor?"))
                 .Do((actor, item) =>
                 {
-                    MudObject.SendMessage(actor, "@convo cant converse");
+                    Core.SendMessage(actor, "@convo cant converse");
                     return CheckResult.Disallow;
                 })
                 .Name("Can only converse with NPCs rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can converse?")
-                .Do((actor, item) => MudObject.CheckIsVisibleTo(actor, item))
+                .Do((actor, item) => Core.CheckIsVisibleTo(actor, item))
                 .Name("Locutor must be visible rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can converse?")
@@ -49,7 +49,7 @@ namespace ConversationModule
                 .When(actor => actor.GetProperty<MudObject>("interlocutor") == null)
                 .Do(actor =>
                 {
-                    MudObject.SendMessage(actor, "@convo nobody");
+                    Core.SendMessage(actor, "@convo nobody");
                     return PerformResult.Stop;
                 })
                 .Name("Need interlocutor to list topics rule.");
@@ -70,7 +70,7 @@ namespace ConversationModule
                         var enumeratedSuggestedTopics = new List<MudObject>(suggestedTopics);
 
                         if (enumeratedSuggestedTopics.Count != 0)
-                            MudObject.SendMessage(actor, "@convo topic prompt", enumeratedSuggestedTopics);
+                            Core.SendMessage(actor, "@convo topic prompt", enumeratedSuggestedTopics);
                         else
                             GlobalRules.ConsiderPerformRule("no topics to discuss", actor, npc);
                     }
@@ -84,7 +84,7 @@ namespace ConversationModule
             GlobalRules.Perform<MudObject, MudObject>("no topics to discuss")
                 .Do((actor, npc) => 
                 {
-                    MudObject.SendMessage(actor, "@convo no topics");
+                    Core.SendMessage(actor, "@convo no topics");
                     return PerformResult.Continue;
                 })
                 .Name("Default report no topics to discuss rule.");
@@ -103,7 +103,7 @@ namespace ConversationModule
             GlobalRules.Perform<MudObject, MudObject, MudObject>("topic response")
                 .Do((actor, npc, topic) =>
                 {
-                    MudObject.SendMessage(actor, "@convo no response");
+                    Core.SendMessage(actor, "@convo no response");
                     return PerformResult.Stop;
                 })
                 .Name("No response rule for the topic rule.");

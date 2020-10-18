@@ -33,7 +33,7 @@ namespace ClothingModule
                 .When((a, b) => !MudObject.ObjectContainsObject(a, b))
                 .Do((actor, item) =>
                 {
-                    MudObject.SendMessage(actor, "@dont have that");
+                    Core.SendMessage(actor, "@dont have that");
                     return CheckResult.Disallow;
                 });
 
@@ -41,7 +41,7 @@ namespace ClothingModule
                 .When((a, b) => a.RelativeLocationOf(b) == RelativeLocations.WORN)
                 .Do((a, b) =>
                 {
-                    MudObject.SendMessage(a, "@clothing already wearing");
+                    Core.SendMessage(a, "@clothing already wearing");
                     return CheckResult.Disallow;
                 });
 
@@ -50,7 +50,7 @@ namespace ClothingModule
                 .When((actor, item) => !actor.GetProperty<bool>("actor?"))
                 .Do((actor, item) =>
                 {
-                    MudObject.SendMessage(actor, "@clothing cant wear");
+                    Core.SendMessage(actor, "@clothing cant wear");
                     return CheckResult.Disallow;
                 })
                 .Name("Can't wear unwearable things rule.");
@@ -59,8 +59,8 @@ namespace ClothingModule
 
             GlobalRules.Perform<MudObject, MudObject>("worn").Do((actor, target) =>
                 {
-                    MudObject.SendMessage(actor, "@clothing you wear", target);
-                    MudObject.SendExternalMessage(actor, "@clothing they wear", actor, target);
+                    Core.SendMessage(actor, "@clothing you wear", target);
+                    Core.SendExternalMessage(actor, "@clothing they wear", actor, target);
                     MudObject.Move(target, actor, RelativeLocations.WORN);
                     return PerformResult.Continue;
                 });

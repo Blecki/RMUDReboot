@@ -13,7 +13,7 @@ namespace World.Hreppholar
 
             this.Response("who he is", (actor, npc, topic) =>
                 {
-                    SendLocaleMessage(actor, "\"Name's Bjorn,\" <the0> gasps. \"You going to buy something, or..?\"", this);
+                    Core.SendLocaleMessage(actor, "\"Name's Bjorn,\" <the0> gasps. \"You going to buy something, or..?\"", this);
                     GlobalRules.ConsiderPerformRule("introduce self", this);
                     return PerformResult.Stop;
                 });
@@ -22,7 +22,7 @@ namespace World.Hreppholar
                 .When((actor, npc, topic) => topic == null)
                 .Do((actor, npc, topic) =>
                 {
-                    SendLocaleMessage(actor, "\"Eh?\" <the0> asks.", this);
+                    Core.SendLocaleMessage(actor, "\"Eh?\" <the0> asks.", this);
                     return PerformResult.Stop;
                 });
 
@@ -37,7 +37,7 @@ namespace World.Hreppholar
 
             Perform<MudObject, MudObject>("describe in locale").Do((actor, item) =>
             {
-                SendMessage(actor, "The shopkeeper leans on the counter.");
+                Core.SendMessage(actor, "The shopkeeper leans on the counter.");
                 return PerformResult.Continue;
             });
         }

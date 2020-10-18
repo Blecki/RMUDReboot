@@ -22,7 +22,7 @@ namespace NetworkModule
                     if (account != null)
                     {
                         account.AFKMessage = match["MESSAGE"].ToString();
-                        MudObject.SendMessage(actor, "AFK message set.");
+                        Core.SendMessage(actor, "AFK message set.");
                     }
 
                     return PerformResult.Continue;

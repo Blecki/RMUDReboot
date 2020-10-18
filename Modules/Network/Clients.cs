@@ -47,8 +47,8 @@ namespace NetworkModule
             dummyPlayer.SetProperty("command handler", new LoginCommandHandler());
             Core.TiePlayerToClient(Client, dummyPlayer);
 
-            MudObject.SendMessage(Client, Core.SettingsObject.Banner);
-            MudObject.SendMessage(Client, Core.SettingsObject.MessageOfTheDay);
+            Core.SendMessage(Client, Core.SettingsObject.Banner);
+            Core.SendMessage(Client, Core.SettingsObject.MessageOfTheDay);
 
             ConnectedClients.Add(Client);
 
@@ -70,7 +70,7 @@ namespace NetworkModule
             if (String.IsNullOrEmpty(Message)) return;
 
             foreach (var client in ConnectedClients)
-                RMUD.MudObject.SendMessage(client, Message, MentionedObjects);
+                Core.SendMessage(client, Message, MentionedObjects);
         }
     }
 }

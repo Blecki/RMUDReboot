@@ -9,7 +9,7 @@
         Perform<MudObject, MudObject, MudObject>("topic response")
             .Do((actor, npc, topic) =>
             {
-                MudObject.SendLocaleMessage(actor, "The wolf snarls and howls, showing its large sharp teeth.");
+                SendLocaleMessage(actor, "The wolf snarls and howls, showing its large sharp teeth.");
                 return PerformResult.Stop;
             });
 
@@ -20,7 +20,7 @@
 
         Perform<MudObject, MudObject>("handle-entrail-drop").Do((wolf, entrails) =>
             {
-                MudObject.SendLocaleMessage(this, "The wolf snatches up the entrails.");
+                SendLocaleMessage(this, "The wolf snatches up the entrails.");
                 IsFed = true;
                 MudObject.Move(entrails, MudObject.GetObject("palantine/soranus"), RelativeLocations.WORN);
                 return PerformResult.Stop;
@@ -37,7 +37,7 @@
         Core.GlobalRules.Perform("heartbeat").Do(() =>
         {
             if (!IsFed)
-                MudObject.SendLocaleMessage(this, "The wolf whines for food.");
+                SendLocaleMessage(this, "The wolf whines for food.");
             return PerformResult.Continue;
         });
     }

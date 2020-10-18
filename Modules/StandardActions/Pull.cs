@@ -37,14 +37,14 @@ namespace StandardActionsModule
             GlobalRules.DeclarePerformRuleBook<MudObject, MudObject>("pull", "[Actor, Item] : Handle the actor pulling the item.", "actor", "item");
 
             GlobalRules.Check<MudObject, MudObject>("can pull?")
-                .Do((actor, item) => MudObject.CheckIsVisibleTo(actor, item))
+                .Do((actor, item) => Core.CheckIsVisibleTo(actor, item))
                 .Name("Item must be visible to pull rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can pull?")
                 .Last
                 .Do((a, t) => 
                     {
-                        MudObject.SendMessage(a, "@does nothing");
+                        Core.SendMessage(a, "@does nothing");
                         return CheckResult.Disallow;
                     })
                 .Name("Default disallow pulling rule.");
@@ -52,7 +52,7 @@ namespace StandardActionsModule
             GlobalRules.Perform<MudObject, MudObject>("pull")
                 .Do((actor, target) =>
                 {
-                    MudObject.SendMessage(actor, "@nothing happens");
+                    Core.SendMessage(actor, "@nothing happens");
                     return PerformResult.Continue;
                 })
                 .Name("Default handle pulling rule.");
@@ -62,7 +62,7 @@ namespace StandardActionsModule
                 .When((actor, target) => target.GetProperty<bool>("actor?"))
                 .Do((actor, thing) =>
                 {
-                    MudObject.SendMessage(actor, "@unappreciated", thing);
+                    Core.SendMessage(actor, "@unappreciated", thing);
                     return CheckResult.Disallow;
                 })
                 .Name("Can't pull people rule.");

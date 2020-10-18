@@ -28,7 +28,7 @@ namespace StandardActionsModule
                     }
                     else
                     {
-                        MudObject.SendMessage(actor, "You do not appear to be anywhere.");
+                        Core.SendMessage(actor, "You do not appear to be anywhere.");
                         return PerformResult.Stop;
                     }
                 }, "lookup link rule")
@@ -62,7 +62,7 @@ namespace StandardActionsModule
                 .When((actor, link) => link == null)
                 .Do((actor, link) =>
                 {
-                    MudObject.SendMessage(actor, "@go to null link");
+                    Core.SendMessage(actor, "@go to null link");
                     return CheckResult.Disallow;
                 })
                 .Name("No link found rule.");
@@ -71,7 +71,7 @@ namespace StandardActionsModule
                 .When((actor, link) => link != null && link.GetProperty<bool>("openable?") && !link.GetProperty<bool>("open?"))
                 .Do((actor, link) =>
                 {
-                    MudObject.SendMessage(actor, "@first opening", link);
+                    Core.SendMessage(actor, "@first opening", link);
                     var tryOpen = Core.Try("StandardActions:Open", Core.ExecutingCommand.With("SUBJECT", link), actor);
                     if (tryOpen == PerformResult.Stop)
                         return CheckResult.Disallow;
@@ -89,8 +89,8 @@ namespace StandardActionsModule
                 .Do((actor, link) =>
                 {
                     var direction = link.GetProperty<Direction>("link direction");
-                    MudObject.SendMessage(actor, "@you went", direction.ToString().ToLower());
-                    MudObject.SendExternalMessage(actor, "@they went", actor, direction.ToString().ToLower());
+                    Core.SendMessage(actor, "@you went", direction.ToString().ToLower());
+                    Core.SendExternalMessage(actor, "@they went", actor, direction.ToString().ToLower());
                     return PerformResult.Continue;
                 })
                 .Name("Report leaving rule.");
@@ -101,7 +101,7 @@ namespace StandardActionsModule
                     var destination = MudObject.GetObject(link.GetProperty<String>("link destination"));
                     if (destination == null)
                     {
-                        MudObject.SendMessage(actor, "@bad link");
+                        Core.SendMessage(actor, "@bad link");
                         return PerformResult.Stop;
                     }
                     MudObject.Move(actor, destination);
@@ -114,7 +114,7 @@ namespace StandardActionsModule
                 {
                     var direction = link.GetProperty<Direction>("link direction");
                     var arriveMessage = Link.FromMessage(Link.Opposite(direction));
-                    MudObject.SendExternalMessage(actor, "@they arrive", actor, arriveMessage);
+                    Core.SendExternalMessage(actor, "@they arrive", actor, arriveMessage);
                     return PerformResult.Continue;
                 })
                 .Name("Report arrival rule.");

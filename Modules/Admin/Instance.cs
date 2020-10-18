@@ -21,11 +21,11 @@ namespace AdminModule
                 {
                     var path = match["PATH"].ToString();
                     var newObject = MudObject.GetObject(path + "@" + Guid.NewGuid().ToString());
-                    if (newObject == null) MudObject.SendMessage(actor, "Failed to instance " + path + ".");
+                    if (newObject == null) Core.SendMessage(actor, "Failed to instance " + path + ".");
                     else
                     {
                         MudObject.Move(newObject, actor);
-                        MudObject.SendMessage(actor, "Instanced " + path + ".");
+                        Core.SendMessage(actor, "Instanced " + path + ".");
                     }
                     return PerformResult.Continue;
                 });

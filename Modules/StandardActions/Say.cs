@@ -65,7 +65,7 @@ namespace StandardActionsModule
             GlobalRules.Perform<MudObject, String>("speak")
                 .Do((actor, text) =>
                 {
-                    MudObject.SendLocaleMessage(actor, "@speak", actor, text);
+                    Core.SendLocaleMessage(actor, "@speak", actor, text);
                     return PerformResult.Continue;
                 })
                 .Name("Default motormouth rule.");
@@ -75,7 +75,7 @@ namespace StandardActionsModule
             GlobalRules.Perform<MudObject, String>("emote")
                 .Do((actor, text) =>
                 {
-                    MudObject.SendLocaleMessage(actor, "@emote", actor, text);
+                    Core.SendLocaleMessage(actor, "@emote", actor, text);
                     return PerformResult.Continue;
                 })
                 .Name("Default exhibitionist rule.");

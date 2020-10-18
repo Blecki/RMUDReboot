@@ -66,7 +66,7 @@ namespace StandardActionsModule
                 {
                     if (!(container.GetProperty<bool>("container?")))
                     {
-                        MudObject.SendMessage(actor, "@cant put relloc", Relloc.GetRelativeLocationName(relloc));
+                        Core.SendMessage(actor, "@cant put relloc", Relloc.GetRelativeLocationName(relloc));
                         return CheckResult.Disallow;
                     }
                     return CheckResult.Continue;
@@ -85,8 +85,8 @@ namespace StandardActionsModule
             GlobalRules.Perform<MudObject, MudObject, MudObject, RelativeLocations>("put")
                 .Do((actor, item, container, relloc) =>
                 {
-                    MudObject.SendMessage(actor, "@you put", item, Relloc.GetRelativeLocationName(relloc), container);
-                    MudObject.SendExternalMessage(actor, "@they put", actor, item, Relloc.GetRelativeLocationName(relloc), container);
+                    Core.SendMessage(actor, "@you put", item, Relloc.GetRelativeLocationName(relloc), container);
+                    Core.SendExternalMessage(actor, "@they put", actor, item, Relloc.GetRelativeLocationName(relloc), container);
                     MudObject.Move(item, container, relloc);
                     return PerformResult.Continue;
                 })
@@ -97,7 +97,7 @@ namespace StandardActionsModule
                 {
                     if ((container.LocationsSupported & relloc) != relloc)
                     {
-                        MudObject.SendMessage(actor, "@cant put relloc", Relloc.GetRelativeLocationName(relloc));
+                        Core.SendMessage(actor, "@cant put relloc", Relloc.GetRelativeLocationName(relloc));
                         return CheckResult.Disallow;
                     }
                     return CheckResult.Continue;
@@ -109,7 +109,7 @@ namespace StandardActionsModule
                 {
                     if (relloc == RelativeLocations.IN && !container.GetProperty<bool>("open?"))
                     {
-                        MudObject.SendMessage(actor, "@is closed error", container);
+                        Core.SendMessage(actor, "@is closed error", container);
                         return CheckResult.Disallow;
                     }
 
@@ -119,12 +119,12 @@ namespace StandardActionsModule
 
             GlobalRules.Check<MudObject, MudObject, MudObject, RelativeLocations>("can put?")
                 .First
-                .Do((actor, item, container, relloc) => MudObject.CheckIsVisibleTo(actor, container))
+                .Do((actor, item, container, relloc) => Core.CheckIsVisibleTo(actor, container))
                 .Name("Container must be visible rule.");
 
             GlobalRules.Check<MudObject, MudObject, MudObject, RelativeLocations>("can put?")
                 .First
-                .Do((actor, item, container, relloc) => MudObject.CheckIsHolding(actor, item))
+                .Do((actor, item, container, relloc) => Core.CheckIsHolding(actor, item))
                 .Name("Must be holding item rule.");
         }
     }

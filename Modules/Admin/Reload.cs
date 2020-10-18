@@ -21,8 +21,8 @@ namespace AdminModule
                 {
                     var target = match["TARGET"].ToString();
                     var newObject = Core.Database.ReloadObject(target);
-                    if (newObject == null) MudObject.SendMessage(actor, "Failed to reload " + target);
-                    else MudObject.SendMessage(actor, "Reloaded " + target);
+                    if (newObject == null) Core.SendMessage(actor, "Failed to reload " + target);
+                    else Core.SendMessage(actor, "Reloaded " + target);
                     return PerformResult.Continue;
                 });
 
@@ -36,9 +36,9 @@ namespace AdminModule
                  .ProceduralRule((match, actor) =>
                  {
                      var target = match["TARGET"].ToString();
-                     if (Core.Database.ResetObject(target) == null) 
-                         MudObject.SendMessage(actor, "Failed to reset " + target);
-                     else MudObject.SendMessage(actor, "Reset " + target);
+                     if (Core.Database.ResetObject(target) == null)
+                         Core.SendMessage(actor, "Failed to reset " + target);
+                     else Core.SendMessage(actor, "Reset " + target);
                      return PerformResult.Continue;
                  });
 

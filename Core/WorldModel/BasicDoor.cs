@@ -28,7 +28,7 @@ namespace RMUD
                 {
                     if (GetProperty<bool>("open?"))
                     {
-                        MudObject.SendMessage(a, "@already open");
+                        Core.SendMessage(a, "@already open");
                         return CheckResult.Disallow;
                     }
                     return CheckResult.Allow;
@@ -41,7 +41,7 @@ namespace RMUD
                 {
                     if (!GetProperty<bool>("open?"))
                     {
-                        MudObject.SendMessage(a, "@already closed");
+                        Core.SendMessage(a, "@already closed");
                         return CheckResult.Disallow;
                     }
                     return CheckResult.Allow;
@@ -60,7 +60,7 @@ namespace RMUD
                     otherSide.SetProperty("open?", true);
                     
                     // This message is defined in the standard actions module. It is perhaps a bit coupled?
-                    MudObject.SendLocaleMessage(otherSide, "@they open", a, this);
+                    Core.SendLocaleMessage(otherSide, "@they open", a, this);
                     Core.MarkLocaleForUpdate(otherSide);
                 }
 
@@ -78,7 +78,7 @@ namespace RMUD
                 if (otherSide != null)
                 {
                     otherSide.SetProperty("open?", false);
-                    MudObject.SendLocaleMessage(otherSide, "@they close", a, this);
+                    Core.SendLocaleMessage(otherSide, "@they close", a, this);
                     Core.MarkLocaleForUpdate(otherSide);
                 }
 

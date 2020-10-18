@@ -50,7 +50,7 @@ namespace NetworkModule
             {
                 Core.MarkLocaleForUpdate(Player);
 
-                MudObject.SendMessage(Player, Actor.GetProperty<String>("short") + " has removed you from the server.");
+                Core.SendMessage(Player, Actor.GetProperty<String>("short") + " has removed you from the server.");
                 client.Disconnect();
                 Clients.SendGlobalMessage(Actor.GetProperty<String>("short") + " has removed " + Player.GetProperty<String>("short") + " from the server.");
             }

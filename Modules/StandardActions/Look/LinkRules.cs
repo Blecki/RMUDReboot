@@ -22,16 +22,16 @@ namespace StandardActionsModule.Look
                     var destination = MudObject.GetObject(item.GetProperty<String>("link destination"));
                     if (destination == null)
                     {
-                        MudObject.SendMessage(viewer, "@bad link");
+                        Core.SendMessage(viewer, "@bad link");
                         return PerformResult.Stop;
                     }
 
                     if (item.GetProperty<bool>("openable?"))
-                        MudObject.SendMessage(viewer, "@through the link you see", item);
+                        Core.SendMessage(viewer, "@through the link you see", item);
                     else
                     {
                         var direction = item.GetProperty<Direction>("link direction");
-                        MudObject.SendMessage(viewer, "@through the cardinal link you see", Link.FriendlyRelativeMessage(direction));
+                        Core.SendMessage(viewer, "@through the cardinal link you see", Link.FriendlyRelativeMessage(direction));
                     }
 
                     GlobalRules.ConsiderPerformRule("describe locale", viewer, destination);

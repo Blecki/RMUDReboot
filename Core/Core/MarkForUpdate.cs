@@ -43,7 +43,7 @@ namespace RMUD
         /// <param name="Object">Reference point object</param>
         public static void MarkLocaleForUpdate(MudObject Object)
         {
-            MudObject locale = MudObject.FindLocale(Object);
+            var locale = FindLocale(Object);
             if (locale != null && !MarkedObjects.Contains(locale))
                 MarkedObjects.Add(locale);
         }

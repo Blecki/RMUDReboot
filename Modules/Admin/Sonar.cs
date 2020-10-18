@@ -77,7 +77,7 @@ namespace AdminModule
                     foreach (var entry in roomLegend)
                         builder.Append(entry + "\r\n");
 
-                    MudObject.SendMessage(actor, builder.ToString());
+                    Core.SendMessage(actor, builder.ToString());
 
                     ClearGrid();
 

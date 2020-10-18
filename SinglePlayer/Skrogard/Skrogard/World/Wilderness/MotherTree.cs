@@ -15,7 +15,7 @@ namespace World.Wilderness
 
             this.Response("who she is", (actor, npc, topic) =>
                 {
-                    SendLocaleMessage(actor, "The breeze whistles between the trees. It almost sounds like words.... \"...Forest...\", the wind says.", this);
+                    Core.SendLocaleMessage(actor, "The breeze whistles between the trees. It almost sounds like words.... \"...Forest...\", the wind says.", this);
                     GlobalRules.ConsiderPerformRule("introduce self", this);
                     return PerformResult.Stop;
                 });
@@ -24,7 +24,7 @@ namespace World.Wilderness
                 .When((actor, npc, topic) => topic == null)
                 .Do((actor, npc, topic) =>
                 {
-                    SendLocaleMessage(actor, "The wind whistles.", this);
+                    Core.SendLocaleMessage(actor, "The wind whistles.", this);
                     return PerformResult.Stop;
                 });
 
@@ -34,7 +34,7 @@ namespace World.Wilderness
 
             Perform<MudObject, MudObject>("describe in locale").Do((actor, item) =>
             {
-                SendMessage(actor, "The wind whistles through the leaves.");
+                Core.SendMessage(actor, "The wind whistles through the leaves.");
                 return PerformResult.Continue;
             });
         }

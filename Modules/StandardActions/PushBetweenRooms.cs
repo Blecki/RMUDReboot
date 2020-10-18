@@ -72,7 +72,7 @@ namespace StandardActionsModule
                     }
                     else
                     {
-                        MudObject.SendMessage(actor, "You do not appear to be anywhere.");
+                        Core.SendMessage(actor, "You do not appear to be anywhere.");
                         return PerformResult.Stop; // Stop will stop execution immediately.
                     }
                 }, "lookup link rule") // We can also name procedural rules. This is always a good idea, as the
@@ -144,7 +144,7 @@ namespace StandardActionsModule
                 // Do expects a lambda, and lets us specify what the rule should actually do.
                 .Do((actor, subject, link) =>
                 {
-                    MudObject.SendMessage(actor, "@can't push direction"); // We defined this message above.
+                    Core.SendMessage(actor, "@can't push direction"); // We defined this message above.
                     return CheckResult.Disallow; // Disallow the action.
                 }).Name("Can't push between rooms by default rule.");
             // So by default, nothing can be pushed between rooms. What a useful command!
@@ -161,11 +161,11 @@ namespace StandardActionsModule
                 .Do((actor, subject, link) =>
                 {
                     var direction = link.GetProperty<Direction>("link direction");
-                    MudObject.SendMessage(actor, "@you push", subject, direction.ToString().ToLower());
+                    Core.SendMessage(actor, "@you push", subject, direction.ToString().ToLower());
 
                     // SendExternalMessage sends the message to everyone in the same place as the actor, 
                     // except the actor themself.
-                    MudObject.SendExternalMessage(actor, "@they push", actor, subject, direction.ToString().ToLower());
+                    Core.SendExternalMessage(actor, "@they push", actor, subject, direction.ToString().ToLower());
                     return PerformResult.Continue;
                 })
                 .Name("Report pushing between rooms rule.");
@@ -177,7 +177,7 @@ namespace StandardActionsModule
                     var destination = MudObject.GetObject(link.GetProperty<String>("link destination"));
                     if (destination == null)
                     {
-                        MudObject.SendMessage(actor, "@bad link");
+                        Core.SendMessage(actor, "@bad link");
                         return PerformResult.Stop;
                     }
 
@@ -194,7 +194,7 @@ namespace StandardActionsModule
                 {
                     var direction = link.GetProperty<Direction>("link direction");
                     var arriveMessage = Link.FromMessage(Link.Opposite(direction));
-                    MudObject.SendExternalMessage(actor, "@they arrive pushing", actor, subject, arriveMessage);
+                    Core.SendExternalMessage(actor, "@they arrive pushing", actor, subject, arriveMessage);
                     return PerformResult.Continue;
                 })
                 .Name("Report arrival while pushing rule.");

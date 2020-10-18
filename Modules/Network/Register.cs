@@ -21,7 +21,7 @@ namespace NetworkModule
                     var client = actor.GetProperty<Client>("client");
                     if (client is NetworkClient && (client as NetworkClient).IsLoggedOn)
                     {
-                        MudObject.SendMessage(actor, "You are already logged in.");
+                        Core.SendMessage(actor, "You are already logged in.");
                         return PerformResult.Stop;
                     }
 
@@ -37,14 +37,14 @@ namespace NetworkModule
             var existingAccount = Accounts.LoadAccount(UserName);
             if (existingAccount != null)
             {
-                MudObject.SendMessage(Actor, "Account already exists.");
+                Core.SendMessage(Actor, "Account already exists.");
                 return;
             }
 
             var newAccount = Accounts.CreateAccount(UserName, Password);
             if (newAccount == null)
             {
-                MudObject.SendMessage(Actor, "Could not create account.");
+                Core.SendMessage(Actor, "Could not create account.");
                 return;
             }
 

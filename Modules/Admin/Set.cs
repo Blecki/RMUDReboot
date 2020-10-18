@@ -29,15 +29,15 @@ namespace AdminModule
 
                     if (propertyInfo == null)
                     {
-                        MudObject.SendMessage(actor, "That property does not exist.");
+                        Core.SendMessage(actor, "That property does not exist.");
                         return PerformResult.Stop;
                     }
 
                     var realValue = propertyInfo.Converter.ConvertFromString(stringValue);
 
                     _object.SetProperty(property_name, realValue);
-                    
-                    MudObject.SendMessage(actor, "Property set.");
+
+                    Core.SendMessage(actor, "Property set.");
                     return PerformResult.Continue;
                 });
         }

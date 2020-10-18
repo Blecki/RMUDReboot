@@ -52,7 +52,7 @@ to the game, they would automatically be described correctly as well.]
             Check<MudObject, MudObject>("can take?")
                 .Do((actor, item) =>
                 {
-                    SendMessage(actor, "It's screwed into the wall.");
+                    Core.SendMessage(actor, "It's screwed into the wall.");
                     return CheckResult.Disallow;
                 });
         }

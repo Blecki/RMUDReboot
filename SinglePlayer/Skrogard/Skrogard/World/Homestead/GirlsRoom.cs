@@ -32,7 +32,7 @@ namespace World.Homestead
                 .ThisOnly()
                 .Do((actor, thing) =>
             {
-                SendMessage(actor, "It's far too heavy.");
+                Core.SendMessage(actor, "It's far too heavy.");
                 return CheckResult.Disallow;
             });
 

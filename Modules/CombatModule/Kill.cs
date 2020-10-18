@@ -50,8 +50,8 @@ namespace CombatModule
                     }
                     else
                     {
-                        MudObject.SendMessage(actor, "@you attack uselessly", actor, target);
-                        MudObject.SendExternalMessage(actor, "@they attack uselessly", actor, target);
+                        Core.SendMessage(actor, "@you attack uselessly", actor, target);
+                        Core.SendExternalMessage(actor, "@they attack uselessly", actor, target);
                     }
                     return PerformResult.Continue;
                 });

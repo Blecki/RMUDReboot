@@ -24,10 +24,10 @@ namespace AdminModule
                     if (System.IO.File.Exists(filename))
                     {
                         foreach (var line in new ReverseLineReader(filename).Take(count).Reverse())
-                            MudObject.SendMessage(actor, line);
+                            Core.SendMessage(actor, line);
                     }
                     else
-                        MudObject.SendMessage(actor, "I could not find that log file.");
+                        Core.SendMessage(actor, "I could not find that log file.");
                     return PerformResult.Continue;
                 });
         }

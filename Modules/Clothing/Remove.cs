@@ -33,7 +33,7 @@ namespace ClothingModule
                 .When((a, b) => !a.Contains(b, RelativeLocations.WORN))
                 .Do((actor, item) =>
                 {
-                    MudObject.SendMessage(actor, "@clothing not wearing");
+                    Core.SendMessage(actor, "@clothing not wearing");
                     return CheckResult.Disallow;
                 });
            
@@ -41,8 +41,8 @@ namespace ClothingModule
 
             GlobalRules.Perform<MudObject, MudObject>("removed").Do((actor, target) =>
                 {
-                    MudObject.SendMessage(actor, "@clothing you remove", target);
-                    MudObject.SendExternalMessage(actor, "@clothing they remove", actor, target);
+                    Core.SendMessage(actor, "@clothing you remove", target);
+                    Core.SendExternalMessage(actor, "@clothing they remove", actor, target);
                     MudObject.Move(target, actor, RelativeLocations.HELD);
                     return PerformResult.Continue;
                 });

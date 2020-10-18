@@ -36,7 +36,7 @@ namespace CombatModule
                 .When((a, b) => !MudObject.ObjectContainsObject(a, b))
                 .Do((actor, item) =>
                 {
-                    MudObject.SendMessage(actor, "@dont have that");
+                    Core.SendMessage(actor, "@dont have that");
                     return CheckResult.Disallow;
                 })
                 .Name("Can't wield what you don't have rule.");
@@ -44,8 +44,8 @@ namespace CombatModule
             GlobalRules.Perform<MudObject, MudObject>("wield").Do((actor, target) =>
                 {
                     actor.SetProperty("combat_weapon", target);
-                    MudObject.SendMessage(actor, "@you wield", actor, target);
-                    MudObject.SendExternalMessage(actor, "@they wield", actor, target);
+                    Core.SendMessage(actor, "@you wield", actor, target);
+                    Core.SendExternalMessage(actor, "@they wield", actor, target);
                     return PerformResult.Continue;
                 });
         }

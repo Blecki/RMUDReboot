@@ -23,15 +23,15 @@ namespace RMUD.Modules.Meta
                 {
                     var buildVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-                    MudObject.SendMessage(actor, "@version", buildVersion);
+                    Core.SendMessage(actor, "@version", buildVersion);
 
                     if (System.IO.File.Exists("version.txt"))
-                        MudObject.SendMessage(actor, "@commit", System.IO.File.ReadAllText("version.txt"));
+                        Core.SendMessage(actor, "@commit", System.IO.File.ReadAllText("version.txt"));
                     else
-                        MudObject.SendMessage(actor, "@no commit");
+                        Core.SendMessage(actor, "@no commit");
 
                     foreach (var module in Core.IntegratedModules)
-                        MudObject.SendMessage(actor, module.Info.BaseNameSpace + " by " + module.Info.Author + " - " + module.Info.Description);
+                        Core.SendMessage(actor, module.Info.BaseNameSpace + " by " + module.Info.Author + " - " + module.Info.Description);
 
                     return PerformResult.Continue;
                 });

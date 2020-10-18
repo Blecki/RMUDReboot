@@ -19,7 +19,7 @@ namespace AdminModule
                 {
                     foreach (var prop in PropertyManifest.GetAllPropertyInformation())
                     {
-                        MudObject.SendMessage(actor, "<s0> (<s1>) : <s2>", prop.Key, prop.Value.Type.ToString(), prop.Value.Converter.ConvertToString(prop.Value.DefaultValue));
+                        Core.SendMessage(actor, "<s0> (<s1>) : <s2>", prop.Key, prop.Value.Type.ToString(), prop.Value.Converter.ConvertToString(prop.Value.DefaultValue));
                     }
 
                     return PerformResult.Continue;

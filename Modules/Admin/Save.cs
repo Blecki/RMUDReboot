@@ -25,7 +25,7 @@ namespace AdminModule
                     var saved = Core.Database.Save();
 
                     //TODO MudObject.SendGlobalMessage("The database has been saved.");
-                    MudObject.SendMessage(actor, String.Format("I saved {0} persistent objects.", saved));
+                    Core.SendMessage(actor, String.Format("I saved {0} persistent objects.", saved));
                     return PerformResult.Continue;
                 });
 		}

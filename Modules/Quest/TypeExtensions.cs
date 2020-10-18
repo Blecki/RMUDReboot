@@ -14,9 +14,9 @@ namespace QuestModule
         {
             if (Actor != null)
             {
-                MudObject.SendMessage(Actor, "[To accept this quest, enter the command 'accept quest'.]");
+                Core.SendMessage(Actor, "[To accept this quest, enter the command 'accept quest'.]");
                 if (Actor.GetProperty<MudObject>("active-quest") != null)
-                    MudObject.SendMessage(Actor, "[Accepting this quest will abandon your active quest.]");
+                    Core.SendMessage(Actor, "[Accepting this quest will abandon your active quest.]");
                 Actor.SetProperty("offered-quest", Quest);
             }
         }

@@ -27,7 +27,7 @@ namespace AliasModule
                         actor.SetProperty("aliases", new Dictionary<String, String>());
                     var aliases = actor.GetProperty<Dictionary<String, String>>("aliases");
                     aliases.Add(match["NAME"].ToString().ToUpper(), match["RAW-COMMAND"].ToString());
-                    MudObject.SendMessage(actor, "Alias added.");
+                    Core.SendMessage(actor, "Alias added.");
                     return PerformResult.Continue;
                 });
 

@@ -74,7 +74,7 @@ namespace ConversationModule
                 {
                     if (actor.GetProperty<MudObject>("interlocutor") == null)
                     {
-                        MudObject.SendMessage(actor, "@convo nobody");
+                        Core.SendMessage(actor, "@convo nobody");
                         return PerformResult.Stop;
                     }
                     return PerformResult.Continue;

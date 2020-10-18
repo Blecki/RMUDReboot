@@ -33,7 +33,7 @@ namespace World.Homestead
 
             Check<RMUD.MudObject, RMUD.MudObject>("can take?").Do((actor, thing) =>
             {
-                SendMessage(actor, "It's far too heavy.");
+                Core.SendMessage(actor, "It's far too heavy.");
                 return CheckResult.Disallow;
             });
         }

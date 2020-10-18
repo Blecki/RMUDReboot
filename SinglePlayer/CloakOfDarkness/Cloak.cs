@@ -58,7 +58,7 @@ Its blackness is so deep that it almost seems to suck light from the room."
                 .When((actor, item) => !(actor.Location is Cloakroom))
                 .Do((actor, item) =>
                 {
-                    SendMessage(actor, "This isn't the best place to leave a smart cloak lying around.");
+                    Core.SendMessage(actor, "This isn't the best place to leave a smart cloak lying around.");
                     return CheckResult.Disallow;
                 });
         }

@@ -252,7 +252,7 @@ namespace RMUD
             builder.AppendLine("Rules invoked by command:");
             if (GeneratedManual != null) builder.AppendLine(GeneratedManual.ToString());
             builder.Append(ManualPage);
-            MudObject.SendMessage(To, builder.ToString());
+            Core.SendMessage(To, builder.ToString());
         }
     }
 }

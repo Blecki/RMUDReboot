@@ -19,7 +19,7 @@ namespace NetworkModule
             this.AuthenticatingCommand = AuthenticatingCommand;
             this.UserName = UserName;
 
-            MudObject.SendMessage(Actor, "Password: ");
+            Core.SendMessage(Actor, "Password: ");
 		}
 
         public void HandleCommand(PendingCommand Command)

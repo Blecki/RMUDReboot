@@ -24,9 +24,9 @@
                     var auto = Core.ExecutingCommand.ValueOrDefault("AUTO", false);
 
                     if (item.TimesViewed > 0 && auto) // Todo: This only works for single player...
-                        MudObject.SendMessage(viewer, item.Brief);
+                        SendMessage(viewer, item.Brief);
                     else
-                        MudObject.SendMessage(viewer, item.Long);
+                        SendMessage(viewer, item.Long);
 
                     item.TimesViewed += 1;
                     return PerformResult.Stop;

@@ -60,7 +60,7 @@ namespace CombatModule
             var hitModifier = weapon.GetProperty<int>("combat_hit_modifier");
             var armorClass = Target.GetProperty<int>("combat_armor_class");
 
-            MudObject.SendMessage(Attacker, "Hit mod " + hitModifier + " vs AC " + armorClass);
+            Core.SendMessage(Attacker, "Hit mod " + hitModifier + " vs AC " + armorClass);
             var hitRoll = RollDice("1d20") + hitModifier;
             
             
@@ -68,18 +68,18 @@ namespace CombatModule
             {
                 var damageDie = weapon.GetProperty<String>("combat_damage_die");
                 var damage = RollDice(damageDie);
-                MudObject.SendMessage(Attacker, "Hit for (" + damageDie + ") - " + damage + " damage!");
+                Core.SendMessage(Attacker, "Hit for (" + damageDie + ") - " + damage + " damage!");
                 if (hitRoll == 20)
                 {
                     var additionalDamage = RollDice(damageDie);
-                    MudObject.SendMessage(Attacker, "Critical! " + additionalDamage + " additional damage!");
+                    Core.SendMessage(Attacker, "Critical! " + additionalDamage + " additional damage!");
                     damage += additionalDamage;
                 }
             }
             else
             {
-                MudObject.SendMessage(Attacker, "@you miss", Attacker, Target);
-                MudObject.SendLocaleMessage(Attacker, "@they miss", Attacker, Target);
+                Core.SendMessage(Attacker, "@you miss", Attacker, Target);
+                Core.SendLocaleMessage(Attacker, "@they miss", Attacker, Target);
             }
         }
     }

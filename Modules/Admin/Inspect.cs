@@ -29,23 +29,23 @@ namespace AdminModule
                 {
                     var target = match["OBJECT"] as MudObject;
 
-                    MudObject.SendMessage(actor, "*** INSPECT LISTING ***");
-                    MudObject.SendMessage(actor, "Path: <s0>", target.Path);
-                    MudObject.SendMessage(actor, "Instance: <s0>", target.Instance);
-                    MudObject.SendMessage(actor, "Persistent: <s0>", target.IsPersistent.ToString());
+                    Core.SendMessage(actor, "*** INSPECT LISTING ***");
+                    Core.SendMessage(actor, "Path: <s0>", target.Path);
+                    Core.SendMessage(actor, "Instance: <s0>", target.Instance);
+                    Core.SendMessage(actor, "Persistent: <s0>", target.IsPersistent.ToString());
                     if (!target.Location.HasValue(out var loc))
-                        MudObject.SendMessage(actor, "Location: NOWHERE");
+                        Core.SendMessage(actor, "Location: NOWHERE");
                     else
-                        MudObject.SendMessage(actor, "Location: <s0>", loc.GetFullName());
-                    MudObject.SendMessage(actor, "*** DYNAMIC PROPERTIES ***");
+                        Core.SendMessage(actor, "Location: <s0>", loc.GetFullName());
+                    Core.SendMessage(actor, "*** DYNAMIC PROPERTIES ***");
 
                     foreach (var property in target.Properties)
                     {
                         var info = PropertyManifest.GetPropertyInformation(property.Key);
-                        MudObject.SendMessage(actor, "<s0>: <s1>", property.Key, info.Converter.ConvertToString(property.Value));
+                        Core.SendMessage(actor, "<s0>: <s1>", property.Key, info.Converter.ConvertToString(property.Value));
                     }
 
-                    MudObject.SendMessage(actor, "*** END OF LISTING ***");
+                    Core.SendMessage(actor, "*** END OF LISTING ***");
 
                     return PerformResult.Continue;
                 }, "List all the damn things rule.");

@@ -39,18 +39,18 @@ namespace StandardActionsModule
             GlobalRules.DeclareCheckRuleBook<MudObject, MudObject, MudObject>("can lock?", "[Actor, Item, Key] : Can the item be locked by the actor with the key?", "actor", "item", "key");
             
             GlobalRules.Check<MudObject, MudObject, MudObject>("can lock?")
-                .Do((actor, item, key) => MudObject.CheckIsVisibleTo(actor, item))
+                .Do((actor, item, key) => Core.CheckIsVisibleTo(actor, item))
                 .Name("Item must be visible to lock it.");
 
             GlobalRules.Check<MudObject, MudObject, MudObject>("can lock?")
-                .Do((actor, item, key) => MudObject.CheckIsHolding(actor, key))
+                .Do((actor, item, key) => Core.CheckIsHolding(actor, key))
                 .Name("Key must be held rule.");
 
             GlobalRules.Check<MudObject, MudObject, MudObject>("can lock?")
                 .When((actor, item, key) => !item.GetProperty<bool>("lockable?"))
                 .Do((a, b, c) =>
                 {
-                    MudObject.SendMessage(a, "@not lockable");
+                    Core.SendMessage(a, "@not lockable");
                     return CheckResult.Disallow;
                 })
                 .Name("Can't lock the unlockable rule.");
@@ -63,8 +63,8 @@ namespace StandardActionsModule
 
             GlobalRules.Perform<MudObject, MudObject, MudObject>("locked").Do((actor, target, key) =>
             {
-                MudObject.SendMessage(actor, "@you lock", target);
-                MudObject.SendExternalMessage(actor, "@they lock", actor, target, key);
+                Core.SendMessage(actor, "@you lock", target);
+                Core.SendExternalMessage(actor, "@they lock", actor, target, key);
                 return PerformResult.Continue;
             });
         }

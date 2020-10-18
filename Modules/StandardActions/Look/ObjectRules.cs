@@ -14,7 +14,7 @@ namespace StandardActionsModule.Look
 
             GlobalRules.Check<MudObject, MudObject>("can examine?")
                 .First
-                .Do((viewer, item) => MudObject.CheckIsVisibleTo(viewer, item))
+                .Do((viewer, item) => Core.CheckIsVisibleTo(viewer, item))
                 .Name("Can't examine what isn't here rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can examine?")

@@ -28,10 +28,7 @@ namespace RMUD
         {
             return OutputQueryTriggered;
         }
-    }
 
-    public partial class MudObject
-    {
         public static void SendMessage(MudObject Actor, String Message, params Object[] MentionedObjects)
         {
             if (String.IsNullOrEmpty(Message)) return;
@@ -52,7 +49,7 @@ namespace RMUD
             if (Core.SilentFlag) return;
             Core.OutputQueryTriggered = true;
 
-            var locale = MudObject.FindLocale(Object);
+            var locale = FindLocale(Object);
             foreach (var actor in locale.EnumerateObjects())
             {
                 var client = actor.GetProperty<Client>("client");

@@ -35,7 +35,7 @@ namespace World.Hreppholar
 
             Check<RMUD.MudObject, RMUD.MudObject>("can take?").ThisOnly().Do((actor, thing) =>
             {
-                SendMessage(actor, "That appears to be attached rather securely to the ground.");
+                Core.SendMessage(actor, "That appears to be attached rather securely to the ground.");
                 return CheckResult.Disallow;
             });
         }

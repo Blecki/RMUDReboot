@@ -66,12 +66,12 @@ namespace NetworkModule
                     Core.ProcessPlayerCommand(matchedCommand.Command, matchedCommand.Matches[0], Command.Actor);
                 }
                 else
-                    MudObject.SendMessage(Command.Actor, "I do not understand.");
+                    Core.SendMessage(Command.Actor, "I do not understand.");
 			}
 			catch (Exception e)
 			{
 				Core.DiscardPendingMessages();
-                MudObject.SendMessage(Command.Actor, e.Message);
+                Core.SendMessage(Command.Actor, e.Message);
 			}
 		}
 	}

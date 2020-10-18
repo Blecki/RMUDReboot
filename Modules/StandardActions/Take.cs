@@ -44,14 +44,14 @@ namespace StandardActionsModule
             GlobalRules.DeclarePerformRuleBook<MudObject, MudObject>("take", "[Actor, Item] : Handle the actor taking the item.", "actor", "item");
 
             GlobalRules.Check<MudObject, MudObject>("can take?")
-                .Do((actor, item) => MudObject.CheckIsVisibleTo(actor, item))
+                .Do((actor, item) => Core.CheckIsVisibleTo(actor, item))
                 .Name("Item must be visible to take rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can take?")
                 .When((actor, item) => actor.Contains(item, RelativeLocations.HELD))
                 .Do((actor, item) =>
                 {
-                    MudObject.SendMessage(actor, "@already have that");
+                    Core.SendMessage(actor, "@already have that");
                     return CheckResult.Disallow;
                 })
                 .Name("Can't take what you're already holding rule.");
@@ -64,8 +64,8 @@ namespace StandardActionsModule
             GlobalRules.Perform<MudObject, MudObject>("take")
                 .Do((actor, target) =>
                 {
-                    MudObject.SendMessage(actor, "@you take", target);
-                    MudObject.SendExternalMessage(actor, "@they take", actor, target);
+                    Core.SendMessage(actor, "@you take", target);
+                    Core.SendExternalMessage(actor, "@they take", actor, target);
                     MudObject.Move(target, actor);
                     return PerformResult.Continue;
                 })
@@ -76,7 +76,7 @@ namespace StandardActionsModule
                 .When((actor, thing) => thing.GetProperty<bool>("actor?"))
                 .Do((actor, thing) =>
                 {
-                    MudObject.SendMessage(actor, "@cant take people");
+                    Core.SendMessage(actor, "@cant take people");
                     return CheckResult.Disallow;
                 })
                 .Name("Can't take people rule.");
@@ -86,7 +86,7 @@ namespace StandardActionsModule
                 .When((actor, thing) => thing.GetProperty<bool>("portal?"))
                 .Do((actor, thing) =>
                 {
-                    MudObject.SendMessage(actor, "@cant take portals");
+                    Core.SendMessage(actor, "@cant take portals");
                     return CheckResult.Disallow;
                 });
 
@@ -95,7 +95,7 @@ namespace StandardActionsModule
                 .When((actor, thing) => thing.GetProperty<bool>("scenery?"))
                 .Do((actor, thing) =>
                 {
-                    MudObject.SendMessage(actor, "@cant take scenery");
+                    Core.SendMessage(actor, "@cant take scenery");
                     return CheckResult.Disallow;
                 })
                 .Name("Can't take scenery rule.");

@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace RMUD
 {
-    public partial class MudObject
+    public partial class Core
     {
         /// <summary>
         /// Determine is an object is visible to another object. This is essentially a comparison of the
@@ -21,10 +21,10 @@ namespace RMUD
         /// <returns>True if the reference point object can 'see' the tested object, false otherwise.</returns>
         public static bool IsVisibleTo(MudObject Actor, MudObject Object)
         {
-            var actorLocale = MudObject.FindLocale(Actor);
+            var actorLocale = FindLocale(Actor);
             if (actorLocale == null) return false;
             
-            var objectLocale = MudObject.FindLocale(Object);
+            var objectLocale = FindLocale(Object);
             return System.Object.ReferenceEquals(actorLocale, objectLocale)
                 || System.Object.ReferenceEquals(actorLocale, Object)
                 || System.Object.ReferenceEquals(objectLocale, Actor);
@@ -38,9 +38,9 @@ namespace RMUD
         /// <returns></returns>
         public static CheckResult CheckIsVisibleTo(MudObject Actor, MudObject Item)
         {
-            if (!MudObject.IsVisibleTo(Actor, Item))
+            if (!IsVisibleTo(Actor, Item))
             {
-                MudObject.SendMessage(Actor, "@gone");
+                SendMessage(Actor, "@gone");
                 return CheckResult.Disallow;
             }
             return CheckResult.Continue;
@@ -57,7 +57,7 @@ namespace RMUD
         {
             if (!MudObject.ObjectContainsObject(Actor, Item))
             {
-                MudObject.SendMessage(Actor, "@dont have that");
+                SendMessage(Actor, "@dont have that");
                 return CheckResult.Disallow;
             }
             return CheckResult.Continue;

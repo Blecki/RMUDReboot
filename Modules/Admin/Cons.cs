@@ -27,7 +27,7 @@ namespace AdminModule
 
                     var resultsFound = 0;
 
-                    MudObject.SendMessage(actor, "@cons");
+                    Core.SendMessage(actor, "@cons");
 
                     if (!localScan)
                         foreach (var command in Core.DefaultParser.EnumerateCommands())
@@ -35,12 +35,12 @@ namespace AdminModule
                             if (String.IsNullOrEmpty(command.GetID())) 
                             {
                                 resultsFound += 1;
-                                MudObject.SendMessage(actor, "Command has no ID set: " + command.ManualName + " from " + command.SourceModule);
+                                Core.SendMessage(actor, "Command has no ID set: " + command.ManualName + " from " + command.SourceModule);
                             }
                         }
 
                     if (resultsFound == 0)
-                        MudObject.SendMessage(actor, "@cons no results");
+                        Core.SendMessage(actor, "@cons no results");
 
 
                     return PerformResult.Continue;

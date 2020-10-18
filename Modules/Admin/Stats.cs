@@ -20,7 +20,7 @@ namespace AdminModule
                 {
                     if (!match.ContainsKey("TYPE"))
                     {
-                        MudObject.SendMessage(actor, "Try one of these stats options");
+                        Core.SendMessage(actor, "Try one of these stats options");
                         Core.GlobalRules.ConsiderPerformRule("enumerate-stats", actor);
                     }
                     else

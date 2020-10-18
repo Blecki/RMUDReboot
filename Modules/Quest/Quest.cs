@@ -17,9 +17,9 @@ namespace QuestModule
                 .ProceduralRule((match, actor) =>
                 {
                     if (actor.GetProperty<MudObject>("active-quest") == null)
-                        MudObject.SendMessage(actor, "You do not have an active quest.");
+                        Core.SendMessage(actor, "You do not have an active quest.");
                     else
-                        MudObject.SendMessage(actor, "Active quest: <a0>.", actor.GetProperty<MudObject>("active-quest"));
+                        Core.SendMessage(actor, "Active quest: <a0>.", actor.GetProperty<MudObject>("active-quest"));
                     return PerformResult.Continue;
                 }, "display the active quest rule.");
         }

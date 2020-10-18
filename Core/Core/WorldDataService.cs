@@ -29,8 +29,8 @@ namespace RMUD
         {
             GlobalRules.Perform<MudObject>("enumerate-stats").Do((Actor) =>
             {
-                MudObject.SendMessage(Actor, "Named Object: " + Core.Database.NamedObjects.Count);
-                MudObject.SendMessage(Actor, "Rooms: " + Core.Database.NamedObjects.Where(obj => obj.Value.HasProperty("room type")).Count());
+                Core.SendMessage(Actor, "Named Object: " + Core.Database.NamedObjects.Count);
+                Core.SendMessage(Actor, "Rooms: " + Core.Database.NamedObjects.Where(obj => obj.Value.HasProperty("room type")).Count());
                 return PerformResult.Continue;
             });
         }

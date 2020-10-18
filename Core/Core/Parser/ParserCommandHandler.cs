@@ -41,7 +41,7 @@ namespace RMUD
                     Command.RawCommand = Command.RawCommand.Substring("@DEBUG ".Length);
                     if (Command.Actor.GetProperty<int>("rank") < 500)
                     {
-                        MudObject.SendMessage(Command.Actor, "You do not have sufficient rank to use the debug command.");
+                        Core.SendMessage(Command.Actor, "You do not have sufficient rank to use the debug command.");
                         return;
                     }
 
@@ -52,11 +52,11 @@ namespace RMUD
                 {
                     // Display all the rules invoked while executing this command.
                     Command.RawCommand = Command.RawCommand.Substring("@RULES ".Length);
-                    Core.GlobalRules.LogRules(s => MudObject.SendMessage(Command.Actor, s));
+                    Core.GlobalRules.LogRules(s => Core.SendMessage(Command.Actor, s));
                 }
                 else
                 {
-                    MudObject.SendMessage(Command.Actor, "I don't recognize that debugging command.");
+                    Core.SendMessage(Command.Actor, "I don't recognize that debugging command.");
                     return;
                 }
             }
@@ -71,12 +71,12 @@ namespace RMUD
 
                 if (matchedCommand == null)
                 {
-                    MudObject.SendMessage(Command.Actor, String.Format("Matched nothing in {0:n0} milliseconds.",
+                    Core.SendMessage(Command.Actor, String.Format("Matched nothing in {0:n0} milliseconds.",
                         (matchEndTime - startTime).TotalMilliseconds));
                 }
                 else
                 {
-                    MudObject.SendMessage(Command.Actor, String.Format("Matched {0} in {1:n0} milliseconds. {2} unique matches.",
+                    Core.SendMessage(Command.Actor, String.Format("Matched {0} in {1:n0} milliseconds. {2} unique matches.",
                         matchedCommand.Command.ManualName,
                         (matchEndTime - startTime).TotalMilliseconds,
                         matchedCommand.Matches.Count));
@@ -93,7 +93,7 @@ namespace RMUD
                             builder.Append("] ");
                         }
 
-                        MudObject.SendMessage(Command.Actor, builder.ToString());
+                        Core.SendMessage(Command.Actor, builder.ToString());
                     }
                 }
             }
@@ -112,7 +112,7 @@ namespace RMUD
             {
                 var endTime = DateTime.Now;
 
-                MudObject.SendMessage(Command.Actor, String.Format("Command completed in {0} milliseconds.", (endTime - startTime).TotalMilliseconds));
+                Core.SendMessage(Command.Actor, String.Format("Command completed in {0} milliseconds.", (endTime - startTime).TotalMilliseconds));
             }
         }
     }

@@ -15,9 +15,9 @@ namespace NetworkModule
                 .Manual("Lists all active bans.")
                 .ProceduralRule((match, actor) =>
                 {
-                    MudObject.SendMessage(actor, "~~~ ALL SET BANS ~~~");
+                    Core.SendMessage(actor, "~~~ ALL SET BANS ~~~");
                     foreach (var proscription in Clients.ProscriptionList.Proscriptions)
-                        MudObject.SendMessage(actor, proscription.Glob + " : " + proscription.Reason);
+                        Core.SendMessage(actor, proscription.Glob + " : " + proscription.Reason);
                     return PerformResult.Continue;
                 });
 

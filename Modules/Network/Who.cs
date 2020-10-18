@@ -16,9 +16,9 @@ namespace NetworkModule
                 .ProceduralRule((match, actor) =>
                 {
                     var clients = Clients.ConnectedClients.Where(c => c is NetworkClient && (c as NetworkClient).IsLoggedOn);
-                    MudObject.SendMessage(actor, "~~ THESE PLAYERS ARE ONLINE NOW ~~");
+                    Core.SendMessage(actor, "~~ THESE PLAYERS ARE ONLINE NOW ~~");
                     foreach (NetworkClient client in clients)
-                        MudObject.SendMessage(actor,
+                        Core.SendMessage(actor,
                             "[" + Core.SettingsObject.GetNameForRank(client.Player.GetProperty<int>("rank")) + "] <a0> ["
                             + client.ConnectionDescription + "]"
                             + (client.IsAfk ? (" afk: " + client.Player.GetProperty<Account>("account").AFKMessage) : "")

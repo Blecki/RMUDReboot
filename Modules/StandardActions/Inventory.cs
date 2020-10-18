@@ -30,12 +30,12 @@ namespace StandardActionsModule
                 .Do(a =>
                 {
                     var heldObjects = a.GetContents(RelativeLocations.HELD);
-                    if (heldObjects.Count == 0) MudObject.SendMessage(a, "@empty handed", a);
+                    if (heldObjects.Count == 0) Core.SendMessage(a, "@empty handed", a);
                     else
                     {
-                        MudObject.SendMessage(a, "@carrying");
+                        Core.SendMessage(a, "@carrying");
                         foreach (var item in heldObjects)
-                            MudObject.SendMessage(a, "  <a0>", item);
+                            Core.SendMessage(a, "  <a0>", item);
                     }
                     return PerformResult.Continue;
                 })

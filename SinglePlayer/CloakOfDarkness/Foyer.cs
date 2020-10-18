@@ -28,10 +28,10 @@ the weather outside seems to be getting worse."
 
             Check<MudObject, MudObject>("can go?")
                .First
-               .When((actor, link) => link != null && link.Location is Foyer && link.GetProperty<Direction>("link direction") == Direction.NORTH)
+               .When((actor, link) => link != null && link.Location.HasValue(out var loc) && loc is Foyer && link.GetProperty<Direction>("link direction") == Direction.NORTH)
                .Do((actor, link) =>
                {
-                   MudObject.SendMessage(actor, "You've only just arrived, and besides, the weather outside seems to be getting worse.");
+                   Core.SendMessage(actor, "You've only just arrived, and besides, the weather outside seems to be getting worse.");
                    return CheckResult.Disallow;
                });
         }

@@ -22,7 +22,7 @@ namespace CombatModule
                 .When(a => a.GetProperty<MudObject>("combat_weapon") != null)
                 .Do(a =>
                 {
-                    MudObject.SendMessage(a, "@wielding", a, a.GetProperty<MudObject>("combat_weapon"));
+                    Core.SendMessage(a, "@wielding", a, a.GetProperty<MudObject>("combat_weapon"));
                     return PerformResult.Continue;
                 })
                 .Name("List weapon in inventory rule.");
@@ -40,7 +40,7 @@ namespace CombatModule
                 .When((viewer, item) => item.GetProperty<MudObject>("combat_weapon") != null)
                 .Do((viewer, item) =>
                 {
-                    MudObject.SendMessage(viewer, "@wielding", item, item.GetProperty<MudObject>("combat_weapon"));
+                    Core.SendMessage(viewer, "@wielding", item, item.GetProperty<MudObject>("combat_weapon"));
                     return PerformResult.Continue;
                 })
                 .Name("Describe their weapon rule.");
