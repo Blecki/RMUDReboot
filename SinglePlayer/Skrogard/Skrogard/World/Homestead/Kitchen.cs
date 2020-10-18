@@ -16,8 +16,8 @@ namespace World.Homestead
             OpenLink(Direction.WEST, "Homestead.SittingRoom");
             OpenLink(Direction.OUT, "Homestead.Homestead");
 
-            Move(GetObject("Homestead.Table"), this);
-            Move(GetObject("Homestead.SkullKey"), GetObject("Homestead.Table"), RelativeLocations.ON);
+            Core.Move(GetObject("Homestead.Table"), this);
+            Core.Move(GetObject("Homestead.SkullKey"), GetObject("Homestead.Table"), RelativeLocations.ON);
         }
     }
 
@@ -31,7 +31,7 @@ namespace World.Homestead
             Long = "This table is little more than a sheet of metal with some legs grafted on. It is dented and stained and still bares old paint from its days as armor plating.";
             AddNoun("metal", "table");
 
-            Move(new MudObject("empty plasma bag", "A small translucent pouch made of tough plastic. All that's left inside is the residue of a red liquid."), this, RelativeLocations.ON);
+            Core.Move(new MudObject("empty plasma bag", "A small translucent pouch made of tough plastic. All that's left inside is the residue of a red liquid."), this, RelativeLocations.ON);
 
             this.CheckCanTake().ThisOnly().Do((actor, thing) =>
             {

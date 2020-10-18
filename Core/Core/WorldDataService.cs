@@ -119,8 +119,8 @@ namespace RMUD
                 if (existing.Location.HasValue(out var loc))
                 {
                     var relloc = loc.RelativeLocationOf(existing);
-                    MudObject.Move(newObject, loc, relloc);
-                    MudObject.Move(existing, null, RelativeLocations.NONE);
+                    Core.Move(newObject, loc, relloc);
+                    Core.Move(existing, null, RelativeLocations.NONE);
                 }
 
                 existing.Destroy(false);

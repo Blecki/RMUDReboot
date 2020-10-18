@@ -10,7 +10,7 @@ namespace ClothingModule
 	{
         public static void Wear(this MudObject NPC, MudObject Item)
         {
-            MudObject.Move(Item, NPC, RelativeLocations.WORN);
+            Core.Move(Item, NPC, RelativeLocations.WORN);
         }
 
         public static void Wear(this MudObject NPC, String Short, ClothingLayer Layer, ClothingBodyPart BodyPart)

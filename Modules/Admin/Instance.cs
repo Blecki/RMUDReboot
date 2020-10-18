@@ -24,7 +24,7 @@ namespace AdminModule
                     if (newObject == null) Core.SendMessage(actor, "Failed to instance " + path + ".");
                     else
                     {
-                        MudObject.Move(newObject, actor);
+                        Core.Move(newObject, actor);
                         Core.SendMessage(actor, "Instanced " + path + ".");
                     }
                     return PerformResult.Continue;

@@ -27,7 +27,7 @@ namespace AdminModule
                     {
                         var target = match["OBJECT"] as MudObject;
                         Core.MarkLocaleForUpdate(target);
-                        MudObject.Move(target, destination);
+                        Core.Move(target, destination);
                         Core.MarkLocaleForUpdate(destination);
 
                         Core.SendMessage(actor, "Success.");

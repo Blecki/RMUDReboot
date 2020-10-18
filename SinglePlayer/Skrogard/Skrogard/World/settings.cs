@@ -31,7 +31,7 @@ namespace World
                 .Do((actor) =>
                 {
                     Skrogard.Game.SwitchPlayerCharacter(RMUD.MudObject.GetObject("Player"));
-                    RMUD.MudObject.Move(Skrogard.Game.Player, RMUD.MudObject.GetObject("Caves.Pod"));
+                    RMUD.Core.Move(Skrogard.Game.Player, RMUD.MudObject.GetObject("Caves.Pod"));
                     RMUD.Core.EnqueuActorCommand(Skrogard.Game.Player, "look");
                     RMUD.Core.ProcessCommands();
                     return PerformResult.Continue;

@@ -37,8 +37,8 @@ namespace RMUD
                     if (_existing.Location.HasValue(out var loc) && _newObject.Location.HasValue(out var newLoc))
 					{
                         var relloc = loc.RelativeLocationOf(existing);
-						MudObject.Move(newObject as MudObject, newLoc, relloc);
-						MudObject.Move(existing as MudObject, null, RelativeLocations.NONE);
+                        Core.Move(newObject as MudObject, newLoc, relloc);
+                        Core.Move(existing as MudObject, null, RelativeLocations.NONE);
 					}
 				}
 

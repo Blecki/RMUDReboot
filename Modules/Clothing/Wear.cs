@@ -61,7 +61,7 @@ namespace ClothingModule
                 {
                     Core.SendMessage(actor, "@clothing you wear", target);
                     Core.SendExternalMessage(actor, "@clothing they wear", actor, target);
-                    MudObject.Move(target, actor, RelativeLocations.WORN);
+                    Core.Move(target, actor, RelativeLocations.WORN);
                     return PerformResult.Continue;
                 });
         }

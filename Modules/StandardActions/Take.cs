@@ -66,7 +66,7 @@ namespace StandardActionsModule
                 {
                     Core.SendMessage(actor, "@you take", target);
                     Core.SendExternalMessage(actor, "@they take", actor, target);
-                    MudObject.Move(target, actor);
+                    Core.Move(target, actor);
                     return PerformResult.Continue;
                 })
                 .Name("Default handle taken rule.");

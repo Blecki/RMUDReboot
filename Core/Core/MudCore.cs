@@ -19,7 +19,7 @@ namespace RMUD
                 .First
                 .Do((actor) =>
                 {
-                    MudObject.Move(actor, MudObject.GetObject(Core.SettingsObject.NewPlayerStartRoom));
+                    Core.Move(actor, MudObject.GetObject(Core.SettingsObject.NewPlayerStartRoom));
                     return PerformResult.Continue;
                 })
                 .Name("Move to start room rule.");
@@ -57,7 +57,7 @@ namespace RMUD
         {
             GlobalRules.ConsiderPerformRule("player left", Actor);
             Actor.SetProperty("client", null);
-            MudObject.Move(Actor, null);
+            Move(Actor, null);
         }
 
         public static void Shutdown()

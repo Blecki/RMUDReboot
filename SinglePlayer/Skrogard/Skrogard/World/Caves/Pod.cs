@@ -13,9 +13,9 @@ namespace World.Caves
             SetProperty("long", "You are in a small dark pod. Light falls through cracks above. The metal walls glisten with condensation, and some papers crinkle under foot. A single light glares overhead.");
             SetProperty("ambient light", LightingLevel.Bright);
 
-            Move(GetObject("Caves.Papers"), this);
-            Move(GetObject("Caves.Pipe"), this);
-            Move(GetObject("Caves.Target"), this);
+            Core.Move(GetObject("Caves.Papers"), this);
+            Core.Move(GetObject("Caves.Pipe"), this);
+            Core.Move(GetObject("Caves.Target"), this);
 
             AddScenery("The papers appear to be blank, save for one.", "papers");
 

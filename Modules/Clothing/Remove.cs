@@ -43,7 +43,7 @@ namespace ClothingModule
                 {
                     Core.SendMessage(actor, "@clothing you remove", target);
                     Core.SendExternalMessage(actor, "@clothing they remove", actor, target);
-                    MudObject.Move(target, actor, RelativeLocations.HELD);
+                    Core.Move(target, actor, RelativeLocations.HELD);
                     return PerformResult.Continue;
                 });
         }

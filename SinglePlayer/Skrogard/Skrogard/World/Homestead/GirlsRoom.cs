@@ -14,7 +14,7 @@ namespace World.Homestead
 
             OpenLink(Direction.NORTH, "Homestead.Hallway", GetObject("Homestead.FlowerDoor@inside"));
 
-            Move(GetObject("Homestead.Bed"), this);
+            Core.Move(GetObject("Homestead.Bed"), this);
         }
     }
 
@@ -36,7 +36,7 @@ namespace World.Homestead
                 return CheckResult.Disallow;
             });
 
-            Move(GetObject("Homestead.Skull"), this, RelativeLocations.ON);
+            Core.Move(GetObject("Homestead.Skull"), this, RelativeLocations.ON);
         }
     }
 }

@@ -104,7 +104,7 @@ namespace StandardActionsModule
                         Core.SendMessage(actor, "@bad link");
                         return PerformResult.Stop;
                     }
-                    MudObject.Move(actor, destination);
+                    Core.Move(actor, destination);
                     return PerformResult.Continue;
                 })
                 .Name("Move through the link rule.");

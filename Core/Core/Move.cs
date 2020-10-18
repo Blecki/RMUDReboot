@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace RMUD
 {
-    public partial class MudObject
+    public partial class Core
     {
         /// <summary>
         /// Move Object to Destination.

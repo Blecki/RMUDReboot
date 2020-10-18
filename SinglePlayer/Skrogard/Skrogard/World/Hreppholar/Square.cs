@@ -17,7 +17,7 @@ namespace World.Hreppholar
             OpenLink(Direction.WEST, "Hreppholar.WestStreet");
             OpenLink(Direction.SOUTH, "Hreppholar.GeneralStorePorch");
 
-            Move(GetObject("Hreppholar.Fountain"), this);
+            Core.Move(GetObject("Hreppholar.Fountain"), this);
         }
     }
 
@@ -31,7 +31,7 @@ namespace World.Hreppholar
             Long = "This old fountain is made from welded together bits of scrap. It depicts a girl, lips pursed, who would be spurting a stream of water if the pump still worked.";
             AddNoun("old", "dried", "fountain", "dried-up");
 
-            Move(new RMUD.MudObject("steel penny", "A small coin marked on one side with a serpent, and the other with a woman's face."), this, RMUD.RelativeLocations.IN);
+            Core.Move(new RMUD.MudObject("steel penny", "A small coin marked on one side with a serpent, and the other with a woman's face."), this, RMUD.RelativeLocations.IN);
 
             Check<RMUD.MudObject, RMUD.MudObject>("can take?").ThisOnly().Do((actor, thing) =>
             {

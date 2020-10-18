@@ -24,7 +24,7 @@ namespace Minimum
                 .Do((actor) =>
                 {
                     SwitchPlayerCharacter(RMUD.MudObject.GetObject("Player"));
-                    RMUD.MudObject.Move(Player, RMUD.MudObject.GetObject("Start"));
+                    RMUD.Core.Move(Player, RMUD.MudObject.GetObject("Start"));
                     RMUD.Core.EnqueuActorCommand(Player, "look");
         
                     return PerformResult.Stop;

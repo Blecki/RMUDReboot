@@ -15,7 +15,7 @@ namespace World.Homestead
             OpenLink(Direction.EAST, "Homestead.Kitchen");
             OpenLink(Direction.DOWN, "Homestead.Cellar");
 
-            Move(GetObject("Homestead.Chair"), this, RelativeLocations.CONTENTS);
+            Core.Move(GetObject("Homestead.Chair"), this, RelativeLocations.CONTENTS);
         }
     }
 
@@ -29,7 +29,7 @@ namespace World.Homestead
             Long = "Long ago, this was a fine leather chair. These days there are more patches then original construction, though it still appears very plush.";
             AddNoun("plush", "chair");
 
-            Move(GetObject("Homestead.Jaygmundre"), this, RMUD.RelativeLocations.ON);
+            Core.Move(GetObject("Homestead.Jaygmundre"), this, RMUD.RelativeLocations.ON);
 
             Check<RMUD.MudObject, RMUD.MudObject>("can take?").Do((actor, thing) =>
             {

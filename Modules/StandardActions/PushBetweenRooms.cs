@@ -181,8 +181,8 @@ namespace StandardActionsModule
                         return PerformResult.Stop;
                     }
 
-                    MudObject.Move(actor, destination);
-                    MudObject.Move(subject, destination);
+                    Core.Move(actor, destination);
+                    Core.Move(subject, destination);
                     return PerformResult.Continue;
                 })
                 .Name("Push through the link rule.");

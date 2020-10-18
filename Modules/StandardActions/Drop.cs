@@ -63,7 +63,7 @@ namespace StandardActionsModule
                 Core.SendMessage(actor, "@you drop", target);
                 Core.SendExternalMessage(actor, "@they drop", actor, target);
                 if (actor.Location.HasValue(out var loc))
-                    MudObject.Move(target, loc);
+                    Core.Move(target, loc);
                 return PerformResult.Continue;
             }).Name("Default drop handler rule.");
         }

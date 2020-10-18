@@ -87,7 +87,7 @@ namespace StandardActionsModule
                 {
                     Core.SendMessage(actor, "@you put", item, Relloc.GetRelativeLocationName(relloc), container);
                     Core.SendExternalMessage(actor, "@they put", actor, item, Relloc.GetRelativeLocationName(relloc), container);
-                    MudObject.Move(item, container, relloc);
+                    Core.Move(item, container, relloc);
                     return PerformResult.Continue;
                 })
                 .Name("Default putting things in things handler.");

@@ -24,10 +24,10 @@ namespace CloakOfDarkness
                 .Do((actor) =>
                 {
                     SwitchPlayerCharacter(RMUD.MudObject.GetObject("Player"));
-                    RMUD.MudObject.Move(Player, RMUD.MudObject.GetObject("Foyer"));
-                    RMUD.Core.SendMessage(actor, "Hurrying through the rainswept November night, you're glad to see the bright lights of the Opera House. It's surprising that there aren't more people about but, hey, what do you expect in a cheap demo game...?");
-                    RMUD.Core.EnqueuActorCommand(Player, "look");
-                    RMUD.Core.ProcessCommands();        
+                    Core.Move(Player, RMUD.MudObject.GetObject("Foyer"));
+                    Core.SendMessage(actor, "Hurrying through the rainswept November night, you're glad to see the bright lights of the Opera House. It's surprising that there aren't more people about but, hey, what do you expect in a cheap demo game...?");
+                    Core.EnqueuActorCommand(Player, "look");
+                    Core.ProcessCommands();        
                     return PerformResult.Continue;
                 });
         }
