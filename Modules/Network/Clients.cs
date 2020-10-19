@@ -43,7 +43,7 @@ namespace NetworkModule
             ClientLock.WaitOne();
 
             var dummyPlayer = new MudObject();
-            dummyPlayer.Actor();
+            ObjectDecorator.Actor(dummyPlayer);
             dummyPlayer.SetProperty("command handler", new LoginCommandHandler());
             Core.TiePlayerToClient(Client, dummyPlayer);
 

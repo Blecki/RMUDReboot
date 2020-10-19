@@ -6,7 +6,7 @@ namespace Minimum
     {
         public override void Initialize()
         {
-            Actor();
+            ObjectDecorator.Actor(this);
 
             SetProperty("short", "you");
         }

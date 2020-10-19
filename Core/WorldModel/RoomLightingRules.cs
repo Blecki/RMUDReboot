@@ -12,6 +12,7 @@ namespace RMUD
         public static void AtStartup(RuleEngine GlobalRules)
         {
             GlobalRules.DeclareValueRuleBook<MudObject, LightingLevel>("light level", "[item] -> LightingLevel, How much light does the item emit?", "item");
+            PropertyManifest.RegisterProperty("lighting level", typeof(LightingLevel), LightingLevel.Dark, new EnumSerializer<LightingLevel>());
 
             GlobalRules.Value<MudObject, LightingLevel>("light level")
                 .Do(item => LightingLevel.Dark)
@@ -29,7 +30,7 @@ namespace RMUD
 
                     foreach (var item in Core.EnumerateVisibleTree(room))
                     {
-                        var lightingLevel = GlobalRules.ConsiderValueRule<LightingLevel>("light level", item);
+                        var lightingLevel = item.GetProperty<LightingLevel>("lighting level");
                         if (lightingLevel > light) light = lightingLevel;
                     }
 

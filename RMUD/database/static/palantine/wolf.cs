@@ -4,7 +4,7 @@
 
     public override void Initialize()
     {
-        this.Actor();
+        ObjectDecorator.Actor(this);
 
         Perform<MudObject, MudObject, MudObject>("topic response")
             .Do((actor, npc, topic) =>

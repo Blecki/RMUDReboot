@@ -2,7 +2,7 @@
 {
     public override void Initialize()
     {
-        this.Actor();
+        ObjectDecorator.Actor(this);
     }
 }
 

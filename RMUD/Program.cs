@@ -5,8 +5,6 @@ using System.Text;
 using System.Net.Sockets;
 using System.IO;
 using System.Net;
-using NetworkModule.Telnet;
-
 using static RMUD.Core;
 
 namespace RMUD
@@ -15,11 +13,11 @@ namespace RMUD
     {
         static void Main(string[] args)
         {
-            TelnetClientSource telnetListener = null;
+            Telnet.TelnetClientSource telnetListener = null;
 
-            if (Core.Start(StartupFlags.SearchDirectory, "database/", new RuntimeDatabase()))
+            if (Core.Start(StartupFlags.NoFlags, "database/", new RuntimeDatabase()))
             {
-                telnetListener = new TelnetClientSource();
+                telnetListener = new Telnet.TelnetClientSource();
                 telnetListener.Port = Core.SettingsObject.TelnetPort;
                 telnetListener.Listen();
 

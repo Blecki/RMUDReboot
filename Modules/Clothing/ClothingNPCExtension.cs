@@ -6,7 +6,7 @@ using RMUD;
 
 namespace ClothingModule
 {
-	public static class NPCExtension
+	public static class ClothingNPCExtension
 	{
         public static void Wear(this MudObject NPC, MudObject Item)
         {

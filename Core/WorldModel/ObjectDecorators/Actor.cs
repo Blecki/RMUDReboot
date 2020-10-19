@@ -18,17 +18,17 @@ namespace RMUD
         }
     }
 
-    public partial class MudObject
+    public partial class ObjectDecorator
     {
-        public void Actor()
+        public static void Actor(MudObject This)
         {
-            Container(RelativeLocations.HELD | RelativeLocations.WORN, RelativeLocations.HELD);
+            This.Container(RelativeLocations.HELD | RelativeLocations.WORN, RelativeLocations.HELD);
 
-            SetProperty("actor?", true);
-            SetProperty("preserve?", true);
+            This.SetProperty("actor?", true);
+            This.SetProperty("preserve?", true);
 
-            AddNoun("MAN").When((a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Male);
-            AddNoun("WOMAN").When((a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Female);
+            This.AddNoun("MAN").When((a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Male);
+            This.AddNoun("WOMAN").When((a) => a.GetProperty<Gender>("gender") == RMUD.Gender.Female);
         }
 
     }

@@ -1,7 +1,4 @@
 ﻿using RMUD;
-using ConversationModule;
-using QuestModule;
-using ClothingModule;
 
 namespace World.Homestead
 {
@@ -9,7 +6,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            this.Actor();
+            ObjectDecorator.Actor(this);
 
             this.Response("who he is", (actor, npc, topic) =>
                 {

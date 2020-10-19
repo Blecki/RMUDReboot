@@ -9,9 +9,9 @@
 
         AddScenery(new lamp());
 
-        Move(ClothingModule.Factory.Create("pair of jeans", ClothingLayer.Outer, ClothingBodyPart.Legs), this);
-        Move(ClothingModule.Factory.Create("polo shirt", ClothingLayer.Outer, ClothingBodyPart.Torso), this);
-        Move(ClothingModule.Factory.Create("pair of briefs", ClothingLayer.Under, ClothingBodyPart.Legs), this);
+        Move(ClothingFactory.Create("pair of jeans", ClothingLayer.Outer, ClothingBodyPart.Legs), this);
+        Move(ClothingFactory.Create("polo shirt", ClothingLayer.Outer, ClothingBodyPart.Torso), this);
+        Move(ClothingFactory.Create("pair of briefs", ClothingLayer.Under, ClothingBodyPart.Legs), this);
 
         OpenLink(Direction.WEST, "palantine\\solar");
 	}

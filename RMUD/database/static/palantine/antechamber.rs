@@ -1,6 +1,5 @@
-﻿antechamber {
+﻿antechamber : ROOM(INTERIOR) {
 	SecretPassageOpen? = NO;
-	ROOM(INTERIOR);
 	[ambient light] = BRIGHT;
 	SHORT = "Palantine Villa - Antechamber";
     LONG = "Two imposing statues stand guard in this small room, on either side of the door to the room beyond. On the left, Jupiter, king of the gods. On the right, Minerva, the goddess of wisdom and beauty.";

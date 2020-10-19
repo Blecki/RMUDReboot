@@ -56,22 +56,6 @@
       <Project>{5c29e6ad-54e3-4105-a9f3-2aab48a17c41}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Admin\AdminModule.csproj">
-      <Project>{adaf3782-88d1-4170-866a-9ef3479eae97}</Project>
-      <Name>AdminModule</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Alias\AliasModule.csproj">
-      <Project>{37794c83-f94b-4b30-8e6a-deda0a389015}</Project>
-      <Name>AliasModule</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Clothing\ClothingModule.csproj">
-      <Project>{8f1af0e1-c98d-466a-a712-621493453373}</Project>
-      <Name>ClothingModule</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Modules\StandardActions\StandardActionsModule.csproj">
-      <Project>{1a004032-0f05-4545-88f2-3f58efa1ce1d}</Project>
-      <Name>StandardActionsModule</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,10 +1,18 @@
-﻿public class disambig_blue_door : RMUD.LockedDoor
+﻿public class disambig_blue_door : MudObject
 {
     public override void Initialize()
     {
+        ObjectDecorator.LockedDoor(this);
+
         AddNoun("BLUE");
-        Locked = true;
-        IsMatchingKey = k => object.ReferenceEquals(k, GetObject("palantine\\library_key"));
+
+        this.CheckIsMatchingKey().Do((door, key) =>
+        {
+            if (object.ReferenceEquals(key, Core.GetObject("palantine\\library_key")))
+                return CheckResult.Allow;
+            return CheckResult.Disallow;
+        });
+
         Short = "blue door";
     }
 }

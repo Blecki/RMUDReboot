@@ -1,7 +1,4 @@
 ﻿using RMUD;
-using ConversationModule;
-using QuestModule;
-using ClothingModule;
 
 namespace World.Wilderness
 {
@@ -9,7 +6,8 @@ namespace World.Wilderness
     {
         public override void Initialize()
         {
-            this.Actor();
+            ObjectDecorator.Actor(this);
+
             this.SetProperty("gender", Gender.Female);
             Long = "The most striking feature of this tree is not it's size - it's the face hacked crudely into the trunk. As you watch, it shifts, as if muttering to itself.";
 

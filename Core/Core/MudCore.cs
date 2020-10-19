@@ -35,7 +35,6 @@ namespace RMUD
         public static WorldDataService Database;
         public static RuleEngine GlobalRules;
         public static Action OnShutDown = null;
-        public static List<ModuleAssembly> IntegratedModules = new List<ModuleAssembly>();
         private static StartupFlags Flags;
 
         public static bool Silent { get { return (Flags & StartupFlags.Silent) == StartupFlags.Silent; } }

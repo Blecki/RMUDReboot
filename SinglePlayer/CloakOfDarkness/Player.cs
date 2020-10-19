@@ -6,7 +6,7 @@ namespace CloakOfDarkness
     {
         public override void Initialize()
         {
-            Actor();
+            ObjectDecorator.Actor(this);
 
             SetProperty("short", "you");
             Core.Move(Core.GetObject("Cloak"), this, RelativeLocations.WORN);

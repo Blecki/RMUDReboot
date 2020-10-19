@@ -30,9 +30,6 @@ namespace RMUD.Modules.Meta
                     else
                         Core.SendMessage(actor, "@no commit");
 
-                    foreach (var module in Core.IntegratedModules)
-                        Core.SendMessage(actor, module.Info.BaseNameSpace + " by " + module.Info.Author + " - " + module.Info.Description);
-
                     return PerformResult.Continue;
                 });
 		}

@@ -58,17 +58,10 @@ namespace RMUD.SinglePlayer
 
             if (gameInfo == null) throw new InvalidOperationException("No GameInfo defined in game assembly.");
 
-            var assemblies = new List<ModuleAssembly>();
-            foreach (var module in gameInfo.Modules)
-                assemblies.Add(new ModuleAssembly(module));
-
-            // Add the database assembly last, so that's AtStartup items are called last.
-            assemblies.Add(new ModuleAssembly(DatabaseAssembly, new ModuleInfo { BaseNameSpace = gameInfo.DatabaseNameSpace }));
-
             if (RMUD.Core.Start(StartupFlags.Silent | StartupFlags.SingleThreaded,
                 "database/",
                 new RMUD.SinglePlayer.CompiledDatabase(DatabaseAssembly, gameInfo.DatabaseNameSpace),
-                assemblies.ToArray()))
+                DatabaseAssembly))
             {
                 Player = RMUD.Core.GetObject(RMUD.Core.SettingsObject.PlayerBaseObject);
                 Player.SetProperty("command handler", Core.ParserCommandHandler);

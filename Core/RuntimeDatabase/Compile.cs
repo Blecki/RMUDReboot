@@ -13,11 +13,7 @@ namespace RMUD
         private String GetFileHeader()
         {
             var builder = new StringBuilder();
-            builder.Append("using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nusing static RMUD.Core;\n\n");
-
-            foreach (var module in Core.IntegratedModules)
-                builder.AppendLine("using " + module.Info.BaseNameSpace + ";\n");
-
+            builder.Append("using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nusing RMUD;\nusing static RMUD.Core;\n\n");
             return builder.ToString();
         }
 
@@ -35,10 +31,7 @@ namespace RMUD
             parameters.ReferencedAssemblies.Add("System.dll");
             parameters.ReferencedAssemblies.Add("System.Core.dll");
             parameters.ReferencedAssemblies.Add("System.Data.Linq.dll");
-
-            foreach (var module in Core.IntegratedModules)
-                if (!String.IsNullOrEmpty(module.FileName))
-                    parameters.ReferencedAssemblies.Add(module.FileName);
+            parameters.ReferencedAssemblies.Add("core.dll");
 
             CompilerResults compilationResults = codeProvider.CompileAssemblyFromSource(parameters, Source);
             bool realError = false;
