@@ -7,7 +7,7 @@ namespace World.Surface
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Landing");
             SetProperty("long", "You are on a small landing at the top of the metal stairway, right against the base of the wall. The wall extends upwards as far as you can see. A ladder leads upwards.");

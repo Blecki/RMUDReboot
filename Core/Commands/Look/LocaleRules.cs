@@ -31,20 +31,20 @@ namespace RMUD.Look
                     GlobalRules.ConsiderPerformRule("update", room);
                     return PerformResult.Continue;
                 })
-                .Name("Update room lighting before generating description rule.");
+                .Name("Update room before generating description rule.");
 
             GlobalRules.Perform<MudObject, MudObject>("describe locale")
                 .First
-                .Do((viewer, room) =>
+                .Do((viewer, locale) =>
                 {
-                    if (!String.IsNullOrEmpty(room.GetProperty<String>("short"))) Core.SendMessage(viewer, room.GetProperty<String>("short"));
+                    if (!String.IsNullOrEmpty(locale.GetProperty<String>("short"))) Core.SendMessage(viewer, locale.GetProperty<String>("short"));
                     return PerformResult.Continue;
                 })
-                .Name("Display room name rule.");
+                .Name("Display locale name rule.");
 
             GlobalRules.Perform<MudObject, MudObject>("describe locale")
                 .First
-                .When((viewer, room) => room.GetProperty<LightingLevel>("light") == LightingLevel.Dark)
+                .When((viewer, room) => room.GetProperty<LightingLevel>("locale light") == LightingLevel.Dark)
                 .Do((viewer, room) =>
                 {
                     Core.SendMessage(viewer, "@dark");
@@ -53,9 +53,9 @@ namespace RMUD.Look
                 .Name("Can't see in darkness rule.");
 
             GlobalRules.Perform<MudObject, MudObject>("describe locale")
-                .Do((viewer, room) =>
+                .Do((viewer, locale) =>
                 {
-                    GlobalRules.ConsiderPerformRule("describe", viewer, room);
+                    GlobalRules.ConsiderPerformRule("describe", viewer, locale);
                     return PerformResult.Continue;
                 })
                 .Name("Include describe rules in locale description rule.");
@@ -63,7 +63,7 @@ namespace RMUD.Look
             var describingLocale = false;
 
             GlobalRules.Value<MudObject, MudObject, String, String>("printed name")
-                .When((viewer, container, article) => describingLocale && (container.LocationsSupported & RelativeLocations.ON) == RelativeLocations.ON)                    
+                .When((viewer, container, article) => describingLocale && (container.ContentLocationsAllowed & RelativeLocations.ON) == RelativeLocations.ON)                    
                 .Do((viewer, container, article) =>
                     {
                         var subObjects = new List<MudObject>(container.EnumerateObjects(RelativeLocations.ON)

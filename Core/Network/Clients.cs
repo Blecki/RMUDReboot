@@ -43,7 +43,7 @@ namespace RMUD
             ClientLock.WaitOne();
 
             var dummyPlayer = new MudObject();
-            ObjectDecorator.Actor(dummyPlayer);
+            dummyPlayer.Actor();
             dummyPlayer.SetProperty("command handler", new LoginCommandHandler());
             Core.TiePlayerToClient(Client, dummyPlayer);
 

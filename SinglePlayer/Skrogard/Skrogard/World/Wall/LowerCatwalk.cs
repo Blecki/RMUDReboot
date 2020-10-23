@@ -7,7 +7,7 @@ namespace World.Wall
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Lower Catwalk");
             SetProperty("long", "A narrow metal ledge is grafted to the wall. It offers a nice place for anyone making the arduous climb up or down to rest.");

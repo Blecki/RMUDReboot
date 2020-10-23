@@ -41,7 +41,7 @@ namespace RMUD
                 .Name("Describe open or closed state rule.");
 
             GlobalRules.Perform<MudObject, MudObject>("describe")
-                .When((viewer, item) => (item.LocationsSupported & RelativeLocations.ON) == RelativeLocations.ON)
+                .When((viewer, item) => (item.ContentLocationsAllowed & RelativeLocations.ON) == RelativeLocations.ON)
                 .Do((viewer, item) =>
                 {
                     var contents = item.GetContents(RelativeLocations.ON);

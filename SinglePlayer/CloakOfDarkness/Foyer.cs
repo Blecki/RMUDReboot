@@ -16,7 +16,7 @@ Instead of going north in the Foyer, say "You've only just arrived, and besides,
 the weather outside seems to be getting worse."
 
              */
-            Room(RoomType.Interior);
+            Locale(RMUD.Locale.Interior);
 
             SetProperty("short", "Foyer of the Opera House");
             SetProperty("long", "You are standing in a spacious hall, splendidly decorated in red and gold, with glittering chandeliers overhead.");

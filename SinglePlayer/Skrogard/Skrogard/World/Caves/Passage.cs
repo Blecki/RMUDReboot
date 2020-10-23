@@ -7,7 +7,7 @@ namespace World.Caves
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Passage");
             SetProperty("long", "This narrow passage winds through the rock. Shallow water splashes underfoot.");

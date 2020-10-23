@@ -8,7 +8,7 @@ namespace World.Surface
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Dustbowl");
             SetProperty("long", "An endless expanse of dusty plain extends in every direction, and the wind kicks it up into a blinding screen. Glance around once, and you forget from which direction you came.");

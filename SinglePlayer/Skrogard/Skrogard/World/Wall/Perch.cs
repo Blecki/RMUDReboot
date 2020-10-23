@@ -7,7 +7,7 @@ namespace World.Wall
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Perch");
             SetProperty("long", "To the east: The land of Skogard. Gray, dismal, heaped with the discarded metal of Valhalla. To the west: Hel. The blasted wasteland of the Jotnar. Somehow, from way up here, it actually looks green. Distant snow capped peaks stab at a clear sky, and the land beyond the wall is dotted with glistening lakes. There's no railing here, and you feel a sudden urge to jump. You could look down.");

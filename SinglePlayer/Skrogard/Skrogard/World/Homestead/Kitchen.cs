@@ -7,7 +7,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Kitchen");
             SetProperty("long", "You are in a small, dirty kitchen. Every surface is covered in some kind of knick-knack, most of them broken.");

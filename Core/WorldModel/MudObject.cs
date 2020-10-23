@@ -5,17 +5,6 @@ using System.Text;
 
 namespace RMUD
 {
-    public static class RegisterBaseProperties
-    {
-        public static void AtStartup(RuleEngine GlobalRules)
-        {
-            PropertyManifest.RegisterProperty("short", typeof(String), "unnamed object", new StringSerializer());
-            PropertyManifest.RegisterProperty("long", typeof(String), "", new StringSerializer());
-            PropertyManifest.RegisterProperty("article", typeof(String), "a", new StringSerializer());
-            PropertyManifest.RegisterProperty("nouns", typeof(NounList), null, new DefaultSerializer());
-        }
-    }
-
     public class PropertyPayload<T>
     {
         public String Name;
@@ -34,7 +23,14 @@ namespace RMUD
         public String GetFullName() { return Path + "@" + Instance; }
         public bool IsPersistent { get; set; }
         public MaybeNull<MudObject> Location { get; set; }
+        public int CurrentHeartbeat = 0;
 
+        [Persist(typeof(ContainerSerializer))]
+        public Dictionary<RelativeLocations, List<MudObject>> Contents { get; set; }
+
+        public RelativeLocations ContentLocationsAllowed = RelativeLocations.NONE;
+        public RelativeLocations DefaultContentLocation = RelativeLocations.NONE;
+        
         public virtual void Initialize() { }
 
         public override string ToString()
@@ -137,6 +133,102 @@ namespace RMUD
                 foreach (var child in EnumerateObjects())
                     if (child.State != ObjectState.Destroyed)
                         child.Destroy(true);
+        }
+
+        public void Remove(MudObject Object)
+        {
+            if (Contents != null) foreach (var list in Contents)
+                {
+                    if (list.Value.Remove(Object))
+                        Object.Location = null;
+                }
+        }
+
+        public int RemoveAll(Predicate<MudObject> Func)
+        {
+            var r = 0;
+            if (Contents != null) foreach (var list in Contents)
+                    r += list.Value.RemoveAll(Func);
+            return r;
+        }
+
+        public void Add(MudObject Object, RelativeLocations Locations)
+        {
+            if (Contents == null) return;
+
+            if (Locations == RelativeLocations.DEFAULT) Locations = DefaultContentLocation;
+
+            if ((ContentLocationsAllowed & Locations) == Locations)
+            {
+                if (!Contents.ContainsKey(Locations)) Contents.Add(Locations, new List<MudObject>());
+                Contents[Locations].Add(Object);
+            }
+        }
+
+        public IEnumerable<MudObject> EnumerateObjects()
+        {
+            if (Contents != null) foreach (var list in Contents)
+                    foreach (var item in list.Value)
+                        yield return item;
+        }
+
+        public IEnumerable<Tuple<MudObject, RelativeLocations>> EnumerateObjectsAndRelloc()
+        {
+            if (Contents != null) foreach (var list in Contents)
+                    foreach (var item in list.Value)
+                        yield return Tuple.Create(item, list.Key);
+        }
+
+        public IEnumerable<T> EnumerateObjects<T>() where T : MudObject
+        {
+            if (Contents != null) foreach (var list in Contents)
+                    foreach (var item in list.Value)
+                        if (item is T) yield return item as T;
+        }
+
+        public IEnumerable<MudObject> EnumerateObjects(RelativeLocations Locations)
+        {
+            if (Contents != null) foreach (var list in Contents)
+                    if ((list.Key & Locations) == list.Key)
+                        foreach (var item in list.Value)
+                            yield return item;
+        }
+
+        public IEnumerable<T> EnumerateObjects<T>(RelativeLocations Locations) where T : MudObject
+        {
+            if (Contents != null) foreach (var list in Contents)
+                    if ((list.Key & Locations) == list.Key)
+                        foreach (var item in list.Value)
+                            if (item is T) yield return item as T;
+        }
+
+        public List<MudObject> GetContents(RelativeLocations Locations)
+        {
+            return new List<MudObject>(EnumerateObjects(Locations));
+        }
+
+        public bool Contains(MudObject Object, RelativeLocations Locations)
+        {
+            if (Locations == RelativeLocations.DEFAULT) Locations = DefaultContentLocation;
+
+            if (Contents != null)
+                if (Contents.ContainsKey(Locations))
+                    return Contents[Locations].Contains(Object);
+            return false;
+        }
+
+        public RelativeLocations RelativeLocationOf(MudObject Object)
+        {
+            if (Contents != null)
+                foreach (var list in Contents)
+                    if (list.Value.Contains(Object))
+                        return list.Key;
+            return RelativeLocations.NONE;
+        }
+
+        public override int GetHashCode()
+        {
+            return !String.IsNullOrEmpty(Path) ? Path.GetHashCode() : this.Short.GetHashCode();
         }
     }
 }

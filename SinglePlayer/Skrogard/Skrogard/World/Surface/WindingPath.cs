@@ -7,7 +7,7 @@ namespace World.Surface
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Winding Path");
             SetProperty("long", "A winding path snakes through the junk east to west. You can't see very far ahead because the metal blocks your view, but you also can't really get lost.");

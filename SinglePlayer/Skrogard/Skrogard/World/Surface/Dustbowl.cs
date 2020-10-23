@@ -7,7 +7,7 @@ namespace World.Surface
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Dustbowl");
             SetProperty("long", "To the west, a narrow and rocky stream. To the south, the high metal walls of a settlement. Everywhere else - dust. Nothing grows here. Nothing even tries. The ground is perfectly flat. The bottom of an old dried-up lake, perhaps.");

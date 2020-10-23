@@ -7,7 +7,7 @@ namespace World.Wall
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Overhang");
             SetProperty("long", "A metal platform juts out from the top of the wall, a ladder piercing the floor. Only a thin railing stands between you and a long fall into the junk.");

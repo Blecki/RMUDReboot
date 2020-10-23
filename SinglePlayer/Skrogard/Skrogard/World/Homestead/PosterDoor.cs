@@ -6,7 +6,16 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            ObjectDecorator.LockedDoor(this);
+            AddNoun("DOOR");
+
+            // Doors can be referred to as 'the open door' or 'the closed door' as appropriate.
+            AddNoun("CLOSED").When(actor => !GetProperty<bool>("open?"));
+            AddNoun("OPEN").When(actor => GetProperty<bool>("open?"));
+
+            SetProperty("open?", false);
+            SetProperty("openable?", true);
+
+            SetProperty("lockable?", true);
 
             AddNoun("poster");
 

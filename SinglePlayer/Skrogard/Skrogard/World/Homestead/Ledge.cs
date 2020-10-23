@@ -7,7 +7,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Ledge");
             SetProperty("long", "A narrow ledge, carved with steps, runs around the rock from the homestead's front door on the shelf above to the bottom of the gully behind the stone.");

@@ -43,10 +43,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Octokit, Version=0.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Octokit.0.6.2\lib\net45\Octokit.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -96,9 +92,7 @@
     <Compile Include="Commands\Admin\Save.cs" />
     <Compile Include="Commands\Admin\Scope.cs" />
     <Compile Include="Commands\Admin\Set.cs" />
-    <Compile Include="Commands\Admin\Sonar.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Commands\Admin\Sonar.cs" />
     <Compile Include="Commands\Admin\Stats.cs" />
     <Compile Include="Ancora\AstNode.cs" />
     <Compile Include="Ancora\Failure.cs" />
@@ -242,7 +236,7 @@
     <Compile Include="Commands\Clothing\R.ules.cs" />
     <Compile Include="Commands\Clothing\Remove.cs" />
     <Compile Include="Commands\Clothing\Wear.cs" />
-    <Compile Include="Commands\Combat\DiceGrammar.cs" />
+    <Compile Include="Core\DiceGrammar.cs" />
     <Compile Include="Commands\Combat\Kill.cs" />
     <Compile Include="Commands\Combat\Messages.cs" />
     <Compile Include="Commands\Combat\Rules.cs" />
@@ -278,31 +272,33 @@
     <Compile Include="Commands\Silly.cs" />
     <Compile Include="Commands\Take.cs" />
     <Compile Include="Commands\Unlock.cs" />
+    <Compile Include="WorldModel\Link.cs" />
     <Compile Include="WorldModel\ObjectDecorators\Actor.cs" />
-    <Compile Include="WorldModel\ObjectDecorators\BasicDoor.cs" />
+    <Compile Include="WorldModel\ObjectProperties.cs" />
     <Compile Include="WorldModel\ObjectDecorators\Container.cs" />
     <Compile Include="Core\CoreFunctions\EnumerateObjectTree.cs" />
     <Compile Include="WorldModel\Gender.cs" />
     <Compile Include="WorldModel\Directions.cs" />
-    <Compile Include="WorldModel\ObjectDecorators\LockedDoor.cs" />
     <Compile Include="WorldModel\MudObject.cs" />
-    <Compile Include="WorldModel\MudObjectRules.cs" />
+    <Compile Include="WorldModel\Rules\Lockable.cs" />
+    <Compile Include="WorldModel\Rules\Openable.cs" />
+    <Compile Include="WorldModel\Rules\PrintedName.cs" />
     <Compile Include="WorldModel\NounList.cs" />
     <Compile Include="WorldModel\ObjectDecorators\ShortLong.cs" />
-    <Compile Include="WorldModel\ObjectProperties\EnumSerializer.cs" />
-    <Compile Include="WorldModel\ObjectProperties\BoolSerializer.cs" />
-    <Compile Include="WorldModel\ObjectProperties\StringSerializer.cs" />
-    <Compile Include="WorldModel\ObjectProperties\IntSerializer.cs" />
-    <Compile Include="WorldModel\ObjectProperties\DefaultSerializer.cs" />
-    <Compile Include="WorldModel\ObjectProperties\TypeSerializer.cs" />
+    <Compile Include="Core\Serialization\Serializers\EnumSerializer.cs" />
+    <Compile Include="Core\Serialization\Serializers\BoolSerializer.cs" />
+    <Compile Include="Core\Serialization\Serializers\StringSerializer.cs" />
+    <Compile Include="Core\Serialization\Serializers\IntSerializer.cs" />
+    <Compile Include="Core\Serialization\Serializers\DefaultSerializer.cs" />
+    <Compile Include="Core\Serialization\Serializers\TypeSerializer.cs" />
     <Compile Include="WorldModel\ObjectState.cs" />
     <Compile Include="Core\CoreFunctions\Portal.cs" />
-    <Compile Include="WorldModel\ObjectProperties\PropertyManifest.cs" />
+    <Compile Include="Core\Serialization\Serializers\PropertyManifest.cs" />
     <Compile Include="WorldModel\RelativeLocations.cs" />
     <Compile Include="WorldModel\ObjectDecorators\Scenery.cs" />
-    <Compile Include="WorldModel\ObjectDecorators\Room.cs" />
-    <Compile Include="WorldModel\RoomLightingRules.cs" />
-    <Compile Include="WorldModel\RoomType.cs" />
+    <Compile Include="WorldModel\ObjectDecorators\Locale.cs" />
+    <Compile Include="WorldModel\Rules\RoomLighting.cs" />
+    <Compile Include="WorldModel\LocaleType.cs" />
     <Compile Include="WorldModel\Settings.cs" />
   </ItemGroup>
   <ItemGroup>

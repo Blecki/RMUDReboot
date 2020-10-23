@@ -6,7 +6,7 @@ namespace World.Wilderness
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Narrow Trail");
             SetProperty("long", "A narrow path winds between stunted and twisted trees. Somewhere above, a waterfall crashes down, filling the air with a fine mist. Near the bottom of this path, the foilage thickens, and the trees turn lush.");

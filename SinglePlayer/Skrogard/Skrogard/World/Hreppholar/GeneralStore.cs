@@ -6,7 +6,7 @@ namespace World.Hreppholar
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "General Store");
             SetProperty("long", "Dusty shelves stand in neat rows, filled with goods of all kinds. New mixed with old - clean pieces of glass ware and canned goods, old iron pots, clothes both tattered and new hanging on long rods. A counter stands at the back.");

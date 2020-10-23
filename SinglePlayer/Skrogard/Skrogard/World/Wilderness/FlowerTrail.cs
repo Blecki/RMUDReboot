@@ -6,7 +6,7 @@ namespace World.Wilderness
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Flower Trail");
             SetProperty("long", "A path trails through the forest, flowers dotting the edges on both sides.");

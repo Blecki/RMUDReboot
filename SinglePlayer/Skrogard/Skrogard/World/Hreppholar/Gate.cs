@@ -7,7 +7,7 @@ namespace World.Hreppholar
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Gate");
             SetProperty("long", "A gate in the metal wall stands open, hinges rusted. There's a bit of shade underneath it, but it no longer serves any other purpose.");

@@ -7,7 +7,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Balcony");
             SetProperty("long", "A rickety wooden platform juts from the side of the rock. It creaks loudly underfoot.");

@@ -25,7 +25,7 @@ hanging on it[otherwise]screwed to the wall[end if]."
 [This description is general enough that, if we were to add other hangable items
 to the game, they would automatically be described correctly as well.]
              */
-            Room(RoomType.Interior);
+            Locale(RMUD.Locale.Interior);
 
             SetProperty("short", "Cloakroom");
             SetProperty("long", "The walls of this small room were clearly once lined with hooks, though now only one remains.");

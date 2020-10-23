@@ -7,7 +7,7 @@ namespace World.Caves
     {
         public override void Initialize()
         {
-            Room(RoomType.Interior);
+            Locale(RMUD.Locale.Interior);
 
             SetProperty("short", "$Red;Pod$White;");
             SetProperty("long", "You are in a small dark pod. Light falls through cracks above. The metal walls glisten with condensation, and some papers crinkle under foot. A single light glares overhead.");

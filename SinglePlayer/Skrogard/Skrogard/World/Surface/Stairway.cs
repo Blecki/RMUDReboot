@@ -7,7 +7,7 @@ namespace World.Surface
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Stairway");
             SetProperty("long", "This stairway carved into the stone, then into the junk, climbs ever higher between two walls of metal. The stairs have been welded together so that they do not shift during the junk quakes.");

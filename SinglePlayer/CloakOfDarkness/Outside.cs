@@ -6,7 +6,7 @@ namespace CloakOfDarkness
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Outside the Opera House");
         }

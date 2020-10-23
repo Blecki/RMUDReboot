@@ -43,7 +43,7 @@ namespace RMUD
 
             GlobalRules.Perform<MudObject, MudObject>("wield").Do((actor, target) =>
                 {
-                    actor.SetProperty("combat_weapon", target);
+                    actor.SetProperty("combat weapon", target);
                     Core.SendMessage(actor, "@you wield", actor, target);
                     Core.SendExternalMessage(actor, "@they wield", actor, target);
                     return PerformResult.Continue;

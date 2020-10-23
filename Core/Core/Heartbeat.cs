@@ -11,13 +11,7 @@ namespace RMUD
     {
         public static void AtStartup(RuleEngine GlobalRules)
         {
-            GlobalRules.DeclarePerformRuleBook("heartbeat", "[] : Considered every tick.");
-
-            GlobalRules.Perform("heartbeat").Do(() =>
-                {
-                    Core.TimeOfDay += Core.SettingsObject.ClockAdvanceRate;
-                    return PerformResult.Continue;
-                }).Name("Advance clock on heartbeat rule");
+            GlobalRules.DeclarePerformRuleBook<MudObject>("heartbeat", "[Object] : Considered every tick.", "Object");
         }
     }
 
@@ -36,6 +30,9 @@ namespace RMUD
             var ruleset = On.Rules;
             return ruleset.ConsiderPerformRule(Name, Arguments);
         }
+
+        internal static int CurrentHeartbeat = 1;
+        internal static HashSet<MudObject> HeartbeatSet = new HashSet<MudObject>();
 
         internal static List<Timer> ActiveTimers = new List<Timer>();
 
@@ -69,8 +66,25 @@ namespace RMUD
             var timeSinceLastBeat = now - TimeOfLastHeartbeat;
             if (timeSinceLastBeat.TotalMilliseconds >= SettingsObject.HeartbeatInterval)
             {
+                Core.TimeOfDay += Core.SettingsObject.ClockAdvanceRate;
                 TimeOfLastHeartbeat = now;
-                GlobalRules.ConsiderPerformRule("heartbeat");
+                CurrentHeartbeat += 1;
+
+                var heartbeatObjects = new HashSet<MudObject>();
+                foreach (var client in Clients.ConnectedClients)
+                    foreach (var visibleObject in Core.EnumerateVisibleTree(Core.FindLocale(client.Player)))
+                        heartbeatObjects.Add(visibleObject);
+
+                foreach (var heartbeatObject in heartbeatObjects)
+                {
+                    HeartbeatSet.Add(heartbeatObject);
+                    heartbeatObject.CurrentHeartbeat = CurrentHeartbeat;
+                }
+
+                HeartbeatSet.RemoveWhere(o => o.CurrentHeartbeat < (CurrentHeartbeat - Core.SettingsObject.LiveHeartbeats));
+
+                foreach (var heartbeatObject in HeartbeatSet)
+                    GlobalRules.ConsiderPerformRule("heartbeat", heartbeatObject);
 
                 //In case heartbeat rules emitted messages.
                 Core.SendPendingMessages();

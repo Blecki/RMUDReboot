@@ -7,7 +7,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Hallway");
             SetProperty("long", "A narrow hallway runs from the kitchen to a small, sad window. Hardly any light filters in around the metal shutters. There is a door on the north and the south wall.");

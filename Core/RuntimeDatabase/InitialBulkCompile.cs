@@ -20,18 +20,7 @@ namespace RMUD
             source.Append(GetFileHeader() + "namespace database {\n");
             int lineCount = 5;
 
-            List<String> fileList = null;
-
-            if (Core.SettingsObject.UseGithubDatabase)
-                fileList = EnumerateGithubDatabase();
-            else
-                fileList = new List<String>();
-
-            foreach (var item in EnumerateLocalDatabase(""))
-            {
-                if (fileList.Contains(item)) Core.LogError("Object present in github and local database: " + item);
-                else fileList.Add(item);
-            }
+            var fileList = EnumerateLocalDatabase("");
 
             foreach (var s in fileList)
             {

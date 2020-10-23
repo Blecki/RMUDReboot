@@ -17,7 +17,7 @@ namespace RMUD.Look
                 .Name("Container must be visible rule.");
 
             GlobalRules.Check<MudObject, MudObject, RelativeLocations>("can look relloc?")
-                .When((actor, item, relloc) => (item.LocationsSupported & relloc) != relloc)
+                .When((actor, item, relloc) => (item.ContentLocationsAllowed & relloc) != relloc)
                 .Do((actor, item, relloc) =>
                 {
                     Core.SendMessage(actor, "@cant look relloc", Relloc.GetRelativeLocationName(relloc));

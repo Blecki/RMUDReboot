@@ -68,18 +68,6 @@ namespace RMUD
                 .Name("No link found rule.");
 
             GlobalRules.Check<MudObject, MudObject>("can go?")
-                .When((actor, link) => link != null && link.GetProperty<bool>("openable?") && !link.GetProperty<bool>("open?"))
-                .Do((actor, link) =>
-                {
-                    Core.SendMessage(actor, "@first opening", link);
-                    var tryOpen = Core.Try("StandardActions:Open", Core.ExecutingCommand.With("SUBJECT", link), actor);
-                    if (tryOpen == PerformResult.Stop)
-                        return CheckResult.Disallow;
-                    return CheckResult.Continue;
-                })
-                .Name("Try opening a closed door first rule.");
-
-            GlobalRules.Check<MudObject, MudObject>("can go?")
                 .Do((actor, link) => CheckResult.Allow)
                 .Name("Default can go rule.");
 

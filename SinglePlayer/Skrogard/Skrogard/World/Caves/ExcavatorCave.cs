@@ -7,7 +7,7 @@ namespace World.Caves
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Excavator Cave");
             SetProperty("long", "This small chamber was formed by two massive chunks of metal precariously balanced overhead. An excavator sits right in the center of the space, arm reaching up through the junk.");

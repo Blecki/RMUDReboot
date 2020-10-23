@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace RMUD
 {
@@ -21,7 +18,9 @@ namespace RMUD
         HELD = 64,
         WORN = 128,
 
-        HIDDEN = 256
+        HIDDEN = 256,
+
+        ENEMIES = 512
     }
 
     public static class Relloc

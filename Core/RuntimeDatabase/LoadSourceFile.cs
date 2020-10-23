@@ -15,15 +15,6 @@ namespace RMUD
             Path = Path.Replace('\\', '/');
             if (Path.Contains("..")) return Tuple.Create(false, "Backtrack path entries are not permitted.");
 
-            if (Core.SettingsObject.UseGithubDatabase)
-            {
-                try
-                {
-                    return Tuple.Create(true, WebClient.DownloadString(Core.SettingsObject.GithubRawURL + Path + ".cs"));
-                }
-                catch (Exception) { }
-            }
-
             var realPath = StaticPath + Path + ".cs";
 
             if (!System.IO.File.Exists(realPath)) return Tuple.Create(false, "File not found.");

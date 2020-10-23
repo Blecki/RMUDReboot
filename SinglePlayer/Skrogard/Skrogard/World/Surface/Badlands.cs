@@ -7,7 +7,7 @@ namespace World.Surface
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Badlands");
             SetProperty("long", "A hard tack path winds through steep hills, large rocks rising on both sides.");

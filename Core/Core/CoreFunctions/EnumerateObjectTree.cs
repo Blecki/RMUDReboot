@@ -31,9 +31,9 @@ namespace RMUD
             {
                 yield return C;
 
-                if (C.Lists != null)
+                if (C.Contents != null)
                 {
-                    foreach (var list in C.Lists)
+                    foreach (var list in C.Contents)
                     {
                         if (list.Key == RelativeLocations.IN && C.GetProperty<bool>("openable?") && !C.GetProperty<bool>("open?")) continue;
                         foreach (var item in list.Value)

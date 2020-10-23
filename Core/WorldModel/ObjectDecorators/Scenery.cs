@@ -5,14 +5,6 @@ using System.Text;
 
 namespace RMUD
 {
-    public static class RegisterSceneryProperties
-    {
-        public static void AtStartup(RuleEngine GlobalRules)
-        {
-            PropertyManifest.RegisterProperty("scenery?", typeof(bool), false, new BoolSerializer());
-        }
-    }
-
     public partial class MudObject
 	{
         public MudObject AddScenery(String Description, params String[] Nouns)

@@ -14,10 +14,6 @@ namespace RMUD
 
         public String NewPlayerStartRoom = "palantine/antechamber";
         public String PlayerBaseObject = "player_base";
-        public bool UseGithubDatabase = false;
-        public String GithubAuthToken = "";
-        public String GithubRawURL = "https://raw.githubusercontent.com/Reddit-Mud/RMUD-DB/master/static/";
-        public String GithubRepo = "Reddit-Mud/RMUD-DB";
 
         public int AllowedCommandRate = 100; //How many milliseconds to allow between commands - default is to not limit very much.
 
@@ -32,6 +28,7 @@ namespace RMUD
         public int MaximumChatChannelLogSize = 1000;
         public int HeartbeatInterval = 1000; //Heartbeat every second
         public TimeSpan ClockAdvanceRate = TimeSpan.FromSeconds(10);
+        public int LiveHeartbeats = 10; // Objects continue to receive heartbeats for 10 beats after player leaves locale.
 
         public Dictionary<int, String> RankNames;
 
@@ -57,5 +54,7 @@ namespace RMUD
 
             return "errorem magnificum";
         }
-	}
+
+        public LightingLevel AmbientExteriorLightingLevel = LightingLevel.Bright;
+    }
 }

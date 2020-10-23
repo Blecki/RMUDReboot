@@ -6,7 +6,7 @@ namespace World.Wilderness
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Clearing");
             SetProperty("long", "Several paths cross, forming a triangle with a patch of grass in the middle. Several pink fungi grow in a circle around the path of grass.");

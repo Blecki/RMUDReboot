@@ -7,7 +7,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Girl's Bed Room");
             SetProperty("long", "Every surface in this tiny bedroom is scribed with swirling leaves and bursting flowers, and a great deal of dust. Save for the dust, the floor is immaculate. The bed is neatly made, the dresser clear. A few wilted stuffed animals sit on the bed.");

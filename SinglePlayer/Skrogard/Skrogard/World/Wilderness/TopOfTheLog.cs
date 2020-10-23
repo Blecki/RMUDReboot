@@ -6,7 +6,7 @@ namespace World.Wilderness
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "On Top of a Giant Log");
             SetProperty("long", "The path crosses a giant log. Below, you can see another path, but thick and wicked looking thorn bushes block you from reaching it.");

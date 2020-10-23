@@ -1,40 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RMUD;
 
 namespace RMUD
 {
-    public class HitModifierRuleType
-    {
-        public int HitModifier = 0;
-    }
-
-    public class ArmorClassRuleType
-    {
-        public int ArmorClass = 0;
-    }
-
     public static class CombatSystem
     {
-        public static DiceGrammar DiceGrammar = new DiceGrammar();
         public static String DefaultWeapon = "";
-
-        // Keep track of active combats
-        // Update them on heartbeats
-
-        public static int RollDice(String Dice)
-        {
-            var itr = new Ancora.StringIterator(Dice);
-            var r = DiceGrammar.Root.Parse(itr);
-
-            if (r.ResultType == Ancora.ResultType.Success)
-                return DiceGrammar.CalculateDieRoll(r.Node, Core.Random);
-            else
-                return 1;
-        }
 
         public static MudObject GetDefaultWeapon()
         {
@@ -46,34 +17,36 @@ namespace RMUD
 
         public static void MeleeAttack(MudObject Attacker, MudObject Target)
         {
-            if (!Target.HasProperty("combat_health"))
+            if (!Target.HasProperty("combat health"))
                 return;
 
-            MudObject weapon = Attacker.GetProperty<MudObject>("combat_weapon");
+            MudObject weapon = Attacker.GetProperty<MudObject>("combat weapon");
             if (weapon == null)
             {
                 weapon = GetDefaultWeapon();
                 weapon.Location = Attacker;
             }
 
-            var hitModifier = weapon.GetProperty<int>("combat_hit_modifier");
-            var armorClass = Target.GetProperty<int>("combat_armor_class");
+            var hitModifier = weapon.GetProperty<int>("combat hit modifier");
+            var armorClass = Target.GetProperty<int>("combat armor class");
 
             Core.SendMessage(Attacker, "Hit mod " + hitModifier + " vs AC " + armorClass);
-            var hitRoll = RollDice("1d20") + hitModifier;
+            var hitRoll = Core.RollDice("1d20") + hitModifier;
             
             
             if (hitRoll == 20 || hitRoll >= armorClass)
             {
-                var damageDie = weapon.GetProperty<String>("combat_damage_die");
-                var damage = RollDice(damageDie);
+                var damageDie = weapon.GetProperty<String>("combat damage die");
+                var damage = Core.RollDice(damageDie);
                 Core.SendMessage(Attacker, "Hit for (" + damageDie + ") - " + damage + " damage!");
                 if (hitRoll == 20)
                 {
-                    var additionalDamage = RollDice(damageDie);
+                    var additionalDamage = Core.RollDice(damageDie);
                     Core.SendMessage(Attacker, "Critical! " + additionalDamage + " additional damage!");
                     damage += additionalDamage;
                 }
+
+                Core.SendLocaleMessage(Attacker, "^<0> hits ^<1> for " + damage + " damage!", Attacker, Target);
             }
             else
             {

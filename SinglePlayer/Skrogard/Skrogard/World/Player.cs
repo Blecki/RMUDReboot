@@ -6,7 +6,7 @@ namespace World
     {
         public override void Initialize()
         {
-            ObjectDecorator.Actor(this);
+            Actor();
 
             SetProperty("short", "you");
             SetProperty("rank", 500);

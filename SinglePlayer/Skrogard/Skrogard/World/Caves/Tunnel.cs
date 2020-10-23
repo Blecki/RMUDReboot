@@ -7,7 +7,7 @@ namespace World.Caves
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Tunnel");
             SetProperty("long", "This smooth walled tunnel through the rock is lined on both sides with blue, glowing fungi.");

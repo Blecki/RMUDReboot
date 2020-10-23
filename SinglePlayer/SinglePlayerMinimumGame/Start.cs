@@ -7,7 +7,7 @@ namespace Minimum
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
             SetProperty("short", "Start Room");
             SetProperty("long", "This is a game with the minimum possible objects.");
         }

@@ -33,7 +33,7 @@ namespace RMUD
                     if (!match.ContainsKey("RELLOC"))
                     {
                         if ((match["OBJECT"] as MudObject).GetProperty<bool>("container?"))
-                            match.Upsert("RELLOC", (match["OBJECT"] as MudObject).DefaultLocation);
+                            match.Upsert("RELLOC", (match["OBJECT"] as MudObject).DefaultContentLocation);
                         else
                             match.Upsert("RELLOC", RelativeLocations.ON);
                     }
@@ -95,7 +95,7 @@ namespace RMUD
             GlobalRules.Check<MudObject, MudObject, MudObject, RelativeLocations>("can put?")
                 .Do((actor, item, container, relloc) =>
                 {
-                    if ((container.LocationsSupported & relloc) != relloc)
+                    if ((container.ContentLocationsAllowed & relloc) != relloc)
                     {
                         Core.SendMessage(actor, "@cant put relloc", Relloc.GetRelativeLocationName(relloc));
                         return CheckResult.Disallow;

@@ -7,7 +7,7 @@ namespace World.Hreppholar
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Square");
             SetProperty("long", "You are in a dusty square, surprisingly large compared to the size of the settlement. This is the only place in the village with pavement, though it's as much crack now as asphalt. There's no vehicles on the roads, just weeds and bits of debris. A dried up fountain stands in the very center.");

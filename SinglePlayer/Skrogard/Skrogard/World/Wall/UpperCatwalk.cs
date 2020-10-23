@@ -7,7 +7,7 @@ namespace World.Wall
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Upper Catwalk");
             SetProperty("long", "Up here the air is a bit thin. There's nothing below but fog, and nothing above but the sky. From here, you can just see the edge of the wall - where the gray steel ends and the gray sky begins.");

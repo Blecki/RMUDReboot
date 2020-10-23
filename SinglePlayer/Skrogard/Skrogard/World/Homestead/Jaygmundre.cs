@@ -6,7 +6,7 @@ namespace World.Homestead
     {
         public override void Initialize()
         {
-            ObjectDecorator.Actor(this);
+            Actor();
 
             this.Response("who he is", (actor, npc, topic) =>
                 {

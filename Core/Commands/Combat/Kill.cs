@@ -44,9 +44,9 @@ namespace RMUD
             GlobalRules.Perform<MudObject, MudObject>("attack").Do((actor, target) =>
                 {
                     // Weapon?
-                    if (target.HasProperty("combat_health"))
+                    if (target.HasProperty("combat health"))
                     {
-                        CombatSystem.MeleeAttack(actor, target);
+                        actor.SetProperty("combat target", target);
                     }
                     else
                     {

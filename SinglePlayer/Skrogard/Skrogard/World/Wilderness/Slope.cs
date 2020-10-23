@@ -6,7 +6,7 @@ namespace World.Wilderness
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Slope");
             SetProperty("long", "The path slopes steeply between two large stands of thorn bushes, from a clearing above to the bottom of a narrow ravine.");

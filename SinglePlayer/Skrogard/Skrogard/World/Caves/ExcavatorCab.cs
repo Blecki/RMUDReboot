@@ -7,7 +7,7 @@ namespace World.Caves
     {
         public override void Initialize()
         {
-            Room(RoomType.Exterior);
+            Locale(RMUD.Locale.Exterior);
 
             SetProperty("short", "Excavator Cab");
             SetProperty("long", "You are sitting in the cab of an old, broken down excavator.");
