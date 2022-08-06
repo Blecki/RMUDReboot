@@ -29,7 +29,6 @@ namespace RMUD
             PropertyManifest.RegisterProperty("nouns", typeof(NounList), null, new DefaultSerializer());
             PropertyManifest.RegisterProperty("openable?", typeof(bool), false, new BoolSerializer());
             PropertyManifest.RegisterProperty("open?", typeof(bool), false, new BoolSerializer());
-            PropertyManifest.RegisterProperty("combat target", typeof(MudObject), null, new DefaultSerializer());
 
         }
     }

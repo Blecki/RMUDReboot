@@ -15,6 +15,14 @@ namespace RMUD
                 return Core.GetObject(DefaultWeapon);
         }
 
+        public static void StartFight(MudObject Attacker, MudObject Target)
+        {
+            var existingTarget = Attacker.GetProperty<MudObject>("combat target");
+            if (existingTarget != null)
+                return; // Already have a target.
+            Attacker.SetProperty("combat target", Target);
+        }
+
         public static void MeleeAttack(MudObject Attacker, MudObject Target)
         {
             if (!Target.HasProperty("combat health"))

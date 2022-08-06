@@ -6,27 +6,32 @@ using RMUD;
 
 namespace RMUD
 {
-	internal class Kill : CommandFactory
-	{
-        public static MatchPreference PreferValidTargets(MudObject Actor, MudObject Object)
+    // Todo: Get spellbook from actor somehow.
+    public class SpellbookObjectSource : IObjectSource
+    {
+        public List<MudObject> GetObjects(PossibleMatch State, MatchContext Context)
         {
-            if (Object.HasProperty("health")) return MatchPreference.Likely;
-            return MatchPreference.VeryUnlikely;
+            return new List<MudObject>(Context.ObjectsInScope);
         }
+    }
+
+    internal class Cast : CommandFactory
+	{
+        // Todo: Spells can be cast one someone, but the target is optional
+        // In rules - automatically handle cases where we are in combat vs not; if it's an offensive spell it needs to invoke the combat system when it's targetted at a creature and we aren't already in combat.
 
         public override void Create(CommandParser Parser)
         {
             Parser.AddCommand(
                 Sequence(
                     Or(
-                        KeyWord("KILL"),
-                        KeyWord("ATTACK")
+                        KeyWord("CAST")
                     ),
                     BestScore("OBJECT",
                         MustMatch("@kill what",
-                            Object("OBJECT", InScope, PreferValidTargets)))))
-                .ID("Combat:Kill")
-                .Manual("Murder. Death. Kill.")
+                            Object("OBJECT", new SpellbookObjectSource())))))
+                .ID("Combat:Cast")
+                .Manual("Cast a spell")
                 .Check("can attack?", "ACTOR", "OBJECT")
                 .BeforeActing()
                 .Perform("attack", "ACTOR", "OBJECT")

@@ -57,6 +57,7 @@
     <Compile Include="Commands\Chat\ChatChannelObjectSource.cs" />
     <Compile Include="Commands\Chat\ChatChannelRules.cs" />
     <Compile Include="Commands\Chat\Commands.cs" />
+    <Compile Include="Core\Parser\PropertySet.cs" />
     <Compile Include="Network\Account.cs" />
     <Compile Include="Network\Accounts.cs" />
     <Compile Include="Network\Afk.cs" />

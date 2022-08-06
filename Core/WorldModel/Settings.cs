@@ -27,6 +27,7 @@ namespace RMUD
 
         public int MaximumChatChannelLogSize = 1000;
         public int HeartbeatInterval = 1000; //Heartbeat every second
+        public int Combat_RoundLength = 6; //Heartbeats Per Combat Round
         public TimeSpan ClockAdvanceRate = TimeSpan.FromSeconds(10);
         public int LiveHeartbeats = 10; // Objects continue to receive heartbeats for 10 beats after player leaves locale.
 
