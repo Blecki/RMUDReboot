@@ -14,6 +14,10 @@ namespace RMUD
 
         public String NewPlayerStartRoom = "palantine/antechamber";
         public String PlayerBaseObject = "player_base";
+        public bool UseGithubDatabase = true;
+        public String GithubAuthToken = "";
+        public String GithubRawURL = "https://raw.githubusercontent.com/Blecki/RMUD-DB/main/static/";
+        public String GithubRepo = "Blecki/RMUD-DB";
 
         public int AllowedCommandRate = 100; //How many milliseconds to allow between commands - default is to not limit very much.
 
